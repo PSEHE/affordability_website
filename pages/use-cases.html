@@ -8,6 +8,53 @@
     <script src="../assets/password-gate.js"></script>
     <link rel="stylesheet" href="../assets/styles-new.css">
     <link rel="icon" type="image/png" href="../assets/favicon.png">
+    <style>
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url('../assets/stock-images/iStock-1128888172.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.25;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .story-section {
+            background: rgba(255, 255, 255, 0.75);
+        }
+
+        .story-wrapper {
+            max-width: 75%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Inline image pairs within story-body */
+        .story-body .inline-image-pair {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            margin: 1rem 0;
+        }
+        .story-body .inline-image-pair img {
+            width: 50%;
+            height: 420px;
+            object-fit: contain;
+        }
+        .story-body .inline-image-pair.wide img {
+            width: 75%;
+            height: 360px;
+            object-fit: contain;
+        }
+        .story-body .inline-img {
+            max-width: 35%;
+            height: 35%;
+            display: block;
+            margin: 1rem 0;
+        }
+    </style>
 </head>
 <body>
     <!-- Top Navigation Bar -->
@@ -45,155 +92,133 @@
                 </div>
                 <h1>Use Cases</h1>
                 <p class="lead">
-                    Example applications of PSE’s National Energy Affordability Tool to answer questions about the effects of policy or technology on residential energy affordability.
+                    Example applications of PSE's National Energy Affordability Tool to answer questions about the effects of policy or technology on residential energy affordability.
                 </p>
             </div>
         </header>
 
         <!-- Page Content -->
         <main class="page-content">
-            <div class="container">
-                <!-- Main Content - Loads from Markdown -->
-                <div id="markdown-content" data-content-source="use-cases.md">
-                    <!-- Fallback/placeholder content -->
-                    
-                    <!-- Introduction -->
-                    <section class="content-section" id="intro">
-                        <h2>NEAT in Action</h2>
-                        <p>
-                            The National Energy Affordability Tool can be used to answer a number of questions on energy affordability impacts from policy decisions, rate cases, technological improvements, and more. Below are example use cases based on real-world policies, showcasing how NEAT can be used to narrow in on which populations are impacted most by said policies. 
-                        </p>
-                    </section>
+            <div class="container story-wrapper">
+                <div class="story-lede">
+                    <p>
+                        The National Energy Affordability Tool can be used to answer a number of questions on energy affordability impacts from policy decisions, rate cases, technological improvements, and more. Below are example use cases based on real-world policies, showcasing how NEAT can be used to narrow in on which populations are impacted most by said policies.
+                    </p>
+                </div>
 
-                    <!-- Use Case Cards -->
-                    <section class="content-section" id="use-cases-list">
-                        <h2>Example Use Cases</h2>
-                        <!-- DTE Rate Increase -->
-                        <div class="info-box" style="margin-bottom: 0.75rem; border-left: 4px solid #0066cc;">
-                            <h3>Rate Increases - DTE Rate Hikes in Michigan</h3>
-                            <div style="
-                                width: 100%;
-                                height: 200px;
-                                background-image: url('../assets/stock-images/iStock_Sunset_grid_electricity_outage.jpg');
-                                background-size: cover;
-                                background-position: center;
-                                margin-bottom: 1rem;
-                            "></div>
-                            <img src="../assets/dte-rate-hikes/dte_rate_hike_news.png" alt="DTE rate hike news" style="max-width: 100%; height: auto;">
-                            <p><strong>Context:</strong> In 2025, Michigan utility DTE proposed an 11% increase in residential electricity rates. While it is self-evident that an increase in electricity rates would cause household energy bills to increase as well, we want to determine if cost increases are proportional to the proposed rate increases (i.e. do household costs increase by 11%, or do they increase by more). We also want to pinpoint areas in DTE service territory that may be more impacted by this increase than others.</p>
-                            <p><strong>Approach:</strong> To do this, we will go to the left side of the tool, select “Utility” under “Geographic Scope,” and select the necessary state and utility (in this case, Michigan and DTE Electric Company). Then we will launch the Decision Support Tool. </p>
-                            <div style="display: flex; gap: 1rem; align-items: flex-start;">
-                                <img src="../assets/dte-rate-hikes/scope_dte.png" alt="Scope DTE" style="width: 50%; height: 400px; object-fit: contain;">
-                                <img src="../assets/dte-rate-hikes/dte_elec_hike_rate.png" alt="DTE elec rate hike" style="width: 50%; height: 400px; object-fit: contain;">
-                            </div>
-                            <p> Within the Decision Support Tool, we will focus on Rate Changes. We enable rate changes and then we set a new rate to approximate an 11% rate increase. </p>
-                            <p><strong>Key Findings:</strong> The output map shows the increase in the energy affordability gap for each census tract in DTE service territory.</p>
-                            <div style="display: flex; gap: 1rem; align-items: flex-start;">
-                                <img src="../assets/dte-rate-hikes/dte_gap_map.png" alt="DTE gap map" style="width: 75%; height: 400px; object-fit: contain;">
-                                <img src="../assets/dte-rate-hikes/policy_scenario_Home_Type_dte_rate.png" alt="DTE line graph" style="width: 75%; height: 400px; object-fit: contain;">
-                            </div>
-                            <p> As expected, cumulative household electricity bills increased, but not uniformly throughout the area. Tracts within Detroit, as well as those in the exurbs of Detroit and further north in the state, had higher increases in the gap. This allows decision makers and organizers to target specific areas of Michigan to provide bill assistance.</p>
-                            
+                <div class="story-sections">
 
-                            <p> An 11% electric rate increase corresponds to a nearly 20% increase in electricity bills across single family, multifamily, and mobile homes alike. These impacts are most acutely felt in dense urban areas as well as rural areas in DTE territory.</p>
-                        
-                        </div>
-
-                        <hr style="border: none; border-top: 1px solid #ccc; margin: 0.75rem 0 0.75rem 0;">
-
-                        <!-- Community Solar -->
-                        <div class="info-box" style="margin-top: 0; margin-bottom: 0.75rem; border-left: 4px solid #0066cc;">
-                            
-                            <h3>Community Solar – Targeting Areas in LADWP Territory that would benefit the most from community solar</h3>
-                            <div style="
-                                width: 100%;
-                                height: 200px;
-                                background-image: url('../assets/stock-images/iStock-1138203628.jpg');
-                                background-size: cover;
-                                background-position: center;
-                                margin-bottom: 1rem;
-                            "></div>
-                            <p><strong>Context:</strong> Inspired by California’s Solar on Multifamily Homes (SOMAH) program, we use the community solar module within the Decision Support tool to investigate areas of Los Angeles that would benefit the most from community solar. This simulation is purely hypothetical, assuming an unlimited community solar system size, but is more to assess relative benefits from community solar rather than specific dollar savings.</p>
-                            <p><strong>Approach:</strong> Enter the Decision Support tool and enable community solar. We estimate each household would get the equivalent of 4 kW of solar (generally enough to cover the average household’s energy needs in California). We also assume electricity provided from community solar provides a 10% discount over standard utility electricity.</p>
-                            <div style="display: flex; gap: 1rem; align-items: flex-start;">
-                                <img src="../assets/ladwp-comm-solar/enable comm solar.png" alt="enable comm solar" style="width: 50%; height: 400px; object-fit: contain;">
-                                <img src="../assets/ladwp-comm-solar/enable low income discount cs.png" alt="low income discount" style="width: 50%; height: 400px; object-fit: contain;">
-                            </div>
-                            <p> SOMAH is targeted toward multifamily and largely low-income households, so this exercise will include an additional 20% discount on community solar electricity to low-income households (under 80% Area Median Income), and will be limited to multifamily or renter households only.</p>
-                            <img src="../assets/ladwp-comm-solar/limit mf renter cs.png" alt="Limit to multifamily and renter households" style="max-width: 50%; height: auto;">
-
-
-                            <p><strong>Key Findings:</strong> The output map below shows the affordability gap decrease across LADWP service territory – however, benefits are highest in Downtown Los Angeles, and to the west in San Fernando Valley. These are areas that may see the largest cost benefit from a localized community solar addition.</p>
-                            <div style="display: flex; gap: 1rem; align-items: flex-start;">
-                                <img src="../assets/ladwp-comm-solar/ladwp_comm_solar.png" alt="map comm solar" style="width: 50%; height: 400px; object-fit: contain;">
-                                <img src="../assets/ladwp-comm-solar/ladwp_comm_solar_race.png" alt="gap cs race" style="width: 50%; height: 400px; object-fit: contain;">
-                            </div>
-                            <p>In this example, all racial groups would have a 20-25% reduction in their energy affordability gap. Studies indicate that SOMAH may save individual households up to 40-60% on their electricity bills. </p>
-                            
-                        </div>
-
-                        <hr style="border: none; border-top: 1px solid #ccc; margin: 0.75rem 0 0.75rem 0;">
-
-                        <!-- Heat Pumps -->
-                        <div class="info-box" style="margin-top: 0; margin-bottom: 0.75rem; border-left: 4px solid #0066cc;">
-                            <h3>Targeted Heat Pump Replacement – Identifying households in the Boston Metropolitan Area ideal for switching to heat pumps to reduce costs and emissions</h3>
-                            <div style="
-                                width: 100%;
-                                height: 200px;
-                                background-image: url('../assets/stock-images/pexels-pixabay-266896.jpg');
-                                background-size: cover;
-                                background-position: center 67%;
-                                margin-bottom: 1rem;
-                            "></div>
-                            <p><strong>Context:</strong> Inspired by Mass Save, we decided to examine opportunities for LMI household cost reductions through heating electrification in the Boston Metropolitan Area.</p>
-                            <p><strong>Approach:</strong> To do this, we first want to filter the data for households of interest – in this case, LMI (<80% AMI) households and those that use fossil fuels (gas, propane, and fuel oil) for space heating. This can be done with the Generate Custom Dataset feature, in which a user can filter for specific household characteristics of interest. Once these characteristics have been selected, the map and corresponding summary charts will update accordingly.</p>
-                            <p> Once the dataset has been filtered, we then go to the Decision Support Tool to assess the impacts of switching these households to electric heat pumps. Enable Fuel Switching, and configure the fuel switching scenario accordingly (in this case, all fossil fuel to electric for both space heating and water heating). Since Boston is in a cold climate, we will set System Tier to High Efficiency Cold Climate (HSPF2 9.8). Income eligibility will be set to households at or below AMI. We will also set the operating mode to dual fuel, which enables a switchover back to furnace heating below a given temperature.</p>
-                            <p><strong>Key Findings:</strong>
-                            Running this example shows a key trend: Switching to heat pumps actually may increase costs on households that use fossil gas, but decreases costs for households that use propane and fuel oil, particularly for those in the exurbs of Boston.</p>
-
-                            <p>This example shows the importance of targeted interventions – while blanket heat pump adoption would reduce greenhouse gas emissions across the board, it would only decrease costs for some households. Heat pump adoption in the Boston metro should then focus on households under 80% of the AMI that burn propane or fuel oil for space heating to maximize household cost savings and greenhouse gas reductions. </p>
-
-                        
-                        </div>
-
-                        
-                    </section>
-
-                    <!-- How to Get Involved -->
-                    <section class="content-section" id="get-involved">
-                        <h2>Your use case here</h2>
-                        <p>
-                            Curious about how to use the National Energy Affordability Tool to answer your questions? We'd love 
-                            to help!
-                        </p>
-                        
-                        <div class="info-box note">
-                            <h4>Share Your Work</h4>
+                    <!-- Use Case 1: DTE Rate Increase -->
+                    <section class="story-section" id="dte-rate-increase">
+                        <div class="story-body">
+                            <span class="story-tag">01 • Rate Increases</span>
+                            <h3>DTE Rate Hikes in Michigan</h3>
+                            <img src="../assets/dte-rate-hikes/dte_rate_hike_news.png" alt="DTE rate hike news" class="inline-img" style="max-width: 60%;">
                             <p>
-                                Contact us to discuss how the tool might support your specific use case, or how we can help answer your questions.
+                                <strong>Context:</strong> In 2025, Michigan utility DTE proposed an 11% increase in residential electricity rates. While it is self-evident that an increase in electricity rates would cause household energy bills to increase as well, we want to determine if cost increases are proportional to the proposed rate increases (i.e. do household costs increase by 11%, or do they increase by more). We also want to pinpoint areas in DTE service territory that may be more impacted by this increase than others.
                             </p>
                             <p>
-                                <a href="https://www.psehealthyenergy.org/contact/" target="_blank" class="btn btn-secondary btn-sm">
-                                    Contact PSE Healthy Energy
-                                </a>
+                                <strong>Approach:</strong> To do this, we will go to the left side of the tool, select "Utility" under "Geographic Scope," and select the necessary state and utility (in this case, Michigan and DTE Electric Company). Then we will launch the Decision Support Tool.
                             </p>
+                            <div class="inline-image-pair">
+                                <img src="../assets/dte-rate-hikes/scope_dte.png" alt="Scope DTE">
+                                <img src="../assets/dte-rate-hikes/dte_elec_hike_rate.png" alt="DTE elec rate hike">
+                            </div>
+                            <p>Within the Decision Support Tool, we will focus on Rate Changes. We enable rate changes and then we set a new rate to approximate an 11% rate increase.</p>
+                            <p>
+                                <strong>Key Findings:</strong> The output map shows the increase in the energy affordability gap for each census tract in DTE service territory.
+                            </p>
+                            <div class="inline-image-pair wide">
+                                <img src="../assets/dte-rate-hikes/dte_gap_map.png" alt="DTE gap map">
+                                <img src="../assets/dte-rate-hikes/policy_scenario_Home_Type_dte_rate.png" alt="DTE line graph">
+                            </div>
+                            <p>As expected, cumulative household electricity bills increased, but not uniformly throughout the area. Tracts within Detroit, as well as those in the exurbs of Detroit and further north in the state, had higher increases in the gap. This allows decision makers and organizers to target specific areas of Michigan to provide bill assistance.</p>
+                            <p>An 11% electric rate increase corresponds to a nearly 20% increase in electricity bills across single family, multifamily, and mobile homes alike. These impacts are most acutely felt in dense urban areas as well as rural areas in DTE territory.</p>
                         </div>
                     </section>
 
-                    <!-- Related Publications -->
-                    <section class="content-section" id="publications">
-                        <h2>Related Publications</h2>
-                        <p>
-                            Detailed findings from case studies and methodology papers are available
-                            through PSE Healthy Energy's publications library.
-                        </p>
-                        <ul>
-                            <li><a href="https://www.psehealthyenergy.org/wp-content/uploads/2023/02/Energy-Affordability-in-Maryland-2023_-Final-Report-1.pdf" target="_blank">Maryland Energy Affordability Report</a></li>
-                            <li><a href="https://www.psehealthyenergy.org/wp-content/uploads/2022/02/Colorado-Energy-Affordability-Study_Full-Report.pdf" target="_blank">Colorado Energy Equity Analysis</a></li>
-                            <li><a href="https://www.psehealthyenergy.org/work/western-states-deep-decarbonization/" target="_blank">Western States Decarbonization Study</a></li>
-                            <li>Utility Rate Case Testimony Examples <em>(Coming Soon)</em></li>
-                        </ul>
+                    <!-- Use Case 2: Community Solar -->
+                    <section class="story-section" id="community-solar">
+                        <div class="story-body">
+                            <span class="story-tag">02 • Community Solar</span>
+                            <h3>Identifying Areas in LADWP Territory that would reap the highest benefits from community solar</h3>
+                            <div style="width: 100%; height: 200px; background-image: url('../assets/stock-images/iStock-1138203628.jpg'); background-size: cover; background-position: center; margin-bottom: 1rem;"></div>
+                            <p>
+                                <strong>Context:</strong> Inspired by California's Solar on Multifamily Homes (SOMAH) program, we use the community solar module within the Decision Support tool to investigate areas of Los Angeles that would benefit the most from community solar. This simulation is purely hypothetical, assuming an unlimited community solar system size, but is more to assess relative benefits from community solar rather than specific dollar savings.
+                            </p>
+                            <p>
+                                <strong>Approach:</strong> Enter the Decision Support tool and enable community solar. We estimate each household would get the equivalent of 4 kW of solar (generally enough to cover the average household's energy needs in California). We also assume electricity provided from community solar provides a 10% discount over standard utility electricity.
+                            </p>
+                            <div class="inline-image-pair">
+                                <img src="../assets/ladwp-comm-solar/enable comm solar.png" alt="Enable community solar">
+                                <img src="../assets/ladwp-comm-solar/enable low income discount cs.png" alt="Low income discount">
+                            </div>
+                            <p>SOMAH is targeted toward multifamily and largely low-income households, so this exercise will include an additional 20% discount on community solar electricity to low-income households (under 80% Area Median Income), and will be limited to multifamily or renter households only.</p>
+                            <img src="../assets/ladwp-comm-solar/limit mf renter cs.png" alt="Limit to multifamily and renter households" class="inline-img">
+                            <p>
+                                <strong>Key Findings:</strong> The output map shows the affordability gap decrease across LADWP service territory – however, benefits are highest in Downtown Los Angeles, and to the west in San Fernando Valley. These are areas that may see the largest cost benefit from a localized community solar addition.
+                            </p>
+                            <div class="inline-image-pair">
+                                <img src="../assets/ladwp-comm-solar/ladwp_comm_solar.png" alt="LADWP community solar map">
+                                <img src="../assets/ladwp-comm-solar/ladwp_comm_solar_race.png" alt="Gap by race for community solar">
+                            </div>
+                            <p>In this example, all racial groups would have a 20–25% reduction in their energy affordability gap. Studies indicate that SOMAH may save individual households up to 40–60% on their electricity bills.</p>
+                        </div>
                     </section>
+
+                    <!-- Use Case 3: Heat Pumps -->
+                    <section class="story-section" id="heat-pumps">
+                        <div class="story-body">
+                            <span class="story-tag">03 • Heat Pump Replacement</span>
+                            <h3>Targeted heat pump replacement in the Boston Metro Area to maximize cost and emissions savings</h3>
+                            <div style="width: 100%; height: 200px; background-image: url('../assets/stock-images/pexels-pixabay-266896.jpg'); background-size: cover; background-position: center 67%; margin-bottom: 1rem;"></div>
+                            <p>
+                                <strong>Context:</strong> Inspired by Mass Save, we decided to examine opportunities for LMI household cost reductions through heating electrification in the Boston Metropolitan Area.
+                            </p>
+                            <p>
+                                <strong>Approach:</strong> To do this, we first want to filter the data for households of interest – in this case, LMI (&lt;80% AMI) households and those that use fossil fuels (gas, propane, and fuel oil) for space heating. This can be done with the Generate Custom Dataset feature, in which a user can filter for specific household characteristics of interest. Once these characteristics have been selected, the map and corresponding summary charts will update accordingly.
+                                <div class="inline-image-pair">
+                                <img src="../assets/boston-heat-pumps/boston-metro-filter-ff-heating.png" alt="Boston ff house filter">
+                                <img src="../assets/boston-heat-pumps/figures-ff-heating.png" alt="Boston map ff households">
+                            </div>
+                            </p>
+                            <p>Once the dataset has been filtered, we then go to the Decision Support Tool to assess the impacts of switching these households to electric heat pumps. Enable Fuel Switching, and configure the fuel switching scenario accordingly (in this case, all fossil fuel to electric for both space heating and water heating). Since Boston is in a cold climate, we will set System Tier to High Efficiency Cold Climate (HSPF2 9.8). Income eligibility will be set to households at or below AMI. We will also set the operating mode to dual fuel, which enables a switchover back to furnace heating below a given temperature.</p>
+                            <div class="inline-image-pair">
+                                <img src="../assets/boston-heat-pumps/fuel-switch-1.png" alt="Boston fuel switch 1">
+                                <img src="../assets/boston-heat-pumps/fuel-switch-2.png" alt="Boston fuel switch 2">
+                                <img src="../assets/boston-heat-pumps/fuel-switch-3.png" alt="Boston fuel switch 3">
+                            </div>
+                            <p>
+                                <strong>Key Findings:</strong> Running this example shows a key trend: Switching to heat pumps actually may increase costs on households that use fossil gas, but decreases costs for households that use propane and fuel oil, particularly for those in the exurbs of Boston.
+                            </p>
+                            <p>This example shows the importance of targeted interventions – while blanket heat pump adoption would reduce greenhouse gas emissions across the board, it would only decrease costs for some households. Heat pump adoption in the Boston metro should then focus on households under 80% of the AMI that burn propane or fuel oil for space heating to maximize household cost savings and greenhouse gas reductions.</p>
+                        </div>
+                    </section>
+
+                    <!-- Your Use Case Here -->
+                    <section class="story-section reverse" id="get-involved">
+                        <div class="story-figure">
+                            <img src="../assets/stock-images/iStock-505412046_handshake.png" alt="Collaboration and partnership">
+                        </div>
+                        <div class="story-body">
+                            <span class="story-tag">04 • Your Use Case</span>
+                            <h3>Your use case here</h3>
+                            <p>
+                                Curious about how to use the National Energy Affordability Tool to answer your questions? We'd love to help!
+                            </p>
+                            <div class="story-note">
+                                <strong>Share Your Work:</strong> Contact us to discuss how the tool might support your specific use case, or how we can help answer your questions. <a href="https://www.psehealthyenergy.org/contact/" target="_blank" style="color: inherit; text-decoration: underline;">Contact PSE Healthy Energy →</a>
+                            </div>
+                            <p>Detailed findings from case studies and methodology papers are also available through PSE Healthy Energy's publications library:</p>
+                            <ul>
+                                <li><a href="https://www.psehealthyenergy.org/wp-content/uploads/2023/02/Energy-Affordability-in-Maryland-2023_-Final-Report-1.pdf" target="_blank">Maryland Energy Affordability Report</a></li>
+                                <li><a href="https://www.psehealthyenergy.org/wp-content/uploads/2022/02/Colorado-Energy-Affordability-Study_Full-Report.pdf" target="_blank">Colorado Energy Equity Analysis</a></li>
+                                <li><a href="https://www.psehealthyenergy.org/work/western-states-deep-decarbonization/" target="_blank">Western States Decarbonization Study</a></li>
+                                <li>Utility Rate Case Testimony Examples <em>(Coming Soon)</em></li>
+                            </ul>
+                        </div>
+                    </section>
+
                 </div>
             </div>
         </main>
@@ -207,7 +232,7 @@
                     <img src="../assets/2021 - PSE_Logo_Stacked_Color.png" alt="PSE Healthy Energy">
                     <p>Bringing science to energy policy for a healthy, clean future.</p>
                 </div>
-                
+
                 <div class="footer-section">
                     <h4>Navigation</h4>
                     <ul>
@@ -220,7 +245,7 @@
                         <li><a href="contact.html">Contact Us</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <ul>
@@ -229,7 +254,7 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
                 <p>© 2024 PSE Healthy Energy. All rights reserved.</p>
             </div>
@@ -237,21 +262,30 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="../js/content-loader.js"></script>
     <script>
         // Mobile menu toggle
         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
         const navMenu = document.getElementById('navMenu');
-        
-        mobileMenuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('open');
-        });
-        
+        mobileMenuToggle.addEventListener('click', () => navMenu.classList.toggle('open'));
+
         // Navbar scroll effect
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             navbar.classList.toggle('scrolled', window.scrollY > 50);
         });
+
+        // Fade-in storytelling sections
+        const storySections = document.querySelectorAll('.story-section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        storySections.forEach(section => observer.observe(section));
     </script>
 </body>
 </html>
