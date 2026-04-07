@@ -49,10 +49,19 @@
             object-fit: contain;
         }
         .story-body .inline-img {
-            max-width: 35%;
-            height: 35%;
+            max-width: 100%;
+            height: auto;
             display: block;
             margin: 1rem 0;
+        }
+
+        .story-body a {
+            color: #1a6eb5;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+        .story-body a:hover {
+            color: #0f4a80;
         }
     </style>
 </head>
@@ -113,9 +122,9 @@
                         <div class="story-body">
                             <span class="story-tag">01 • Rate Increases</span>
                             <h3>DTE Rate Hikes in Michigan</h3>
-                            <img src="../assets/dte-rate-hikes/dte_rate_hike_news.png" alt="DTE rate hike news" class="inline-img" style="max-width: 60%;">
+                            
                             <p>
-                                <strong>Context:</strong> In 2025, Michigan utility DTE proposed an 11% increase in residential electricity rates. While it is self-evident that an increase in electricity rates would cause household energy bills to increase as well, we want to determine if cost increases are proportional to the proposed rate increases (i.e. do household costs increase by 11%, or do they increase by more). We also want to pinpoint areas in DTE service territory that may be more impacted by this increase than others.
+                                <strong>Context:</strong> In 2025, Michigan utility DTE <a href="https://www.detroitnews.com/story/business/2025/04/25/dte-energy-electricity-prices-rate-increase/83278149007/?gnt-cfr=1&gca-cat=p&gca-uir=true&gca-epti=z117726p118950c118950e009600v117726d--69--b--69--&gca-ft=230&gca-ds=sophi">proposed an 11% increase in residential electricity rates</a>. While it is self-evident that an increase in electricity rates would cause household energy bills to increase as well, we want to determine if cost increases are proportional to the proposed rate increases (i.e. do household costs increase by 11%, or do they increase by more). We also want to pinpoint areas in DTE service territory that may be more impacted by this increase than others.
                             </p>
                             <p>
                                 <strong>Approach:</strong> To do this, we will go to the left side of the tool, select "Utility" under "Geographic Scope," and select the necessary state and utility (in this case, Michigan and DTE Electric Company). Then we will launch the Decision Support Tool.
@@ -146,15 +155,13 @@
                             <p>
                                 <strong>Context:</strong> Inspired by California's Solar on Multifamily Homes (SOMAH) program, we use the community solar module within the Decision Support tool to investigate areas of Los Angeles that would benefit the most from community solar. This simulation is purely hypothetical, assuming an unlimited community solar system size, but is more to assess relative benefits from community solar rather than specific dollar savings.
                             </p>
+                            <img src="../assets/ladwp-comm-solar/comm-solar-main-stats.png" alt="Comm solar main" class="inline-img">
                             <p>
                                 <strong>Approach:</strong> Enter the Decision Support tool and enable community solar. We estimate each household would get the equivalent of 4 kW of solar (generally enough to cover the average household's energy needs in California). We also assume electricity provided from community solar provides a 10% discount over standard utility electricity.
                             </p>
-                            <div class="inline-image-pair">
-                                <img src="../assets/ladwp-comm-solar/enable comm solar.png" alt="Enable community solar">
-                                <img src="../assets/ladwp-comm-solar/enable low income discount cs.png" alt="Low income discount">
-                            </div>
+                            
                             <p>SOMAH is targeted toward multifamily and largely low-income households, so this exercise will include an additional 20% discount on community solar electricity to low-income households (under 80% Area Median Income), and will be limited to multifamily or renter households only.</p>
-                            <img src="../assets/ladwp-comm-solar/limit mf renter cs.png" alt="Limit to multifamily and renter households" class="inline-img">
+                            
                             <p>
                                 <strong>Key Findings:</strong> The output map shows the affordability gap decrease across LADWP service territory – however, benefits are highest in Downtown Los Angeles, and to the west in San Fernando Valley. These are areas that may see the largest cost benefit from a localized community solar addition.
                             </p>
