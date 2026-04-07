@@ -8,6 +8,53 @@
     <script src="../assets/password-gate.js"></script>
     <link rel="stylesheet" href="../assets/styles-new.css">
     <link rel="icon" type="image/png" href="../assets/favicon.png">
+    <style>
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url('../assets/stock-images/iStock-505412046.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.20;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .story-section {
+            background: rgba(255, 255, 255, 0.75);
+        }
+
+        .story-wrapper {
+            max-width: 75%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Inline image pairs within story-body */
+        .story-body .inline-image-pair {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            margin: 1rem 0;
+        }
+        .story-body .inline-image-pair img {
+            width: 50%;
+            height: 420px;
+            object-fit: contain;
+        }
+        .story-body .inline-image-pair.wide img {
+            width: 75%;
+            height: 360px;
+            object-fit: contain;
+        }
+        .story-body .inline-img {
+            max-width: 35%;
+            height: 35%;
+            display: block;
+            margin: 1rem 0;
+        }
+    </style>
 </head>
 <body>
     <!-- Top Navigation Bar -->
@@ -52,118 +99,158 @@
 
         <!-- Page Content -->
         <main class="page-content">
-            <div class="container">
-                <!-- Main Content - Loads from Markdown -->
-                <div id="markdown-content" data-content-source="case-studies.md">
-                    <!-- Fallback/placeholder content -->
-                    
-                    <!-- Introduction -->
-                    <section class="content-section" id="intro">
-                        <h2>Applications of the Tool</h2>
-                        <p>
-                            The National Energy Affordability Tool and underlying methodology have been used 
-                            in a variety of contexts, from state-level policy development to utility rate case 
-                            analysis. Below are selected case studies demonstrating the tool's capabilities.
-                        </p>
-                    </section>
+            <div class="container story-wrapper">
+                <div class="story-lede">
+                    <p>
+                        The National Energy Affordability Tool and underlying methodology have been used in a variety of contexts, from state-level policy development to utility rate case analysis. Below are selected case studies demonstrating the tool's capabilities.
+                    </p>
+                </div>
 
-                    <!-- Case Study Cards -->
-                    <section class="content-section" id="case-studies-list">
-                        <h2>Featured Case Studies</h2>
+                <div class="story-sections">
 
-                        <!-- Maryland -->
-                        <div class="info-box" style="margin-bottom: 2rem; border-left: 4px solid #0066cc;">
+                    <!-- Case Study 1: Maryland -->
+                    <section class="story-section" id="maryland">
+                        <div class="story-body">
+                            <span class="story-tag">01 • State Policy Analysis</span>
                             <h3>Maryland State Analysis</h3>
-                            <p><strong>Context:</strong> Comprehensive energy affordability assessment supporting the Maryland Commission on Climate Change.</p>
-                            <p><strong>Approach:</strong> Used the tool to identify geographic and demographic patterns in energy burden across Maryland counties and utility territories.</p>
-                            <p><strong>Key Findings:</strong></p>
-                            <p><em>Who is affected?</em><br>
-                            Roughly 400,000 households in Maryland are energy cost burdened. Most of these households are under 200% of the Federal Poverty Level, and half of these households are renters. High rural cost burdens are driven by a reliance on expensive fuels like propane and fuel oil, while urban cost burdens are typically concentrated in historically red-lined areas. In Baltimore City, black households have nearly twice the energy cost burden compared to the rest of the city's population.</p>
-
-                            <p><em>Solutions</em><br>
-                            Maryland households collectively have an affordability gap of $400 million, only 30% of which is currently covered by bill assistance. However, implementing targeted interventions for low- and moderate-income households—such as weatherization, community solar, and demand response programs—can reduce the gap down to just $80 million, while also decarbonizing the state's energy systems. This would enable 40% of households below the poverty level to no longer require bill assistance.</p>
-
-                            <p><strong>Impact:</strong> Informed state policy recommendations for energy assistance and efficiency program targeting.</p>
+                            <div style="width: 100%; height: 200px; background-image: url('../assets/stock-images/iStock-636101676.jpg'); background-size: cover; background-position: center 42%; margin-bottom: 1rem;"></div>
+                            <p>
+                                <strong>Context:</strong> Comprehensive energy affordability assessment supporting the Maryland Commission on Climate Change.
+                            </p>
+                            <p>
+                                <strong>Approach:</strong> Used the tool to identify geographic and demographic patterns in energy burden across Maryland counties and utility territories.
+                            </p>
+                            <p>
+                                <strong>Key Findings:</strong>
+                            </p>
+                            <p>
+                                <em>Who is affected?</em><br>
+                                Roughly 400,000 households in Maryland are energy cost burdened. Most of these households are under 200% of the Federal Poverty Level. Half of cost-burdened households are renters. High rural cost burdens are driven by a reliance on expensive fuels like propane and fuel oil, while urban cost burdens are typically concentrated in historically red-lined areas. In Baltimore City, black households have nearly twice the energy cost burden compared to the rest of the city's population.
+                            </p>
+                            <p>
+                                <em>Solutions</em><br>
+                                Maryland households collectively have an affordability gap of $400 million, only 30% of which is currently covered by bill assistance. However, implementing targeted interventions for low- and moderate-income households—such as weatherization, community solar, and demand response programs—can reduce the gap down to just $80 million, while also decarbonizing the state's energy systems. This would enable 40% of households below the poverty level to no longer require bill assistance.
+                            </p>
+                            <p>
+                                <strong>Impact:</strong> Informed state policy recommendations for energy assistance and efficiency program targeting.
+                            </p>
+                            <div class="story-note">
+                                <strong>Publication:</strong> <a href="https://www.psehealthyenergy.org/wp-content/uploads/2023/02/Energy-Affordability-in-Maryland-2023_-Final-Report-1.pdf" target="_blank" style="color: inherit; text-decoration: underline;">Maryland Energy Affordability Report →</a>
+                            </div>
                         </div>
+                    </section>
 
-                        <!-- Colorado -->
-                        <div class="info-box" style="margin-bottom: 2rem; border-left: 4px solid #0066cc;">
+                    <!-- Case Study 2: Colorado -->
+                    <section class="story-section" id="colorado">
+                        <div class="story-body">
+                            <span class="story-tag">02 • Energy Equity</span>
                             <h3>Colorado Energy Equity</h3>
-                            <p><strong>Context:</strong> Analysis of energy burden disparities across Colorado communities supporting the state's equity-focused clean energy transition.</p>
-                            <p><strong>Approach:</strong> Examined burden distributions by income, race/ethnicity, and housing type across Colorado utilities.</p>
-
-                            <p><strong>Key Findings:</strong></p>
-                            <p><em>Who is affected?</em><br>
-                            Across Colorado, low-income households face dramatically higher energy cost burdens, despite using less energy overall. Communities of color, renters, and those with lower average education attainment face higher energy cost burdens, even after controlling for income. Energy cost burdens are starkest in rural areas of Colorado, especially in mobile homes that are primarily heated with propane.</p>
-
-                            <p>Rural census tracts and tracts in the coldest regions of the state also have the highest Energy Use Intensities, indicating that their homes are energy inefficient, and could benefit the most from weatherization programs that can help improve home insulation and install more energy-efficient appliances. In urban areas, higher average household heating Energy Use Intensities are found in census tracts with a higher proportion of Hispanic and Black residents have, who would also benefit from home weatherization and electrification programs.</p>
-
-                            <p><em>Solutions</em><br>
-                            Energy cost-burdens can be alleviated by equitable allocation, expansion, and enrollment efforts of existing programs and funds already dedicated to energy bill assistance and climate action. For example, funds from the Colorado Clean Energy Fund (CCEF) can help finance weatherization, electrification, community solar, and smart appliances for low-income households, which would then reduce reliance on other bill assistance programs over time.</p>
-
-                            <p><strong>Impact:</strong> Supported development of equity metrics for Colorado's climate action planning.</p>
+                            <div style="width: 100%; height: 200px; background-image: url('../assets/stock-images/1144990631-huge.jpg'); background-size: cover; background-position: center 37%; margin-bottom: 1rem;"></div>
+                            <p>
+                                <strong>Context:</strong> Analysis of energy burden disparities across Colorado communities supporting the state's equity-focused clean energy transition.
+                            </p>
+                            <p>
+                                <strong>Approach:</strong> Examined burden distributions by income, race/ethnicity, and housing type across Colorado utilities.
+                            </p>
+                            <p>
+                                <strong>Key Findings:</strong>
+                            </p>
+                            <p>
+                                <em>Who is affected?</em><br>
+                                Across Colorado, low-income households face dramatically higher energy cost burdens, despite using less energy overall. Communities of color, renters, and those with lower average education attainment face higher energy cost burdens, even after controlling for income. Energy cost burdens are starkest in rural areas of Colorado, especially in mobile homes that are primarily heated with propane.
+                            </p>
+                            <p>
+                                Rural census tracts and tracts in the coldest regions of the state also have the highest Energy Use Intensities, indicating that their homes are energy inefficient, and could benefit the most from weatherization programs that can help improve home insulation and install more energy-efficient appliances. In urban areas, higher average household heating Energy Use Intensities are found in census tracts with a higher proportion of Hispanic and Black residents, who would also benefit from home weatherization and electrification programs.
+                            </p>
+                            <p>
+                                <em>Solutions</em><br>
+                                Energy cost-burdens can be alleviated by equitable allocation, expansion, and enrollment efforts of existing programs and funds already dedicated to energy bill assistance and climate action. For example, funds from the Colorado Clean Energy Fund (CCEF) can help finance weatherization, electrification, community solar, and smart appliances for low-income households, which would then reduce reliance on other bill assistance programs over time.
+                            </p>
+                            <p>
+                                <strong>Impact:</strong> Supported development of equity metrics for Colorado's climate action planning.
+                            </p>
+                            <div class="story-note">
+                                <strong>Publication:</strong> <a href="https://www.psehealthyenergy.org/wp-content/uploads/2022/02/Colorado-Energy-Affordability-Study_Full-Report.pdf" target="_blank" style="color: inherit; text-decoration: underline;">Colorado Energy Equity Analysis →</a>
+                            </div>
                         </div>
+                    </section>
 
-                        <!-- Western States -->
-                        <div class="info-box" style="margin-bottom: 2rem; border-left: 4px solid #0066cc;">
+                    <!-- Case Study 3: Western States -->
+                    <section class="story-section" id="western-states">
+                        <div class="story-body">
+                            <span class="story-tag">03 • Deep Decarbonization</span>
                             <h3>Western States Deep Decarbonization</h3>
-                            <p><strong>Context:</strong> Multi-state analysis examining affordability implications of deep decarbonization pathways across the Western interconnection.</p>
-                            <p><strong>Approach:</strong> Modeled household-level impacts of electrification and rate changes under various decarbonization scenarios in Colorado, Nevada, and New Mexico.</p>
-
-                            <p><strong>Key Findings:</strong><br>
-                            Across Colorado, Nevada, and New Mexico, pollution- and energy cost-burdened communities can be targeted for clean energy infrastructure and emissions reductions programs to provide significant public health and economic benefits. Decarbonization policies that do not incorporate equity can prolong exposures to health-damaging pollutants, and increase energy and transportation costs for communities already disproportionately affected by the current fossil fuel system.</p>
-
-                            <p>Climate policy focused solely on carbon emissions can worsen existing pollution and economic disparities. The affected communities would see some of the greatest benefits from clean energy adoption if policy focused on them. Thus, equitable decarbonization policy can then yield substantial health and economic benefits in addition to carbon benefits.</p>
-
-                            <p><strong>Impact:</strong> Identified strategies to minimize affordability impacts while achieving emission reduction goals.</p>
+                            <div style="width: 100%; height: 200px; background-image: url('../assets/stock-images/iStock-1379549388.jpg'); background-size: cover; background-position: center 32%; margin-bottom: 1rem;"></div>
+                            <p>
+                                <strong>Context:</strong> Multi-state analysis examining affordability implications of deep decarbonization pathways across the Western interconnection.
+                            </p>
+                            <p>
+                                <strong>Approach:</strong> Modeled household-level impacts of electrification and rate changes under various decarbonization scenarios in Colorado, Nevada, and New Mexico.
+                            </p>
+                            <p>
+                                <strong>Key Findings:</strong><br>
+                                Across Colorado, Nevada, and New Mexico, pollution- and energy cost-burdened communities can be targeted for clean energy infrastructure and emissions reductions programs to provide significant public health and economic benefits. Decarbonization policies that do not incorporate equity can prolong exposures to health-damaging pollutants, and increase energy and transportation costs for communities already disproportionately affected by the current fossil fuel system.
+                            </p>
+                            <p>
+                                Climate policy focused solely on carbon emissions can worsen existing pollution and economic disparities. The affected communities would see some of the greatest benefits from clean energy adoption if policy focused on them. Thus, equitable decarbonization policy can yield substantial health and economic benefits in addition to carbon benefits.
+                            </p>
+                            <p>
+                                <strong>Impact:</strong> Identified strategies to minimize affordability impacts while achieving emission reduction goals.
+                            </p>
+                            <div class="story-note">
+                                <strong>Publication:</strong> <a href="https://www.psehealthyenergy.org/work/western-states-deep-decarbonization/" target="_blank" style="color: inherit; text-decoration: underline;">Western States Decarbonization Study →</a>
+                            </div>
                         </div>
+                    </section>
 
-                        <!-- Utility Rate Case -->
-                        <div class="info-box" style="margin-bottom: 2rem; border-left: 4px solid #0066cc;">
+                    <!-- Case Study 4: Utility Rate Case -->
+                    <section class="story-section" id="utility-rate-case">
+                        <div class="story-body">
+                            <span class="story-tag">04 • Rate Case Analysis</span>
                             <h3>Utility Rate Case Analysis</h3>
-                            <p><strong>Context:</strong> Application of affordability metrics in utility rate proceedings to assess customer impacts and design equitable rate structures.</p>
-                            <p><strong>Approach:</strong> Provided detailed analysis of burden distributions by customer class and demographic characteristics.</p>
-                            <p><strong>Key Findings:</strong> <em>Coming Soon</em></p>
-                            <p><strong>Impact:</strong> Informed rate design decisions and low-income discount program recommendations.</p>
+                            <div style="width: 100%; height: 200px; background-image: url('../assets/stock-images/iStock_Sunset_grid_electricity_outage.jpg'); background-size: cover; background-position: center 65%; margin-bottom: 1rem;"></div>
+                            <p>
+                                <strong>Context:</strong> Application of affordability metrics in utility rate proceedings to assess customer impacts and design equitable rate structures.
+                            </p>
+                            <p>
+                                <strong>Approach:</strong> Provided detailed analysis of burden distributions by customer class and demographic characteristics.
+                            </p>
+                            <p>
+                                <strong>Key Findings:</strong> <em>Coming Soon</em>
+                            </p>
+                            <p>
+                                <strong>Impact:</strong> Informed rate design decisions and low-income discount program recommendations.
+                            </p>
+                            <div class="story-note">
+                                <strong>Publication:</strong> Utility Rate Case Testimony Examples <em>(Coming Soon)</em>
+                            </div>
                         </div>
                     </section>
 
-                    <!-- How to Get Involved -->
-                    <section class="content-section" id="get-involved">
-                        <h2>Your Case Study Here</h2>
-                        <p>
-                            Are you using the National Energy Affordability Tool in your work? We'd love 
-                            to hear about it and potentially feature your application as a case study.
-                        </p>
-                        
-                        <div class="info-box note">
-                            <h4>Share Your Work</h4>
+                    <!-- Your Case Study Here -->
+                    <section class="story-section reverse" id="get-involved">
+                        <div class="story-figure">
+                            <img src="../assets/stock-images/iStock-505412046_handshake.png" alt="Collaboration and partnership">
+                        </div>
+                        <div class="story-body">
+                            <span class="story-tag">05 • Your Case Study</span>
+                            <h3>Your case study here</h3>
                             <p>
-                                Contact us to discuss how your analysis could be featured, or to learn more 
-                                about how the tool might support your specific use case.
+                                Are you using the National Energy Affordability Tool in your work? We'd love to hear about it and potentially feature your application as a case study.
                             </p>
-                            <p>
-                                <a href="https://www.psehealthyenergy.org/contact/" target="_blank" class="btn btn-secondary btn-sm">
-                                    Contact PSE Healthy Energy
-                                </a>
-                            </p>
+                            <div class="story-note">
+                                <strong>Share Your Work:</strong> Contact us to discuss how your analysis could be featured, or to learn more about how the tool might support your specific use case. <a href="https://www.psehealthyenergy.org/contact/" target="_blank" style="color: inherit; text-decoration: underline;">Contact PSE Healthy Energy →</a>
+                            </div>
+                            <p>Detailed findings from case studies and methodology papers are available through PSE Healthy Energy's publications library:</p>
+                            <ul>
+                                <li><a href="https://www.psehealthyenergy.org/wp-content/uploads/2023/02/Energy-Affordability-in-Maryland-2023_-Final-Report-1.pdf" target="_blank">Maryland Energy Affordability Report</a></li>
+                                <li><a href="https://www.psehealthyenergy.org/wp-content/uploads/2022/02/Colorado-Energy-Affordability-Study_Full-Report.pdf" target="_blank">Colorado Energy Equity Analysis</a></li>
+                                <li><a href="https://www.psehealthyenergy.org/work/western-states-deep-decarbonization/" target="_blank">Western States Decarbonization Study</a></li>
+                                <li>Utility Rate Case Testimony Examples <em>(Coming Soon)</em></li>
+                            </ul>
                         </div>
                     </section>
 
-                    <!-- Related Publications -->
-                    <section class="content-section" id="publications">
-                        <h2>Related Publications</h2>
-                        <p>
-                            Detailed findings from case studies and methodology papers are available
-                            through PSE Healthy Energy's publications library.
-                        </p>
-                        <ul>
-                            <li><a href="https://www.psehealthyenergy.org/wp-content/uploads/2023/02/Energy-Affordability-in-Maryland-2023_-Final-Report-1.pdf" target="_blank">Maryland Energy Affordability Report</a></li>
-                            <li><a href="https://www.psehealthyenergy.org/wp-content/uploads/2022/02/Colorado-Energy-Affordability-Study_Full-Report.pdf" target="_blank">Colorado Energy Equity Analysis</a></li>
-                            <li><a href="https://www.psehealthyenergy.org/work/western-states-deep-decarbonization/" target="_blank">Western States Decarbonization Study</a></li>
-                            <li>Utility Rate Case Testimony Examples <em>(Coming Soon)</em></li>
-                        </ul>
-                    </section>
                 </div>
             </div>
         </main>
@@ -177,7 +264,7 @@
                     <img src="../assets/2021 - PSE_Logo_Stacked_Color.png" alt="PSE Healthy Energy">
                     <p>Bringing science to energy policy for a healthy, clean future.</p>
                 </div>
-                
+
                 <div class="footer-section">
                     <h4>Navigation</h4>
                     <ul>
@@ -190,7 +277,7 @@
                         <li><a href="contact.html">Contact Us</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <ul>
@@ -199,7 +286,7 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
                 <p>© 2024 PSE Healthy Energy. All rights reserved.</p>
             </div>
@@ -207,21 +294,30 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="../js/content-loader.js"></script>
     <script>
         // Mobile menu toggle
         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
         const navMenu = document.getElementById('navMenu');
-        
-        mobileMenuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('open');
-        });
-        
+        mobileMenuToggle.addEventListener('click', () => navMenu.classList.toggle('open'));
+
         // Navbar scroll effect
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             navbar.classList.toggle('scrolled', window.scrollY > 50);
         });
+
+        // Fade-in storytelling sections
+        const storySections = document.querySelectorAll('.story-section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        storySections.forEach(section => observer.observe(section));
     </script>
 </body>
 </html>
