@@ -8,6 +8,38 @@
     <script src="../assets/password-gate.js"></script>
     <link rel="stylesheet" href="../assets/styles-new.css">
     <link rel="icon" type="image/png" href="../assets/favicon.png">
+    <style>
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url('../assets/stock-images/iStock-1138203628.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.10;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .story-section {
+            background: rgba(255, 255, 255, 0.75);
+        }
+
+        .story-wrapper {
+            max-width: 75%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .story-body a {
+            color: #1a6eb5;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+        .story-body a:hover {
+            color: #0f4a80;
+        }
+    </style>
 </head>
 <body>
     <!-- Top Navigation Bar -->
@@ -45,7 +77,7 @@
                 </div>
                 <h1>Additional Resources</h1>
                 <p class="lead">
-                    Explore related publications, data sources, external tools, and other resources 
+                    Explore related publications, data sources, external tools, and other resources
                     for energy affordability research and advocacy.
                 </p>
             </div>
@@ -53,130 +85,117 @@
 
         <!-- Page Content -->
         <main class="page-content">
-            <div class="container">
-                <!-- Main Content - Loads from Markdown -->
-                <div id="markdown-content" data-content-source="resources.md">
-                    <!-- Fallback/placeholder content -->
-                    
-                    <!-- Data Sources Section -->
-                    <section class="content-section" id="data-sources">
-                        <h2>Data Sources</h2>
-                        <p>
-                            The National Energy Affordability Tool integrates data from multiple 
-                            authoritative sources. Below are links to the primary data used in our analysis.
-                        </p>
-                        
-                        <h3>U.S. Census Bureau</h3>
-                        <ul>
-                            <li><a href="https://www.census.gov/programs-surveys/acs" target="_blank">American Community Survey (ACS)</a> - Demographics, income, and housing characteristics</li>
-                            <li><a href="https://www.census.gov/programs-surveys/ahs" target="_blank">American Housing Survey (AHS)</a> - Detailed housing unit information</li>
-                        </ul>
-                        
-                        <h3>U.S. Energy Information Administration (EIA)</h3>
-                        <ul>
-                            <li><a href="https://www.eia.gov/consumption/residential/" target="_blank">Residential Energy Consumption Survey (RECS)</a> - Household energy consumption patterns</li>
-                            <li><a href="https://www.eia.gov/electricity/data/eia861/" target="_blank">Form EIA-861</a> - Annual electric power industry report</li>
-                            <li><a href="https://www.eia.gov/naturalgas/ngqs/" target="_blank">Natural Gas Data</a> - Natural gas prices and consumption</li>
-                        </ul>
-                        
-                        <h3>Climate & Weather Data</h3>
-                        <ul>
-                            <li><a href="https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals" target="_blank">NOAA Climate Normals</a> - Heating and cooling degree days</li>
-                        </ul>
-                    </section>
+            <div class="container story-wrapper">
+                <div class="story-lede">
+                    <p>
+                        Below are selected publications, tools, and programs relevant to energy affordability research and advocacy. Resources are organized by topic to help you quickly find what you need.
+                    </p>
+                </div>
 
-                    <!-- PSE Publications Section -->
-                    <section class="content-section" id="pse-publications">
-                        <h2>PSE Healthy Energy Publications</h2>
-                        <p>
-                            Related research and analysis from PSE Healthy Energy's energy equity work.
-                        </p>
-                        <ul>
-                            <li>Maryland Energy Affordability Report <em>(Coming Soon)</em></li>
-                            <li>Colorado Energy Equity Analysis <em>(Coming Soon)</em></li>
-                            <li>Western States Deep Decarbonization Study <em>(Coming Soon)</em></li>
-                            <li>National Energy Affordability Methodology Paper <em>(Coming Soon)</em></li>
-                        </ul>
-                    </section>
+                <div class="story-sections">
 
-                    <!-- External Tools Section -->
-                    <section class="content-section" id="external-tools">
-                        <h2>Related Tools & Resources</h2>
-                        <p>
-                            Other tools and resources for energy affordability and equity analysis.
-                        </p>
-                        
-                        <h3>Energy Burden & Affordability</h3>
-                        <ul>
-                            <li><a href="https://energyequityproject.com/" target="_blank">Energy Equity Project</a> - Framework and metrics for energy equity</li>
-                            <li><a href="https://www.energy.ca.gov/data-reports/data-exploration-tools/energy-equity-indicators-dashboard-collection/deep-dive-energy" target="_blank">California Energy Commission Deep Dive into Energy Affordability</a> - Metrics assessing energy affordability in California</li>
-                            <li><a href="https://www.energy.gov/scep/slsc/lead-tool" target="_blank">DOE LEAD Tool</a> - Low-Income Energy Affordability Data Tool <em>(Currently inactive)</em></li>
-                        </ul>
-                        
-                        <h3>Environmental Justice</h3>
-                        <ul>
-                            <li><a href="https://screeningtool.geoplatform.gov/" target="_blank">Climate and Economic Justice Screening Tool (CEJST)</a></li>
-                            <li><a href="https://www.epa.gov/ejscreen" target="_blank">EPA EJScreen</a> - Environmental justice mapping tool</li>
-                        </ul>
-                        
-                        <h3>Building & Energy Data</h3>
-                        <ul>
-                            <li><a href="https://resstock.nrel.gov/" target="_blank">NREL ResStock</a> - Residential building stock analysis</li>
-                            <li><a href="https://atlas.eia.gov/" target="_blank">EIA Energy Atlas</a> - Interactive energy maps</li>
-                        </ul>
-                    </section>
-
-                    <!-- Assistance Programs Section -->
-                    <section class="content-section" id="assistance-programs">
-                        <h2>Energy Assistance Programs</h2>
-                        <p>
-                            Federal and state programs providing energy assistance to low-income households.
-                        </p>
-                        
-                        <h3>Federal Programs</h3>
-                        <ul>
-                            <li><a href="https://www.acf.hhs.gov/ocs/programs/liheap" target="_blank">LIHEAP</a> - Low Income Home Energy Assistance Program</li>
-                            <li><a href="https://www.energy.gov/scep/wap/weatherization-assistance-program" target="_blank">Weatherization Assistance Program (WAP)</a></li>
-                        </ul>
-                        
-                        <h3>State Resources</h3>
-                        <p>
-                            Many states offer additional energy assistance programs. Contact your state's 
-                            public utility commission or energy office for local resources.
-                        </p>
-                    </section>
-
-                    <!-- About PSE Section -->
-                    <section class="content-section" id="about-pse">
-                        <h2>About PSE Healthy Energy</h2>
-                        <p>
-                            PSE Healthy Energy is a non-profit energy science and policy research institute 
-                            dedicated to supplying evidence-based, scientific information on the public health, 
-                            environmental, and climate dimensions of energy production and use.
-                        </p>
-                        
-                        <div class="info-box note">
-                            <h4>Learn More</h4>
-                            <p>
-                                Visit our website to learn more about our research, publications, and mission.
-                            </p>
-                            <p>
-                                <a href="https://www.psehealthyenergy.org/" target="_blank" class="btn btn-secondary btn-sm">
-                                    Visit PSE Healthy Energy
-                                </a>
-                            </p>
+                    <!-- PSE Publications -->
+                    <section class="story-section" id="pse-publications">
+                        <div class="story-body">
+                            
+                            <h3>PSE Healthy Energy Publications</h3>
+                            <p>Related research and analysis from PSE Healthy Energy's energy equity work.</p>
+                            <ul>
+                                <li><a href="https://www.psehealthyenergy.org/work/energy-affordability-in-maryland/" target="_blank">Maryland Energy Affordability Report</a></li>
+                                <li><a href="https://www.psehealthyenergy.org/wp-content/uploads/2022/02/Colorado-Energy-Affordability-Study_Full-Report.pdf" target="_blank">Colorado Energy Equity Analysis</a></li>
+                                <li><a href="https://www.psehealthyenergy.org/work/western-states-deep-decarbonization/" target="_blank">Western States Deep Decarbonization Study</a></li>
+                                <li>National Energy Affordability Methodology Paper <em>(Coming Soon)</em></li>
+                            </ul>
                         </div>
                     </section>
 
-                    <!-- Funding Acknowledgment -->
-                    <section class="content-section" id="funding">
-                        <h2>Funding Acknowledgment</h2>
-                        <p>
-                            Development of the National Energy Affordability Tool was supported by 
-                            [Funder Name]. The findings and conclusions in this tool are those of the 
-                            authors and do not necessarily represent the views of the funders.
-                        </p>
+                    <!-- Related Tools & Resources -->
+                    <section class="story-section" id="external-tools">
+                        <div class="story-body">
+                            
+                            <h3>Related Tools & Resources</h3>
+                            <p>Other tools and resources for energy affordability and equity analysis.</p>
+
+                            <h4>Energy Burden &amp; Affordability: Metrics</h4>
+                            <ul>
+                                <li><a href="https://www.energy.gov/scep/slsc/lead-tool" target="_blank">US Department of Energy Low-income Energy Affordability Data (LEAD) Tool</a> — Models energy costs and cost burdens at different geographic levels (national, state, county, and city) across the US. LEAD breaks this data down by fuel type, demographics, household characteristics (income metrics as well as resident tenure), and building characteristics (age, type, primary heating fuel). Data comes primarily from US Census Bureau American Community Survey 2022 Public Use Microdata samples, and US EIA 2022 electric utility (Survey Form-861) and gas utility (Survey Form-176) data. Provides similar breakdowns compared to NEAT, but NEAT simulates data based on the same sources for every household in the US, and provides additional metrics, like the Energy Affordability Gap, which can be more actionable for policymakers and community groups.</li>
+                                <li><a href="https://www.energy.ca.gov/data-reports/data-exploration-tools/energy-equity-indicators-dashboard-collection/deep-dive-energy" target="_blank">California Energy Commission Deep Dive into Energy Affordability</a> — A comprehensive interactive tool assessing energy affordability in California, measured through metrics like energy burden, Energy Affordability Gap, and the Energy Affordability Index. Provides multiple geographic levels, from census tracts to utility service territories, and includes multiple filters for community types (e.g. housing tenure, disadvantaged communities, least affordable quartile of census tracts, etc.). In-home energy data sourced from the DOE's LEAD tool, and supplemented with transportation data from CalTrans and CEC. Further demographic data comes from the American Community Survey and the University of Washington's Center for Women's Welfare.</li>
+                            </ul>
+                            <br>
+
+                            <h4>Energy Burden &amp; Affordability: Relevant Policies</h4>
+                            <ul>
+                                <li><a href="https://statesleadtheway.justsolutionscollective.org/the-policy-library/" target="_blank">Just Solutions Energy Affordability Policy Library</a> — A comprehensive collection of resources, regulations, and policies to reduce home electricity and gas costs. Users can browse through the library, or filter by Affordability Strategy (e.g. Utility Reforms), Region (Federal, State, Local), Policy Mechanism (e.g. Legislation), Keywords (e.g. Air Quality), and Community Benefits (e.g. Affordability).</li>
+                                <li><a href="https://www.climatepolicydashboard.org/" target="_blank">State Climate Policy Dashboard</a> — An in-depth list of climate programs for each state in the US. Users can filter for policies by topic, including affordability-related areas like Electrification, Buildings and Efficiency, and Transportation. The dashboard also divides programs up by states that have enacted them, states that have not, and states that are in the process of enacting them.</li>
+                                <li><a href="https://energyjustice.indiana.edu/disconnection-dashboard/index.html" target="_blank">Energy Justice Disconnections Dashboard</a> — A tool to identify utility disconnections across the US. Can be used to assess disconnection trends across different geographies, information on utility companies, and state policies that aim to protect customers. Data is updated through 2024, but it should be noted that this tool is not yet finalized.</li>
+                                <li><a href="https://energyequityproject.com/" target="_blank">Energy Equity Project</a> — Provides a hub of resources for frontline communities and partners to advocate against shutoffs. Includes information on lessons learned, how to hone arguments, a boilerplate language library, shutoff protection guidance, and more.</li>
+                                <li><a href="https://www.aceee.org/city-clean-energy-scorecard" target="_blank">ACEEE City Clean Energy Scorecard</a></li>
+                                <li><a href="https://neada.org/energy-affordability-project/" target="_blank">NEADA Energy Affordability Project</a></li>
+                                <li><a href="https://dsireusa.org/" target="_blank">Database of State Incentives for Renewables &amp; Efficiency (DSIRE)</a></li>
+                                <li><a href="https://neep.org/public-policy-and-programs/regional-roundup" target="_blank">NEEP Regional Policy Roundup</a></li>
+                            </ul>
+                            <br>
+
+                            <h4>Environmental Justice</h4>
+                            <ul>
+                                <li><a href="https://public-environmental-data-partners.github.io/j40-cejst-2/en/#3/37.09/-101.55" target="_blank">Climate and Economic Justice Screening Tool (CEJST)</a> — Highlights marginalized and underinvested census tracts across the entire US. Provides population data about each tract upon selection, as well as reasons a tract is classified as disadvantaged (under categories of climate change, energy, health, housing, legacy pollution, transportation, water/wastewater, and workforce development).</li>
+                                <li><a href="https://www.epa.gov/ejscreen" target="_blank">EPA EJScreen</a> — Environmental justice mapping tool enabling users to assess cumulative EJ burdens at the tract level for the entire US. Taken down in January 2025 but mirrors are hosted online.</li>
+                            </ul>
+                            <p><strong>State-level Environmental Justice Screening Tools</strong><br>Tools that display a number of environmental, socioeconomic, and health endpoints by census tract in the state, as well as overall scores for environmental justice. Can be used to identify areas of the state with a combination of equity and environmental justice burdens.</p>
+                            <ul>
+                                <li>California — <a href="https://oehha.ca.gov/calenviroscreen/report/calenviroscreen-40" target="_blank">CalEnviroScreen</a></li>
+                                <li>Michigan — <a href="https://www.michigan.gov/egle/maps-data/miejscreen" target="_blank">MiEJScreen</a></li>
+                                <li>Maryland — <a href="https://mde.maryland.gov/Environmental_Justice/Pages/MDEnviroScreen.aspx" target="_blank">MDEnviroScreen</a></li>
+                                <li>New York — <a href="https://climate.ny.gov/Resources/Disadvantaged-Communities-Criteria" target="_blank">Disadvantaged Communities Criteria</a></li>
+                                <li>Washington — <a href="https://doh.wa.gov/data-and-statistical-reports/washington-tracking-network-wtn/washington-environmental-health-disparities-map" target="_blank">Environmental Health Disparities Map</a></li>
+                            </ul>
+                            <br>
+
+                            <h4>Building &amp; Energy Data</h4>
+                            <ul>
+                                <li><a href="https://resstock.nrel.gov/" target="_blank">NREL ResStock</a> — Residential building stock analysis. Physics-based simulations of a diverse array of households that may not match observed consumption patterns, since they do not account for behaviors to reduce energy consumption.</li>
+                                <li><a href="https://www.eia.gov/consumption/residential/" target="_blank">EIA Residential Energy Consumption Survey (RECS)</a> — Energy consumption, cost, and housing data from a nationally representative sample of housing units.</li>
+                                <li><a href="https://emp.lbl.gov/tracking-sun-tool" target="_blank">Lawrence Berkeley Lab US Distributed Solar and Storage Tool</a> — Tracks solar and storage installations across all states over time, including system design, install prices, market characteristics, and income.</li>
+                            </ul>
+                        </div>
                     </section>
+
+                    <!-- Energy Assistance Programs -->
+                    <section class="story-section" id="assistance-programs">
+                        <div class="story-body">
+                            
+                            <h3>Energy Assistance Programs</h3>
+                            <p>Federal and state programs providing energy assistance to low-income households.</p>
+
+                            <h4>Federal Programs</h4>
+                            <ul>
+                                <li><a href="https://www.acf.hhs.gov/ocs/programs/liheap" target="_blank">LIHEAP</a> — Low Income Home Energy Assistance Program</li>
+                                <li><a href="https://www.energy.gov/scep/wap/weatherization-assistance-program" target="_blank">Weatherization Assistance Program (WAP)</a></li>
+                            </ul>
+                            <br>
+
+                            <h4>State Resources</h4>
+                            <p>Many states offer additional energy assistance programs. Contact your state's public utility commission or energy office for local resources.</p>
+                        </div>
+                    </section>
+
+                    <!-- About PSE -->
+                    <section class="story-section" id="about-pse">
+                        <div class="story-body">
+                            
+                            <h3>About PSE Healthy Energy</h3>
+                            <p>
+                                PSE Healthy Energy is a non-profit energy science and policy research institute
+                                dedicated to supplying evidence-based, scientific information on the public health,
+                                environmental, and climate dimensions of energy production and use.
+                            </p>
+                            <div class="story-note">
+                                <strong>Learn More:</strong> Visit our website to learn more about our research, publications, and mission. <a href="https://www.psehealthyenergy.org/" target="_blank" style="color: inherit; text-decoration: underline;">Visit PSE Healthy Energy →</a>
+                            </div>
+                            <p>Development of the National Energy Affordability Tool was supported by [Funder Name]. The findings and conclusions in this tool are those of the authors and do not necessarily represent the views of the funders.</p>
+                        </div>
+                    </section>
+
                 </div>
             </div>
         </main>
@@ -190,7 +209,7 @@
                     <img src="../assets/2021 - PSE_Logo_Stacked_Color.png" alt="PSE Healthy Energy">
                     <p>Bringing science to energy policy for a healthy, clean future.</p>
                 </div>
-                
+
                 <div class="footer-section">
                     <h4>Navigation</h4>
                     <ul>
@@ -203,7 +222,7 @@
                         <li><a href="contact.html">Contact Us</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <ul>
@@ -212,7 +231,7 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
                 <p>© 2024 PSE Healthy Energy. All rights reserved.</p>
             </div>
@@ -220,21 +239,30 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="../js/content-loader.js"></script>
     <script>
         // Mobile menu toggle
         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
         const navMenu = document.getElementById('navMenu');
-        
-        mobileMenuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('open');
-        });
-        
+        mobileMenuToggle.addEventListener('click', () => navMenu.classList.toggle('open'));
+
         // Navbar scroll effect
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             navbar.classList.toggle('scrolled', window.scrollY > 50);
         });
+
+        // Fade-in storytelling sections
+        const storySections = document.querySelectorAll('.story-section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        storySections.forEach(section => observer.observe(section));
     </script>
 </body>
 </html>
