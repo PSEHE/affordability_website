@@ -8,6 +8,50 @@
     <script src="assets/password-gate.js"></script>
     <link rel="stylesheet" href="assets/styles-new.css">
     <link rel="icon" type="image/png" href="assets/favicon.png">
+    <style>
+        html {
+            background-image: url('assets/stock-images/iStock-1138203628.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        body {
+            background-color: rgba(255, 255, 255, 0.50);
+        }
+        .hero {
+            background: linear-gradient(135deg, rgba(232, 240, 241, 0.85) 0%, rgba(255, 255, 255, 0.85) 50%, rgba(196, 242, 235, 0.85) 100%) !important;
+        }
+        .section-cards,
+        .scroll-section:nth-child(odd),
+        .scroll-section:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.82) !important;
+        }
+        .card {
+            background-color: rgba(255, 255, 255, 0.97) !important;
+        }
+        .card-banner {
+            margin: calc(-1 * var(--space-xl)) calc(-1 * var(--space-xl)) var(--space-md);
+            height: 150px;
+            overflow: hidden;
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        }
+        .card-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .scroll-section.reverse .container {
+            grid-template-columns: 1fr;
+            direction: ltr;
+        }
+        .scroll-section.reverse .section-text {
+            order: 1;
+        }
+        .scroll-section.reverse .section-visual {
+            order: 2;
+        }
+    </style>
 </head>
 <body>
     <!-- Top Navigation Bar -->
@@ -40,8 +84,8 @@
                 <h1 class="hero-title">Understanding Energy Affordability in America</h1>
                 <p class="hero-subtitle">
                     Explore comprehensive data on household energy costs, burdens, and emissions 
-                    across every U.S. census tract. Our tool helps researchers, policymakers, and advocates 
-                    understand and address energy equity challenges.
+                    across every U.S. household, aggregated up to the census tract level. Our tool helps researchers, policymakers, and advocates 
+                    understand and address energy equity challenges at hyperlocal scales, across the U.S.
                 </p>
                 <div class="hero-actions">
                     <a href="https://energy-affordability-frontend.vercel.app" class="btn btn-primary" target="_blank">
@@ -61,14 +105,15 @@
     <!-- Quick Navigation Cards -->
     <section class="section-cards">
         <div class="container">
-            <h2 class="section-title">Explore the Tool</h2>
+            <h2 class="section-title">Explore the National Energy Affordability Tool (NEAT)</h2>
             <p class="section-subtitle">
-                Navigate through comprehensive resources on energy affordability, from understanding 
-                the problem to using our interactive tools for analysis.
+                Navigate through comprehensive resources on NEAT, from tool guides and examples os using the tool to assess affordability impacts of local policy decisions, to deeper dives into other work on energy affordability, both by PSE and by our contemporaries.
             </p>
             <div class="card-grid">
                 <a href="pages/overview.html" class="card">
-                    <div class="card-icon">💡</div>
+                    <div class="card-banner">
+                        <img src="assets/stock-images/1144990631-huge.jpg" alt="Residential neighborhood">
+                    </div>
                     <h3 class="card-title">Overview</h3>
                     <p class="card-description">
                         Get the big picture on energy costs, burdens, and emissions in a concise walkthrough.
@@ -77,50 +122,60 @@
                 </a>
                 
                 <a href="pages/tool-guide.html" class="card">
-                    <div class="card-icon">🛠️</div>
+                    <div class="card-banner">
+                        <img src="assets/stock-images/iStock_Sunset_grid_electricity_outage.jpg" alt="Electricity grid at sunset">
+                    </div>
                     <h3 class="card-title">Tool Guide</h3>
                     <p class="card-description">
-                        Learn how to use the National Energy Affordability Tool's features, including 
-                        the Statistics Generator and Decision Support capabilities.
+                        Learn how to use the NEAT's features, including 
+                        the Statistics Generator for a snapshot of the affordability landscape, and the Decision Support Tool for a dive on the impacts of policy changes.
                     </p>
                     <span class="card-link">View Guide →</span>
                 </a>
                 
                 <a href="pages/case-studies.html" class="card">
-                    <div class="card-icon">📊</div>
+                    <div class="card-banner">
+                        <img src="assets/stock-images/iStock-636101676.jpg" alt="City aerial view at night">
+                    </div>
                     <h3 class="card-title">Case Studies</h3>
                     <p class="card-description">
-                        See how the tool has been used in real-world applications, from state-level 
-                        policy analysis to utility program design.
+                        See how NEAT's underlying data has been used in real-world applications, from state-level 
+                        policy analysis in Colorado, Maryland, Nevada, and New Mexico, to utility rate cases in Michigan.
                     </p>
                     <span class="card-link">Read Case Studies →</span>
                 </a>
                 
                 <a href="pages/methodology.html" class="card">
-                    <div class="card-icon">📐</div>
+                    <div class="card-banner">
+                        <img src="assets/stock-images/iStock-627777022.jpg" alt="Solar farm with mountain backdrop">
+                    </div>
                     <h3 class="card-title">Methodology</h3>
                     <p class="card-description">
                         Dive into the technical details of our data sources, modeling approaches, 
-                        and estimation methodology.
+                        and estimation methodology used to generate NEAT's underlying data.
                     </p>
                     <span class="card-link">Learn More →</span>
                 </a>
 
                   <a href="pages/use-cases.html" class="card">
-                    <div class="card-icon">📊</div>
+                    <div class="card-banner">
+                        <img src="assets/stock-images/iStock-1128888172.jpg" alt="Solar panels, wind turbines, and battery storage">
+                    </div>
                     <h3 class="card-title">Use Cases</h3>
                     <p class="card-description">
-                        See NEAT in action answering questions on energy affordability impacts of policy changes and technology adoption, based on real-world examples.
+                        See NEAT in action answering questions on energy affordability impacts of policy changes and technology adoption, based on local, real-world examples.
                     </p>
                     <span class="card-link">Learn More →</span>
                 </a>
                 
                 <a href="pages/resources.html" class="card">
-                    <div class="card-icon">📚</div>
+                    <div class="card-banner">
+                        <img src="assets/stock-images/iStock-1173204659.jpg" alt="City skyline with rooftop solar panels">
+                    </div>
                     <h3 class="card-title">Additional Resources</h3>
                     <p class="card-description">
-                        Access related publications, data sources, external tools, and other 
-                        resources for energy affordability research.
+                        Dive into related publications, data sources, external tools, and other 
+                        resources on energy affordability, equity, and environmental justice.
                     </p>
                     <span class="card-link">Browse Resources →</span>
                 </a>
@@ -150,11 +205,32 @@
         </div>
     </section>
 
+<!-- REMINDER: This iframe requires a local server to preview (file:// won't work).
+     Run: python -m http.server 8080 in the project folder, then open http://localhost:8080/overview.html -->
+
+    <!-- Tool Motivation -->
+    <section class="section-cards">
+        <div class="container">
+            <h2 class="section-title">Tool Motivation</h2>
+            <p class="section-subtitle" style="max-width: 900px;">
+                New technologies are opening the door to meeting load growth while decreasing emissions, cleaning the air, and making homes safer.
+                This tool aims to go beyond just quantifying the affordability challenges, but help analysts quickly and directly estimate how various solutions can improve affordability.
+                No one-size-all policy would suit whole states, let alone the entire US. This highlights the importance of
+                Explore household CO2e emissions and energy affordability gaps across every U.S. census tract.
+                Use the layer control to switch between metrics.
+            </p>
+            <iframe src="assets/ghg_eag_map.html"
+                    style="width: 100%; height: 600px; border: none; border-radius: 8px;">
+            </iframe>
+        </div>
+    </section>
+
     <!-- Tool Features Section -->
     <section class="scroll-section reverse">
         <div class="container">
             <div class="section-visual">
-                <img src="assets/tool_statistics_1.png" alt="Statistics Generator Feature" loading="lazy">
+                <p style="margin-bottom: var(--space-sm); font-style: italic; color: var(--color-gray-600);">Statistics Generator in action, viewing the affordabilty gap by race across renter-occupied homes in LADWP area</p>
+                <img src="assets/ladwp-comm-solar/comm-solar-main-stats.png" alt="LADWP main stats" loading="lazy">
             </div>
             <div class="section-text">
                 <h2>Powerful Analysis Tools</h2>
@@ -162,11 +238,11 @@
                     Our interactive dashboard provides two main capabilities for energy equity analysis:
                 </p>
                 <ul>
-                    <li><strong>Statistics Generator:</strong> Explore energy data by county, state, 
-                        utility territory, or nationwide with demographic filters</li>
+                    <li><strong>Statistics Generator:</strong> Explore data on energy rates, costs, and burdens across geographic levels (county, state, utility territory, metropolitan areas, national) 
+                        with a number of demographic and household characteristic filters (race, income bracket, heating fuel used, renter or owner, education level, and more).</li>
                     <li><strong>Decision Support:</strong> Model the impacts of efficiency programs, 
-                        weatherization initiatives, and electrification policies</li>
-                    <li><strong>Data Export:</strong> Download data for your own analysis and reporting</li>
+                        weatherization initiatives, and electrification policies, like targeted heat pump replacement, local community solar, and more.</li>
+                    <li><strong>Data Export:</strong> Download data for your own analysis and reporting.</li>
                 </ul>
                 <a href="pages/tool-guide.html" class="btn btn-secondary btn-sm">View Tool Guide</a>
             </div>

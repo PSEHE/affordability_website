@@ -36,6 +36,10 @@ Thumbs.db
 assets/generated/
 assets/temp/
 
+# Large data files (exceed GitHub's 100MB limit)
+assets/national_ghg_eag_map.geojson
+*.geojson
+
 # Temporary files
 *.tmp
 *.temp
