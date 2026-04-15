@@ -16,19 +16,98 @@
             background-image: url('../assets/stock-images/iStock-627777022.jpg');
             background-size: cover;
             background-position: center;
-            opacity: 0.20;
+            opacity: 0.10;
             z-index: -1;
             pointer-events: none;
         }
 
-        .story-section {
-            background: rgba(255, 255, 255, 0.75);
+        /* ---- Page layout: sidebar + content ---- */
+        .tool-guide-layout {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 2.5rem;
+            align-items: start;
+            padding: 2.5rem 0 4rem;
         }
 
-        .story-wrapper {
-            max-width: 75%;
-            margin-left: auto;
-            margin-right: auto;
+        /* ---- Sticky TOC Sidebar ---- */
+        .toc-sidebar {
+            display: block;
+            position: sticky;
+            top: calc(var(--navbar-height) + 1.5rem);
+            max-height: calc(100vh - var(--navbar-height) - 3rem);
+            overflow-y: auto;
+            padding: 1.25rem 1rem 1.25rem 0;
+            border-right: 2px solid var(--color-gray-200);
+        }
+
+        .toc-sidebar h4 {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-gray-500);
+            margin-bottom: 0.75rem;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-list li {
+            margin-bottom: 0;
+        }
+
+        .toc-list a {
+            display: block;
+            padding: 0.3rem 0.5rem;
+            font-size: 0.875rem;
+            color: var(--color-gray-600);
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-fast);
+            text-decoration: none;
+            border-left: 2px solid transparent;
+        }
+
+        .toc-list a:hover {
+            color: var(--color-primary);
+            background: var(--color-primary-lighter);
+            border-left-color: var(--color-primary);
+        }
+
+        .toc-list a.active {
+            color: var(--color-primary);
+            background: var(--color-primary-lighter);
+            border-left-color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        /* ---- Story sections ---- */
+        .story-section {
+            background: rgba(255, 255, 255, 0.75);
+            scroll-margin-top: calc(var(--navbar-height) + 1.5rem);
+        }
+
+        /* ---- Mobile: collapse to single column ---- */
+        @media (max-width: 768px) {
+            .tool-guide-layout {
+                grid-template-columns: 1fr;
+            }
+            .toc-sidebar {
+                position: static;
+                max-height: none;
+                border-right: none;
+                border-bottom: 2px solid var(--color-gray-200);
+                padding-bottom: 1rem;
+                margin-bottom: 1rem;
+            }
+            .toc-list {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.25rem;
+            }
         }
 
         /* Inline image pairs within story-body */
@@ -174,14 +253,28 @@
 
         <!-- Page Content -->
         <main class="page-content">
-            <div class="container story-wrapper">
-                <div class="story-lede" style="max-width: 100%;">
-                    <p>
-                        The National Energy Affordability Tool provides two main capabilities for energy equity analysis: an Existing Affordability Landscape Tool for exploring current data, and a Decision Support Tool for modeling the impacts of policy interventions. Below is a guide to using each component of the dashboard.
-                    </p>
-                </div>
+            <div class="container">
+                <div class="tool-guide-layout">
 
-                <div class="story-sections">
+                    <!-- ======= TOC SIDEBAR ======= -->
+                    <aside class="toc-sidebar" id="toc">
+                        <h4>Contents</h4>
+                        <ul class="toc-list">
+                            <li><a href="#existing-affordability-landscape" class="toc-link">Existing Affordability Landscape</a></li>
+                            <li><a href="#decision-support-tool" class="toc-link">Decision Support Tool</a></li>
+                            <li><a href="#tips" class="toc-link">Tips &amp; Best Practices</a></li>
+                        </ul>
+                    </aside>
+
+                    <!-- ======= MAIN CONTENT ======= -->
+                    <div>
+                        <div class="story-lede" style="max-width: 100%;">
+                            <p>
+                                The National Energy Affordability Tool provides two main capabilities for energy equity analysis: an Existing Affordability Landscape Tool for exploring current data, and a Decision Support Tool for modeling the impacts of policy interventions. Below is a guide to using each component of the dashboard.
+                            </p>
+                        </div>
+
+                        <div class="story-sections">
 
                     <!-- Section 1: Existing Affordability Landscape Tool -->
                     <section class="story-section" id="existing-affordability-landscape">
@@ -447,7 +540,10 @@
                         </div>
                     </section>
 
-                </div>
+                        </div>
+                    </div><!-- end main content -->
+
+                </div><!-- end tool-guide-layout -->
             </div>
         </main>
     </div>
@@ -515,16 +611,31 @@
 
         // Fade-in storytelling sections
         const storySections = document.querySelectorAll('.story-section');
-        const observer = new IntersectionObserver((entries) => {
+        const fadeObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target);
+                    fadeObserver.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.3 });
 
-        storySections.forEach(section => observer.observe(section));
+        storySections.forEach(section => fadeObserver.observe(section));
+
+        // Active TOC highlighting
+        const tocLinks = document.querySelectorAll('.toc-link');
+        const tocObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    tocLinks.forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+                    });
+                }
+            });
+        }, { rootMargin: '-10% 0px -60% 0px' });
+
+        document.querySelectorAll('.story-section[id]').forEach(s => tocObserver.observe(s));
     </script>
 </body>
 </html>

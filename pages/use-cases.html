@@ -16,19 +16,93 @@
             background-image: url('../assets/stock-images/iStock-1128888172.jpg');
             background-size: cover;
             background-position: center;
-            opacity: 0.25;
+            opacity: 0.1;
             z-index: -1;
             pointer-events: none;
         }
 
-        .story-section {
-            background: rgba(255, 255, 255, 0.75);
+        /* ---- Page layout: sidebar + content ---- */
+        .uc-layout {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 2.5rem;
+            align-items: start;
+            padding: 2.5rem 0 4rem;
         }
 
-        .story-wrapper {
-            max-width: 65%;
-            margin-left: auto;
-            margin-right: auto;
+        /* ---- Sticky TOC Sidebar ---- */
+        #toc {
+            display: block;
+            position: sticky;
+            top: calc(var(--navbar-height) + 1.5rem);
+            max-height: calc(100vh - var(--navbar-height) - 3rem);
+            overflow-y: auto;
+            padding: 1.25rem 1rem 1.25rem 0;
+            border-right: 2px solid var(--color-gray-200);
+        }
+
+        #toc h4 {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-gray-500);
+            margin-bottom: 0.75rem;
+        }
+
+        #toc ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #toc li {
+            margin-bottom: 0;
+        }
+
+        #toc a {
+            display: block;
+            padding: 0.3rem 0.5rem;
+            font-size: 0.875rem;
+            color: var(--color-gray-600);
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-fast);
+            text-decoration: none;
+            border-left: 2px solid transparent;
+        }
+
+        #toc a:hover {
+            color: var(--color-primary);
+            background: var(--color-primary-lighter);
+            border-left-color: var(--color-primary);
+        }
+
+        #toc a.active {
+            color: var(--color-primary);
+            background: var(--color-primary-lighter);
+            border-left-color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        /* ---- Story sections ---- */
+        .story-section {
+            background: rgba(255, 255, 255, 0.75);
+            scroll-margin-top: calc(var(--navbar-height) + 1.5rem);
+        }
+
+        /* ---- Mobile: collapse to single column ---- */
+        @media (max-width: 768px) {
+            .uc-layout {
+                grid-template-columns: 1fr;
+            }
+            #toc {
+                position: static;
+                max-height: none;
+                border-right: none;
+                border-bottom: 2px solid var(--color-gray-200);
+                padding-bottom: 1rem;
+                margin-bottom: 1rem;
+            }
         }
 
         /* Inline image pairs within story-body */
@@ -108,14 +182,29 @@
 
         <!-- Page Content -->
         <main class="page-content">
-            <div class="container story-wrapper">
-                <div class="story-lede">
-                    <p>
-                        The National Energy Affordability Tool can be used to answer a number of questions on energy affordability impacts from policy decisions, rate cases, technological improvements, and more. Below are example use cases based on real-world policies, showcasing how NEAT can be used to narrow in on which populations are impacted most by said policies.
-                    </p>
-                </div>
+            <div class="container">
+                <div class="uc-layout">
 
-                <div class="story-sections">
+                    <!-- ======= TOC SIDEBAR ======= -->
+                    <aside id="toc">
+                        <h4>Contents</h4>
+                        <ul>
+                            <li><a href="#dte-rate-increase" class="toc-link">DTE Rate Hikes in Michigan</a></li>
+                            <li><a href="#community-solar" class="toc-link">Community Solar in LADWP</a></li>
+                            <li><a href="#heat-pumps" class="toc-link">Heat Pumps in Boston</a></li>
+                            <li><a href="#get-involved" class="toc-link">Your Use Case</a></li>
+                        </ul>
+                    </aside>
+
+                    <!-- ======= MAIN CONTENT ======= -->
+                    <div>
+                        <div class="story-lede">
+                            <p>
+                                The National Energy Affordability Tool can be used to answer a number of questions on energy affordability impacts from policy decisions, rate cases, technological improvements, and more. Below are example use cases based on real-world policies, showcasing how NEAT can be used to narrow in on which populations are impacted most by said policies.
+                            </p>
+                        </div>
+
+                        <div class="story-sections">
 
                     <!-- Use Case 1: DTE Rate Increase -->
                     <section class="story-section" id="dte-rate-increase">
@@ -232,7 +321,10 @@
                         </div>
                     </section>
 
-                </div>
+                        </div>
+                    </div><!-- end main content -->
+
+                </div><!-- end uc-layout -->
             </div>
         </main>
     </div>
@@ -289,16 +381,31 @@
 
         // Fade-in storytelling sections
         const storySections = document.querySelectorAll('.story-section');
-        const observer = new IntersectionObserver((entries) => {
+        const fadeObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target);
+                    fadeObserver.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.3 });
 
-        storySections.forEach(section => observer.observe(section));
+        storySections.forEach(section => fadeObserver.observe(section));
+
+        // Active TOC highlighting
+        const tocLinks = document.querySelectorAll('.toc-link');
+        const tocObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    tocLinks.forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+                    });
+                }
+            });
+        }, { rootMargin: '-10% 0px -60% 0px' });
+
+        document.querySelectorAll('.story-section[id]').forEach(s => tocObserver.observe(s));
     </script>
 </body>
 </html>

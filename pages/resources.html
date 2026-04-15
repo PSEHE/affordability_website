@@ -21,14 +21,103 @@
             pointer-events: none;
         }
 
-        .story-section {
-            background: rgba(255, 255, 255, 0.75);
+        /* ---- Page layout: sidebar + content ---- */
+        .res-layout {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 2.5rem;
+            align-items: start;
+            padding: 2.5rem 0 4rem;
         }
 
-        .story-wrapper {
-            max-width: 75%;
-            margin-left: auto;
-            margin-right: auto;
+        /* ---- Sticky TOC Sidebar ---- */
+        #toc {
+            display: block;
+            position: sticky;
+            top: calc(var(--navbar-height) + 1.5rem);
+            max-height: calc(100vh - var(--navbar-height) - 3rem);
+            overflow-y: auto;
+            padding: 1.25rem 1rem 1.25rem 0;
+            border-right: 2px solid var(--color-gray-200);
+        }
+
+        #toc h4 {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-gray-500);
+            margin-bottom: 0.75rem;
+        }
+
+        #toc ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #toc li {
+            margin-bottom: 0;
+        }
+
+        #toc a {
+            display: block;
+            padding: 0.3rem 0.5rem;
+            font-size: 0.875rem;
+            color: var(--color-gray-600);
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-fast);
+            text-decoration: none;
+            border-left: 2px solid transparent;
+        }
+
+        #toc a:hover {
+            color: var(--color-primary);
+            background: var(--color-primary-lighter);
+            border-left-color: var(--color-primary);
+        }
+
+        #toc a.active {
+            color: var(--color-primary);
+            background: var(--color-primary-lighter);
+            border-left-color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        /* Sub-items */
+        #toc .toc-sub {
+            margin-left: 0.5rem;
+        }
+
+        #toc .toc-sub a {
+            font-size: 0.8rem;
+            color: var(--color-gray-500);
+            padding-left: 0.75rem;
+        }
+
+        /* ---- Story sections & subsection anchors ---- */
+        .story-section {
+            background: rgba(255, 255, 255, 0.75);
+            scroll-margin-top: calc(var(--navbar-height) + 1.5rem);
+        }
+
+        .story-body h4[id] {
+            scroll-margin-top: calc(var(--navbar-height) + 1.5rem);
+        }
+
+        /* ---- Mobile: collapse to single column ---- */
+        @media (max-width: 768px) {
+            .res-layout {
+                grid-template-columns: 1fr;
+            }
+            #toc {
+                position: static;
+                max-height: none;
+                border-right: none;
+                border-bottom: 2px solid var(--color-gray-200);
+                padding-bottom: 1rem;
+                margin-bottom: 1rem;
+            }
         }
 
         .story-body a {
@@ -85,14 +174,35 @@
 
         <!-- Page Content -->
         <main class="page-content">
-            <div class="container story-wrapper">
-                <div class="story-lede">
-                    <p>
-                        Below are selected publications, tools, and programs relevant to energy affordability research and advocacy. Resources are organized by topic to help you quickly find what you need.
-                    </p>
-                </div>
+            <div class="container">
+                <div class="res-layout">
 
-                <div class="story-sections">
+                    <!-- ======= TOC SIDEBAR ======= -->
+                    <aside id="toc">
+                        <h4>Contents</h4>
+                        <ul>
+                            <li><a href="#pse-publications" class="toc-link">PSE Publications</a></li>
+                            <li><a href="#external-tools" class="toc-link">Related Tools &amp; Resources</a></li>
+                            <ul class="toc-sub">
+                                <li><a href="#metrics" class="toc-link">Energy Burden &amp; Affordability: Metrics</a></li>
+                                <li><a href="#relevant-policies" class="toc-link">Energy Burden &amp; Affordability: Relevant Policies</a></li>
+                                <li><a href="#environmental-justice" class="toc-link">Environmental Justice</a></li>
+                                <li><a href="#building-energy-data" class="toc-link">Building &amp; Energy Data</a></li>
+                            </ul>
+                            <li><a href="#assistance-programs" class="toc-link">Energy Assistance Programs</a></li>
+                            <li><a href="#about-pse" class="toc-link">About PSE</a></li>
+                        </ul>
+                    </aside>
+
+                    <!-- ======= MAIN CONTENT ======= -->
+                    <div>
+                        <div class="story-lede">
+                            <p>
+                                Below are selected publications, tools, and programs relevant to energy affordability research and advocacy. Resources are organized by topic to help you quickly find what you need.
+                            </p>
+                        </div>
+
+                        <div class="story-sections">
 
                     <!-- PSE Publications -->
                     <section class="story-section" id="pse-publications">
@@ -101,9 +211,9 @@
                             <h3>PSE Healthy Energy Publications</h3>
                             <p>Related research and analysis from PSE Healthy Energy's energy equity work.</p>
                             <ul>
-                                <li><a href="https://www.psehealthyenergy.org/work/energy-affordability-in-maryland/" target="_blank">Maryland Energy Affordability Report</a></li>
-                                <li><a href="https://www.psehealthyenergy.org/wp-content/uploads/2022/02/Colorado-Energy-Affordability-Study_Full-Report.pdf" target="_blank">Colorado Energy Equity Analysis</a></li>
-                                <li><a href="https://www.psehealthyenergy.org/work/western-states-deep-decarbonization/" target="_blank">Western States Deep Decarbonization Study</a></li>
+                                <li><a href="https://www.psehealthyenergy.org/work/energy-affordability-in-maryland/" target="_blank">Report - Energy Affordability in Maryland</a></li>
+                                <li><a href="https://www.psehealthyenergy.org/wp-content/uploads/2022/02/Colorado-Energy-Affordability-Study_Full-Report.pdf" target="_blank">Report - Pathways to Energy Affordability in Colorado</a></li>
+                                <li><a href="https://www.psehealthyenergy.org/work/western-states-deep-decarbonization/" target="_blank">Western States Deep Decarbonization</a></li>
                                 <li>National Energy Affordability Methodology Paper <em>(Coming Soon)</em></li>
                             </ul>
                         </div>
@@ -116,14 +226,14 @@
                             <h3>Related Tools & Resources</h3>
                             <p>Other tools and resources for energy affordability and equity analysis.</p>
 
-                            <h4>Energy Burden &amp; Affordability: Metrics</h4>
+                            <h4 id="metrics">Energy Burden &amp; Affordability: Metrics</h4>
                             <ul>
                                 <li><a href="https://www.energy.gov/scep/slsc/lead-tool" target="_blank">US Department of Energy Low-income Energy Affordability Data (LEAD) Tool</a> — Models energy costs and cost burdens at different geographic levels (national, state, county, and city) across the US. LEAD breaks this data down by fuel type, demographics, household characteristics (income metrics as well as resident tenure), and building characteristics (age, type, primary heating fuel). Data comes primarily from US Census Bureau American Community Survey 2022 Public Use Microdata samples, and US EIA 2022 electric utility (Survey Form-861) and gas utility (Survey Form-176) data. Provides similar breakdowns compared to NEAT, but NEAT simulates data based on the same sources for every household in the US, and provides additional metrics, like the Energy Affordability Gap, which can be more actionable for policymakers and community groups.</li>
                                 <li><a href="https://www.energy.ca.gov/data-reports/data-exploration-tools/energy-equity-indicators-dashboard-collection/deep-dive-energy" target="_blank">California Energy Commission Deep Dive into Energy Affordability</a> — A comprehensive interactive tool assessing energy affordability in California, measured through metrics like energy burden, Energy Affordability Gap, and the Energy Affordability Index. Provides multiple geographic levels, from census tracts to utility service territories, and includes multiple filters for community types (e.g. housing tenure, disadvantaged communities, least affordable quartile of census tracts, etc.). In-home energy data sourced from the DOE's LEAD tool, and supplemented with transportation data from CalTrans and CEC. Further demographic data comes from the American Community Survey and the University of Washington's Center for Women's Welfare.</li>
                             </ul>
                             <br>
 
-                            <h4>Energy Burden &amp; Affordability: Relevant Policies</h4>
+                            <h4 id="relevant-policies">Energy Burden &amp; Affordability: Relevant Policies</h4>
                             <ul>
                                 <li><a href="https://statesleadtheway.justsolutionscollective.org/the-policy-library/" target="_blank">Just Solutions Energy Affordability Policy Library</a> — A comprehensive collection of resources, regulations, and policies to reduce home electricity and gas costs. Users can browse through the library, or filter by Affordability Strategy (e.g. Utility Reforms), Region (Federal, State, Local), Policy Mechanism (e.g. Legislation), Keywords (e.g. Air Quality), and Community Benefits (e.g. Affordability).</li>
                                 <li><a href="https://www.climatepolicydashboard.org/" target="_blank">State Climate Policy Dashboard</a> — An in-depth list of climate programs for each state in the US. Users can filter for policies by topic, including affordability-related areas like Electrification, Buildings and Efficiency, and Transportation. The dashboard also divides programs up by states that have enacted them, states that have not, and states that are in the process of enacting them.</li>
@@ -136,7 +246,7 @@
                             </ul>
                             <br>
 
-                            <h4>Environmental Justice</h4>
+                            <h4 id="environmental-justice">Environmental Justice</h4>
                             <ul>
                                 <li><a href="https://public-environmental-data-partners.github.io/j40-cejst-2/en/#3/37.09/-101.55" target="_blank">Climate and Economic Justice Screening Tool (CEJST)</a> — Highlights marginalized and underinvested census tracts across the entire US. Provides population data about each tract upon selection, as well as reasons a tract is classified as disadvantaged (under categories of climate change, energy, health, housing, legacy pollution, transportation, water/wastewater, and workforce development).</li>
                                 <li><a href="https://www.epa.gov/ejscreen" target="_blank">EPA EJScreen</a> — Environmental justice mapping tool enabling users to assess cumulative EJ burdens at the tract level for the entire US. Taken down in January 2025 but mirrors are hosted online.</li>
@@ -151,7 +261,7 @@
                             </ul>
                             <br>
 
-                            <h4>Building &amp; Energy Data</h4>
+                            <h4 id="building-energy-data">Building &amp; Energy Data</h4>
                             <ul>
                                 <li><a href="https://resstock.nrel.gov/" target="_blank">NREL ResStock</a> — Residential building stock analysis. Physics-based simulations of a diverse array of households that may not match observed consumption patterns, since they do not account for behaviors to reduce energy consumption.</li>
                                 <li><a href="https://www.eia.gov/consumption/residential/" target="_blank">EIA Residential Energy Consumption Survey (RECS)</a> — Energy consumption, cost, and housing data from a nationally representative sample of housing units.</li>
@@ -196,7 +306,10 @@
                         </div>
                     </section>
 
-                </div>
+                        </div>
+                    </div><!-- end main content -->
+
+                </div><!-- end res-layout -->
             </div>
         </main>
     </div>
@@ -253,16 +366,31 @@
 
         // Fade-in storytelling sections
         const storySections = document.querySelectorAll('.story-section');
-        const observer = new IntersectionObserver((entries) => {
+        const fadeObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target);
+                    fadeObserver.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.3 });
 
-        storySections.forEach(section => observer.observe(section));
+        storySections.forEach(section => fadeObserver.observe(section));
+
+        // Active TOC highlighting (sections + h4 subsections)
+        const tocLinks = document.querySelectorAll('.toc-link');
+        const tocObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    tocLinks.forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+                    });
+                }
+            });
+        }, { rootMargin: '-10% 0px -60% 0px' });
+
+        document.querySelectorAll('.story-section[id], .story-body h4[id]').forEach(el => tocObserver.observe(el));
     </script>
 </body>
 </html>

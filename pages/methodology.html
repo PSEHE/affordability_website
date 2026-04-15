@@ -9,7 +9,20 @@
     <link rel="stylesheet" href="../assets/styles-new.css">
     <link rel="icon" type="image/png" href="../assets/favicon.png">
     <style>
+        /* ---- Transparent background image ---- */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url('../assets/stock-images/iStock-1128888172.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+            z-index: -1;
+            pointer-events: none;
+        }
         /* ---- Page layout: sidebar + content ---- */
+        
         .methodology-layout {
             display: grid;
             grid-template-columns: 240px 1fr;

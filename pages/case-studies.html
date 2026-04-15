@@ -21,14 +21,89 @@
             pointer-events: none;
         }
 
-        .story-section {
-            background: rgba(255, 255, 255, 0.75);
+        /* ---- Page layout: sidebar + content ---- */
+        .cs-layout {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 2.5rem;
+            align-items: start;
+            padding: 2.5rem 0 4rem;
         }
 
-        .story-wrapper {
-            max-width: 75%;
-            margin-left: auto;
-            margin-right: auto;
+        /* ---- Sticky TOC Sidebar ---- */
+        /* Use #toc (ID) so specificity beats .toc-sidebar{display:none} in global CSS */
+        #toc {
+            display: block;
+            position: sticky;
+            top: calc(var(--navbar-height) + 1.5rem);
+            max-height: calc(100vh - var(--navbar-height) - 3rem);
+            overflow-y: auto;
+            padding: 1.25rem 1rem 1.25rem 0;
+            border-right: 2px solid var(--color-gray-200);
+        }
+
+        #toc h4 {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-gray-500);
+            margin-bottom: 0.75rem;
+        }
+
+        #toc ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #toc li {
+            margin-bottom: 0;
+        }
+
+        #toc a {
+            display: block;
+            padding: 0.3rem 0.5rem;
+            font-size: 0.875rem;
+            color: var(--color-gray-600);
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-fast);
+            text-decoration: none;
+            border-left: 2px solid transparent;
+        }
+
+        #toc a:hover {
+            color: var(--color-primary);
+            background: var(--color-primary-lighter);
+            border-left-color: var(--color-primary);
+        }
+
+        #toc a.active {
+            color: var(--color-primary);
+            background: var(--color-primary-lighter);
+            border-left-color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        /* ---- Story sections ---- */
+        .story-section {
+            background: rgba(255, 255, 255, 0.75);
+            scroll-margin-top: calc(var(--navbar-height) + 1.5rem);
+        }
+
+        /* ---- Mobile: collapse to single column ---- */
+        @media (max-width: 768px) {
+            .cs-layout {
+                grid-template-columns: 1fr;
+            }
+            #toc {
+                position: static;
+                max-height: none;
+                border-right: none;
+                border-bottom: 2px solid var(--color-gray-200);
+                padding-bottom: 1rem;
+                margin-bottom: 1rem;
+            }
         }
 
         /* Inline image pairs within story-body */
@@ -99,19 +174,35 @@
 
         <!-- Page Content -->
         <main class="page-content">
-            <div class="container story-wrapper">
-                <div class="story-lede">
-                    <p>
-                        The National Energy Affordability Tool and underlying methodology have been used in a variety of contexts, from state-level policy development to utility rate case analysis. Below are selected case studies demonstrating the tool's capabilities.
-                    </p>
-                </div>
+            <div class="container">
+                <div class="cs-layout">
 
-                <div class="story-sections">
+                    <!-- ======= TOC SIDEBAR ======= -->
+                    <aside id="toc">
+                        <h4>Contents</h4>
+                        <ul>
+                            <li><a href="#maryland" class="toc-link">Energy Affordability in Maryland</a></li>
+                            <li><a href="#colorado" class="toc-link">Pathways to Energy Affordability in Colorado</a></li>
+                            <li><a href="#western-states" class="toc-link">Western States Decarbonization</a></li>
+                            <li><a href="#utility-rate-case" class="toc-link">Utility Rate Case Testimonies</a></li>
+                            <li><a href="#get-involved" class="toc-link">Your Case Study</a></li>
+                        </ul>
+                    </aside>
+
+                    <!-- ======= MAIN CONTENT ======= -->
+                    <div>
+                        <div class="story-lede">
+                            <p>
+                                The National Energy Affordability Tool and underlying methodology have been used in a variety of contexts, from state-level policy development to utility rate case analysis. Below are selected case studies demonstrating the tool's capabilities.
+                            </p>
+                        </div>
+
+                        <div class="story-sections">
 
                     <!-- Case Study 1: Maryland -->
                     <section class="story-section" id="maryland">
                         <div class="story-body">
-                            <span class="story-tag">01 • State Policy Analysis</span>
+                            <span class="story-tag">01 • Maryland</span>
                             <h3>Maryland State Analysis</h3>
                             <div style="width: 100%; height: 200px; background-image: url('../assets/stock-images/iStock-636101676.jpg'); background-size: cover; background-position: center 42%; margin-bottom: 1rem;"></div>
                             <p>
@@ -143,8 +234,8 @@
                     <!-- Case Study 2: Colorado -->
                     <section class="story-section" id="colorado">
                         <div class="story-body">
-                            <span class="story-tag">02 • Energy Equity</span>
-                            <h3>Colorado Energy Equity</h3>
+                            <span class="story-tag">02 • Colorado</span>
+                            <h3>Pathways to Energy Affordability in Colorado</h3>
                             <div style="width: 100%; height: 200px; background-image: url('../assets/stock-images/1144990631-huge.jpg'); background-size: cover; background-position: center 37%; margin-bottom: 1rem;"></div>
                             <p>
                                 <strong>Context:</strong> Analysis of energy burden disparities across Colorado communities supporting the state's equity-focused clean energy transition.
@@ -178,7 +269,7 @@
                     <!-- Case Study 3: Western States -->
                     <section class="story-section" id="western-states">
                         <div class="story-body">
-                            <span class="story-tag">03 • Deep Decarbonization</span>
+                            <span class="story-tag">03 • Western States</span>
                             <h3>Western States Deep Decarbonization</h3>
                             <div style="width: 100%; height: 200px; background-image: url('../assets/stock-images/iStock-1379549388.jpg'); background-size: cover; background-position: center 32%; margin-bottom: 1rem;"></div>
                             <p>
@@ -206,8 +297,8 @@
                     <!-- Case Study 4: Utility Rate Case -->
                     <section class="story-section" id="utility-rate-case">
                         <div class="story-body">
-                            <span class="story-tag">04 • Rate Case Analysis</span>
-                            <h3>Utility Rate Case Analysis</h3>
+                            <span class="story-tag">04 • Rate Cases</span>
+                            <h3>Utility Rate Case Testimonies</h3>
                             <div style="width: 100%; height: 200px; background-image: url('../assets/stock-images/iStock_Sunset_grid_electricity_outage.jpg'); background-size: cover; background-position: center 65%; margin-bottom: 1rem;"></div>
                             <p>
                                 <strong>Context:</strong> Application of affordability metrics in utility rate proceedings to assess customer impacts and design equitable rate structures.
@@ -251,7 +342,10 @@
                         </div>
                     </section>
 
-                </div>
+                        </div>
+                    </div><!-- end main content -->
+
+                </div><!-- end cs-layout -->
             </div>
         </main>
     </div>
@@ -308,16 +402,31 @@
 
         // Fade-in storytelling sections
         const storySections = document.querySelectorAll('.story-section');
-        const observer = new IntersectionObserver((entries) => {
+        const fadeObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target);
+                    fadeObserver.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.3 });
 
-        storySections.forEach(section => observer.observe(section));
+        storySections.forEach(section => fadeObserver.observe(section));
+
+        // Active TOC highlighting
+        const tocLinks = document.querySelectorAll('.toc-link');
+        const tocObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    tocLinks.forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+                    });
+                }
+            });
+        }, { rootMargin: '-10% 0px -60% 0px' });
+
+        document.querySelectorAll('.story-section[id]').forEach(s => tocObserver.observe(s));
     </script>
 </body>
 </html>
