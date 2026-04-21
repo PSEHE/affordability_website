@@ -136,9 +136,24 @@ This threshold depends on an outdated assumption that households spend less than
                                 <li>Major opportunities exist to cut emissions while alleviating high bill burdens</li>
                             </ul>
                         </div>
-                        <div class="story-figure">
-                            <img src="../assets/ghg_emissions_static.svg" alt="U.S. residential greenhouse gas emissions map">
-                        </div>
+                         <div id="map-placeholder"
+                 onclick="loadInteractiveMap()"
+                 style="width: 80%; margin: 0 auto; position: relative; cursor: pointer; border-radius: 8px; overflow: hidden; height: 600px;">
+                <img src="../assets/leaflet-map-screenshot.png"
+                     alt="Static preview of GHG emissions and energy affordability gap map — click to load interactive version"
+                     style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.30); display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+                    <div style="background: white; border-radius: 8px; padding: 18px 32px; text-align: center; box-shadow: 0 4px 24px rgba(0,0,0,0.25);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#2a7ab5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block; margin: 0 auto 10px;"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="#2a7ab5" stroke="none"/></svg>
+                        <div style="font-weight: 600; font-size: 1.05rem; color: #222;">Load Interactive Map</div>
+                        <div style="font-size: 0.82rem; color: #666; margin-top: 4px;">May take a moment to load</div>
+                    </div>
+                </div>
+            </div>
+            <iframe id="map-iframe"
+                    data-src="../assets/ghg_eag_map.html"
+                    style="display: none; width: 80%; height: 600px; border: none; border-radius: 8px;">
+            </iframe>
                     </section>
 
                     <section class="story-section reverse" id="why-matters">
@@ -149,8 +164,9 @@ This threshold depends on an outdated assumption that households spend less than
                             <span class="story-tag">04 • Why This Matters</span>
                             <h3>Affordability and equity go together</h3>
                             <p>
-                                Energy affordability is both a social equity and climate issue. The right data helps
-                                direct resources where they do the most good.
+                                Energy affordability is both a social equity and climate issue. Better data helps inform strategies and 
+                               direct resources where they have the greatest increase in prosperity.
+
                             </p>
                             <ul>
                                 <li><strong>Health & Safety:</strong> Households struggling with bills face increased risks from inadequate heating, cooling, and unsafe energy practices (like using the oven for heating)</li>
@@ -230,6 +246,13 @@ This threshold depends on an outdated assumption that households spend less than
         }, { threshold: 0.3 });
 
         storySections.forEach(section => observer.observe(section));
+        function loadInteractiveMap() {
+            const placeholder = document.getElementById('map-placeholder');
+            const iframe = document.getElementById('map-iframe');
+            iframe.src = iframe.dataset.src;
+            placeholder.style.display = 'none';
+            iframe.style.display = 'block';
+        }
     </script>
 </body>
 </html>

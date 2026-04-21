@@ -222,25 +222,7 @@
                 Energy Affordability Gap (by quartile) per census tract. Zoom in or out to examine specific areas, and click on a dot for more information about this tract (total affordability gap in dollars, total CO2e emissions in kilograms, and median energy cost burden).
                 Areas that are in the upper quartiles for both greenhouse gas emissions and affordability gap would represent opportunities to reduce household costs and emissions simultaneously. In this example, many rural areas experience high affordability concerns AND carbon-intense residential energy, identifying the opportunity to cut costs and emissions.
                 </p>
-                <br>
-            <div id="map-placeholder"
-                 onclick="loadInteractiveMap()"
-                 style="width: 90%; margin: 0 auto; position: relative; cursor: pointer; border-radius: 8px; overflow: hidden; height: 600px;">
-                <img src="assets/leaflet-map-screenshot.png"
-                     alt="Static preview of GHG emissions and energy affordability gap map — click to load interactive version"
-                     style="width: 100%; height: 100%; object-fit: cover; display: block;">
-                <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.30); display: flex; align-items: center; justify-content: center; border-radius: 8px;">
-                    <div style="background: white; border-radius: 8px; padding: 18px 32px; text-align: center; box-shadow: 0 4px 24px rgba(0,0,0,0.25);">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#2a7ab5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block; margin: 0 auto 10px;"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="#2a7ab5" stroke="none"/></svg>
-                        <div style="font-weight: 600; font-size: 1.05rem; color: #222;">Load Interactive Map</div>
-                        <div style="font-size: 0.82rem; color: #666; margin-top: 4px;">May take a moment to load</div>
-                    </div>
-                </div>
-            </div>
-            <iframe id="map-iframe"
-                    data-src="assets/ghg_eag_map.html"
-                    style="display: none; width: 90%; height: 600px; border: none; border-radius: 8px;">
-            </iframe>
+                
             
         </div>
     </section>
@@ -367,13 +349,7 @@
             observer.observe(el);
         });
 
-        function loadInteractiveMap() {
-            const placeholder = document.getElementById('map-placeholder');
-            const iframe = document.getElementById('map-iframe');
-            iframe.src = iframe.dataset.src;
-            placeholder.style.display = 'none';
-            iframe.style.display = 'block';
-        }
+      
     </script>
 </body>
 </html>
