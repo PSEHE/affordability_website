@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Overview | National Energy Affordability Tool</title>
-    <meta name="description" content="Explore comprehensive data on household energy costs, burdens, and emissions across every U.S. county with the National Energy Affordability Tool.">
+    <meta name="description" content="Explore comprehensive data on household energy costs, financial burdens, emissions, and how various strategies can improve these factors across the entire U.S. with the National Energy Affordability Tool.">
     <script src="assets/password-gate.js"></script>
     <link rel="stylesheet" href="assets/styles-new.css">
     <link rel="icon" type="image/png" href="assets/favicon.png">
@@ -107,7 +107,7 @@
         <div class="container">
             <h2 class="section-title">Explore the National Energy Affordability Tool (NEAT)</h2>
             <p class="section-subtitle">
-                Navigate through comprehensive resources on NEAT, from tool guides and examples os using the tool to assess affordability impacts of local policy decisions, to deeper dives into other work on energy affordability, both by PSE and by our contemporaries.
+                Navigate through comprehensive resources on NEAT, from tool guides and examples  using the tool to assess affordability impacts of local policy decisions, to deeper dives into other work on energy affordability, both by PSE and by our contemporaries.
             </p>
             <div class="card-grid">
                 <a href="pages/overview.html" class="card">
@@ -116,19 +116,18 @@
                     </div>
                     <h3 class="card-title">Overview</h3>
                     <p class="card-description">
-                        Get the big picture on energy costs, burdens, and emissions in a concise walkthrough.
+                        Summary of why home energy costs matter and how NEAT can inform strategic policies.
                     </p>
                     <span class="card-link">Explore →</span>
                 </a>
                 
                 <a href="pages/tool-guide.html" class="card">
                     <div class="card-banner">
-                        <img src="assets/stock-images/iStock_Sunset_grid_electricity_outage.jpg" alt="Electricity grid at sunset">
+                        <img src="assets/neat-landing1.png" alt="Electricity grid at sunset">
                     </div>
                     <h3 class="card-title">Tool Guide</h3>
                     <p class="card-description">
-                        Learn how to use the NEAT's features, including 
-                        the Statistics Generator for a snapshot of the affordability landscape, and the Decision Support Tool for a dive on the impacts of policy changes.
+                        Learn how to use NEAT's features.
                     </p>
                     <span class="card-link">View Guide →</span>
                 </a>
@@ -139,8 +138,7 @@
                     </div>
                     <h3 class="card-title">Case Studies</h3>
                     <p class="card-description">
-                        See how NEAT's underlying data has been used in real-world applications, from state-level 
-                        policy analysis in Colorado, Maryland, Nevada, and New Mexico, to utility rate cases in Michigan.
+                        See how NEAT's underlying data has been used in real-world applications.
                     </p>
                     <span class="card-link">Read Case Studies →</span>
                 </a>
@@ -151,7 +149,7 @@
                     </div>
                     <h3 class="card-title">Methodology</h3>
                     <p class="card-description">
-                        Dive into the technical details of our data sources, modeling approaches, 
+                        Technical details of our data sources, modeling approaches, 
                         and estimation methodology used to generate NEAT's underlying data.
                     </p>
                     <span class="card-link">Learn More →</span>
@@ -163,7 +161,7 @@
                     </div>
                     <h3 class="card-title">Use Cases</h3>
                     <p class="card-description">
-                        See NEAT in action answering questions on energy affordability impacts of policy changes and technology adoption, based on local, real-world examples.
+                        Quick examples of how NEAT can inform programs and policy design.
                     </p>
                     <span class="card-link">Learn More →</span>
                 </a>
@@ -174,8 +172,9 @@
                     </div>
                     <h3 class="card-title">Additional Resources</h3>
                     <p class="card-description">
-                        Dive into related publications, data sources, external tools, and other 
-                        resources on energy affordability, equity, and environmental justice.
+                        Related publications, data sources, external tools, and other resources.
+                       
+
                     </p>
                     <span class="card-link">Browse Resources →</span>
                 </a>
@@ -197,8 +196,8 @@
                 </p>
                 <ul>
                     <li><strong>$285 billion</strong> spent annually on residential electricity and heating fuels</li>
-                    <li><strong>67%</strong> of low-income households exceed the 6% affordability threshold (ACEEE, 2020)</li>
-                    <li><strong>$30 billion</strong> gap between actual costs and affordable levels</li>
+                    <li><strong>Two-thirds</strong> of low-income households exceed the 6% affordability threshold (ACEEE, 2020)</li>
+                    <li><strong>Over $30 billion</strong> needed annually to ensure no household spends more than six percent of income on home energy needs</li>
                 </ul>
                 <a href="pages/overview.html" class="btn btn-secondary btn-sm">Learn More</a>
             </div>
@@ -213,9 +212,9 @@
         <div class="container">
             <h2 class="section-title">Tool Motivation</h2>
             <p class="section-subtitle" style="max-width: 900px;">
-                New technologies are opening the door to meeting load growth while decreasing emissions, cleaning the air, and making homes safer.
+                New technologies at home are opening the door to meeting load growth while decreasing emissions, cleaning the air, and making homes safer.
                 This tool aims to go beyond just quantifying the affordability challenges, but help analysts quickly and directly estimate how various solutions can improve affordability.
-                No one-size-all policy affecting household energy use would suit whole states, let alone the entire US. This highlights the importance of tailoring known policy toolkits to the local level maximize household cost savings and greenhouse gas emission reductions. 
+                
                 
             </p>
             <br>
@@ -224,8 +223,23 @@
                 Areas that are in the upper quartiles for both greenhouse gas emissions and affordability gap would represent opportunities to reduce household costs and emissions simultaneously. In this example, many rural areas experience high affordability concerns AND carbon-intense residential energy, identifying the opportunity to cut costs and emissions.
                 </p>
                 <br>
-            <iframe src="assets/ghg_eag_map.html"
-                    style="width: 90%; height: 600px; border: none; border-radius: 8px;">
+            <div id="map-placeholder"
+                 onclick="loadInteractiveMap()"
+                 style="width: 90%; margin: 0 auto; position: relative; cursor: pointer; border-radius: 8px; overflow: hidden; height: 600px;">
+                <img src="assets/leaflet-map-screenshot.png"
+                     alt="Static preview of GHG emissions and energy affordability gap map — click to load interactive version"
+                     style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.30); display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+                    <div style="background: white; border-radius: 8px; padding: 18px 32px; text-align: center; box-shadow: 0 4px 24px rgba(0,0,0,0.25);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#2a7ab5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block; margin: 0 auto 10px;"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="#2a7ab5" stroke="none"/></svg>
+                        <div style="font-weight: 600; font-size: 1.05rem; color: #222;">Load Interactive Map</div>
+                        <div style="font-size: 0.82rem; color: #666; margin-top: 4px;">May take a moment to load</div>
+                    </div>
+                </div>
+            </div>
+            <iframe id="map-iframe"
+                    data-src="assets/ghg_eag_map.html"
+                    style="display: none; width: 90%; height: 600px; border: none; border-radius: 8px;">
             </iframe>
             
         </div>
@@ -235,7 +249,7 @@
     <section class="scroll-section reverse">
         <div class="container">
             <div class="section-visual">
-                <p style="margin-bottom: var(--space-sm); font-style: italic; color: var(--color-gray-600);">Statistics Generator in action, viewing the affordabilty gap by race across renter-occupied homes in LADWP area</p>
+                <p style="margin-bottom: var(--space-sm); font-style: italic; color: var(--color-gray-600);">Affordability Landscape Tool in action, viewing the affordability gap for low-income households that rent, grouped by race, in the LADWP area</p>
                 <img src="assets/ladwp-comm-solar/comm-solar-main-stats.png" alt="LADWP main stats" loading="lazy">
             </div>
             <div class="section-text">
@@ -244,10 +258,10 @@
                     Our interactive dashboard provides two main capabilities for energy equity analysis:
                 </p>
                 <ul>
-                    <li><strong>Statistics Generator:</strong> Explore data on energy rates, costs, and burdens across geographic levels (county, state, utility territory, metropolitan areas, national) 
-                        with a number of demographic and household characteristic filters (race, income bracket, heating fuel used, renter or owner, education level, and more).</li>
+                    <li><strong>Affordability Landscape:</strong> Explore data on energy costs, bill assistance needs, emissions, and more down to the census tract. 
+                        Results can be independently calculated for multiple end uses such as heating and all major energy sources and further broken down by several demographic and household characteristic filters, including race, income, heating fuel, renter or owner, and education.</li>
                     <li><strong>Decision Support:</strong> Model the impacts of efficiency programs, 
-                        weatherization initiatives, and electrification policies, like targeted heat pump replacement, local community solar, and more.</li>
+                        weatherization initiatives, electrification policies, local community solar, and more.</li>
                     <li><strong>Data Export:</strong> Download data for your own analysis and reporting.</li>
                 </ul>
                 <a href="pages/tool-guide.html" class="btn btn-secondary btn-sm">View Tool Guide</a>
@@ -352,6 +366,14 @@
             el.classList.add('fade-in');
             observer.observe(el);
         });
+
+        function loadInteractiveMap() {
+            const placeholder = document.getElementById('map-placeholder');
+            const iframe = document.getElementById('map-iframe');
+            iframe.src = iframe.dataset.src;
+            placeholder.style.display = 'none';
+            iframe.style.display = 'block';
+        }
     </script>
 </body>
 </html>
