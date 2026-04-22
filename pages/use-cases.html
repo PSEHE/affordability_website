@@ -137,6 +137,47 @@
         .story-body a:hover {
             color: #0f4a80;
         }
+
+        /* ---- Accordion ---- */
+        .accordion-item {
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-md);
+            margin-bottom: 0.5rem;
+            overflow: hidden;
+        }
+        .accordion-item summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 0.85rem 1.1rem;
+            font-weight: 600;
+            font-size: 0.975rem;
+            background: var(--color-gray-50, #f8f9fa);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: background var(--transition-fast);
+        }
+        .accordion-item summary::-webkit-details-marker { display: none; }
+        .accordion-item summary::after {
+            content: '▸';
+            font-size: 1.2rem;
+            color: var(--color-gray-500);
+            transition: transform 0.2s ease;
+        }
+        .accordion-item[open] summary::after {
+            transform: rotate(90deg);
+        }
+        .accordion-item[open] summary {
+            background: var(--color-primary-lighter, #e8f0fb);
+            color: var(--color-primary);
+        }
+        .accordion-item summary:hover {
+            background: var(--color-primary-lighter, #e8f0fb);
+        }
+        .accordion-body {
+            padding: 1rem 1.1rem 0.5rem;
+        }
     </style>
 </head>
 <body>
@@ -200,7 +241,7 @@
                     <div>
                         <div class="story-lede">
                             <p>
-                                The National Energy Affordability Tool can be used to answer a number of questions on energy affordability impacts from policy decisions, rate cases, technological improvements, and more. Below are example use cases based on real-world policies, showcasing how NEAT can be used to narrow in on which populations are impacted most by said policies.
+                                The National Energy Affordability Tool can be used to answer a number of questions on energy affordability impacts from policy decisions, rate cases, technological improvements, and more. Below are example use cases based on real-world scenarios, showcasing how NEAT can be used to narrow in on populations most impacted by policy changes.
                             </p>
                         </div>
 
@@ -213,23 +254,38 @@
                             <h3>DTE Rate Hikes in Michigan</h3>
                             <div style="width: 100%; height: 200px; background-image: url('../assets/stock-images/iStock_Sunset_grid_electricity_outage.jpg'); background-size: cover; background-position: center 60%; margin-bottom: 1rem;"></div>
                             
-                            <p>
-                                In 2025, Michigan utility DTE <a href="https://www.detroitnews.com/story/business/2025/04/25/dte-energy-electricity-prices-rate-increase/83278149007/?gnt-cfr=1&gca-cat=p&gca-uir=true&gca-epti=z117726p118950c118950e009600v117726d--69--b--69--&gca-ft=230&gca-ds=sophi">proposed an 11% increase in residential electricity rates</a>. 
-                                While it is self-evident that an increase in electricity rates would cause household energy bills to increase as well, we want to determine if cost increases are proportional to the proposed rate increases (i.e. do household costs increase by 11%, or do they increase by more). We also want to pinpoint areas in DTE service territory that may be more impacted by this increase than others.
-                            </p>
-                          
-                            <img src="../assets/dte-rate-hikes/dte_landing_bar_charts.png" alt="DTE Bar Charts" class="inline-img">
-                            <p>NEAT's summary bar chart for households in DTE territory indicate that electricity is the primary driver of costs across all income brackets and between owners and renters. Increases in electricity prices will likely be felt acutely across the board.</p>
-                            <br>
-                            <p>
-                                <strong>Key Findings:</strong> The output map shows the increase in the energy affordability gap for each census tract in DTE service territory.
-                            </p>
-                            <div class="inline-image-pair wide">
-                                <img src="../assets/dte-rate-hikes/dte_gap_map.png" alt="DTE gap map">
-                                <img src="../assets/dte-rate-hikes/policy_scenario_Home_Type_dte_rate.png" alt="DTE line graph">
-                            </div>
-                            <p>As expected, cumulative household electricity bills increased, but not uniformly throughout the area. Tracts within Detroit, as well as those in the exurbs of Detroit and further north in the state, had higher increases in the gap. This allows decision makers and organizers to target specific areas of Michigan to provide bill assistance.</p>
-                            <p>An 11% electric rate increase corresponds to a nearly 20% increase in electricity bills across single family, multifamily, and mobile homes alike. These impacts are most acutely felt in dense urban areas as well as rural areas in DTE territory.</p>
+                            <details class="accordion-item">
+                                <summary>Policy Scenario</summary>
+                                <div class="accordion-body">
+                                    <p>
+                                        In 2025, Michigan utility DTE <a href="https://www.detroitnews.com/story/business/2025/04/25/dte-energy-electricity-prices-rate-increase/83278149007/?gnt-cfr=1&gca-cat=p&gca-uir=true&gca-epti=z117726p118950c118950e009600v117726d--69--b--69--&gca-ft=230&gca-ds=sophi">proposed an 11% increase in residential electricity rates</a>.
+                                        While it is self-evident that an increase in electricity rates would cause household energy bills to increase as well, we want to determine if cost increases are proportional to the proposed rate increases (i.e. do household costs increase by 11%, or do they increase by more). We also want to pinpoint areas in DTE service territory that may be more impacted by this increase than others.
+                                    </p>
+                                </div>
+                            </details>
+
+                            <details class="accordion-item">
+                                <summary>Situation at a Glance</summary>
+                                <div class="accordion-body">
+                                    <img src="../assets/dte-rate-hikes/dte_landing_bar_charts.png" alt="DTE Bar Charts" class="inline-img">
+                                    <p>NEAT's summary bar chart for households in DTE territory indicate that electricity is the primary driver of costs across all income brackets and between owners and renters. Increases in electricity prices will likely be felt acutely across the board.</p>
+                                </div>
+                            </details>
+
+                            <details class="accordion-item">
+                                <summary>Key Findings</summary>
+                                <div class="accordion-body">
+                                    <p>
+                                        The output map shows the increase in the energy affordability gap for each census tract in DTE service territory.
+                                    </p>
+                                    <div class="inline-image-pair wide">
+                                        <img src="../assets/dte-rate-hikes/dte_gap_map.png" alt="DTE gap map">
+                                        <img src="../assets/dte-rate-hikes/policy_scenario_Home_Type_dte_rate.png" alt="DTE line graph">
+                                    </div>
+                                    <p>As expected, cumulative household electricity bills increased, but not uniformly throughout the area. Tracts within Detroit, as well as those in the exurbs of Detroit and further north in the state, had higher increases in the gap. This allows decision makers and organizers to target specific areas of Michigan to provide bill assistance.</p>
+                                    <p>An 11% electric rate increase corresponds to a nearly 20% increase in electricity bills across single family, multifamily, and mobile homes alike. These impacts are most acutely felt in dense urban areas as well as rural areas in DTE territory.</p>
+                                </div>
+                            </details>
                         </div>
                     </section>
 
@@ -240,28 +296,44 @@
                             <h3>Identifying Areas in LADWP Territory that would reap the highest benefits from community solar</h3>
                             <div style="width: 100%; height: 200px; background-image: url('../assets/stock-images/iStock-1138203628.jpg'); background-size: cover; background-position: center; margin-bottom: 1rem;"></div>
                             <br>
+                            <details class="accordion-item">
+                                <summary>Policy Scenario</summary>
+                            <div class="accordion-body">
                             <p>
                                 Inspired by California's Solar on Multifamily Homes (SOMAH) program, we use the community solar module within the Decision Support tool to investigate areas of Los Angeles that would benefit the most from community solar. 
                                 This simulation is purely hypothetical, assuming an unlimited community solar system size, but is more to assess relative benefits from community solar rather than specific dollar savings.
                             </p>
-                            <br>
+                            </div>
+                            </details>
+                            
+                            <details class="accordion-item">
+                                <summary>Situation at a Glance</summary>
+                            <div class="accordion-body">
                             <img src="../assets/ladwp-comm-solar/comm-solar-main-stats.png" alt="Comm solar main" class="inline-img">
                             <p>Above, we filter for low-income renter-occupied households in Los Angeles Department of Water and Power (LADWP) service territory. The map on the left shows the affordability gap by census tract, split up by race/ethnicity, highlighting areas where the affordability gap is high (e.g. urban core areas).
                                 The bar chart on the right shows total energy costs and affordability gap for this subsect of households by race/ethnicity. Hispanic populations face the highest costs and affordability gap.
                             </p>
                             
-                            
+                        
+                        
                             <p>We estimate each household would get the equivalent of 4 kW of solar (generally enough to cover the average household’s energy needs in California). We also assume electricity provided from community solar provides a 10% discount over standard utility electricity. 
                                 SOMAH is targeted toward multifamily and largely low-income households, so this exercise will include an additional 20% discount on community solar electricity to low-income households (under 80% Area Median Income), and will be limited to multifamily or renter households only.</p>
-                            
+                            </div>
+                            </details>
+                            <details class="accordion-item">
+                                <summary>Key Findings</summary>
+                            <div class="accordion-body">
                             <p>
-                                <strong>Key Findings:</strong> The output map shows the affordability gap decrease across LADWP service territory – however, benefits are highest in Downtown Los Angeles, and to the west in San Fernando Valley. These are areas that may see the largest cost benefit from a localized community solar addition.
+                                The output map shows the affordability gap decrease across LADWP service territory – however, benefits are highest in Downtown Los Angeles, and to the west in San Fernando Valley. These are areas that may see the largest cost benefit from a localized community solar addition.
                             </p>
                             <div class="inline-image-pair">
                                 <img src="../assets/ladwp-comm-solar/ladwp_comm_solar.png" alt="LADWP community solar map">
                                 <img src="../assets/ladwp-comm-solar/ladwp_comm_solar_race.png" alt="Gap by race for community solar">
                             </div>
                             <p>In this example, all racial groups would have a 20–25% reduction in their energy affordability gap. Studies indicate that SOMAH may save individual households up to 40–60% on their electricity bills.</p>
+                            </div>
+                            </details>
+                        
                         </div>
                     </section>
 
@@ -271,9 +343,17 @@
                             <span class="story-tag">03 • Heat Pump Replacement</span>
                             <h3>Targeted heat pump replacement in the Boston Metro Area to maximize cost and emissions savings</h3>
                             <div style="width: 100%; height: 200px; background-image: url('../assets/stock-images/pexels-pixabay-266896.jpg'); background-size: cover; background-position: center 67%; margin-bottom: 1rem;"></div>
+                            <details class="accordion-item">
+                                <summary>Policy Scenario</summary>
+                            <div class="accordion-body">
                             <p>
                                 Inspired by Mass Save, we decided to examine opportunities for LMI household cost reductions through heating electrification in the Boston Metropolitan Area.
                             </p>
+                            </div>
+                            </details>
+                            <details class="accordion-item">
+                                <summary>Situation at a Glance</summary>
+                            <div class="accordion-body">
                             <p>
                                 We first filter the data for households of interest – in this case, LMI (&lt;80% AMI) households and those that use fossil fuels (gas, propane, and fuel oil) for space heating. 
                               
@@ -283,18 +363,24 @@
                             <p>From the map, we see that households that use fossil gas for heating primarily comprise the urban and suburban core of the Boston metro area, while households fueled by propane or fuel oil dominate the exurbs and rural areas outside the city. 
                                 Fossil gas is much more prevalent - heating around double the number of households as fuel oil and propane combined. However, households heated by fuel oil and propane had the highest energy cost burdens. 
                                 We will simulate the effects of switching all households to heat pumps to assess impacts to the affordability gap.</p>
-                            
-                            <br>
+                            </div>
+                            </details>
+                          <details class="accordion-item">
+                                <summary>Key Findings</summary>
+                            <div class="accordion-body">
                             <p>
-                                <strong>Key Findings:</strong> Running this example shows a key trend: Switching to heat pumps actually may increase costs on households that use fossil gas, but decreases costs for households that use propane and fuel oil, particularly for those in the exurbs of Boston.
+                                Running this example shows a key trend: Switching to heat pumps actually may increase costs on households that use fossil gas, but decreases costs for households that use propane and fuel oil, particularly for those in the exurbs of Boston.
                             <div class="inline-image-pair">
                                 <img src="../assets/boston-heat-pumps/output-chart-gap.png" alt="Boston output chart gap">
                                 <img src="../assets/boston-heat-pumps/output-map.png" alt="Boston output map gap">
                             
                             </div>
                             </p>
+                            
                             <p>This example shows the importance of targeted interventions – while blanket heat pump adoption would reduce greenhouse gas emissions across the board, it would only decrease costs for some households. Heat pump adoption in the Boston metro should then focus on households under 80% of the AMI that burn propane or fuel oil for space heating to maximize household cost savings and greenhouse gas reductions.</p>
                         </div>
+                        </div>
+                            </details>
                     </section>
 
                     <!-- Your Use Case Here -->
