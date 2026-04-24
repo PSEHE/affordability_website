@@ -649,25 +649,64 @@
                                         <span class="step-tag">RECS 2020</span>
                                         <span class="step-tag">NOAA</span>
                                         <p>
-                                            Energy use is predicted separately for up to 14 end-use categories, 
-                                            including space heating by fuel (electricity, natural gas, propane, 
-                                            fuel oil, and wood), space cooling, water heating, appliances, cooking, 
-                                            and lighting/other. Models were trained on the
-                                            <strong>Residential Energy Consumption Survey (RECS) 2020</strong> data,
-                                            which provides detailed energy use information for roughly 18,500 U.S. households.
+                                            Energy use is predicted separately for 14 end-use categories —
+                                            space heating by fuel (electricity, natural gas, propane, fuel oil,
+                                            wood), space cooling, water heating, electric appliances, cooking,
+                                            clothes drying, and fan/pump loads. Models are trained on the
+                                            <strong>Residential Energy Consumption Survey (RECS) 2020</strong>,
+                                            which provides measured end-use energy data for ~18,500 U.S. households.
                                         </p>
                                         <p>
                                             The appropriate model type is chosen for each end-use based on the
-                                            statistical properties of that energy stream—whether consumption is
-                                            near-universal or zero-inflated and how skewed the distribution is.
-                                            We used a Gradient Boosting regression for most end-uses, though used 
-                                            Random Forest or linear regressions where those performed better on 
-                                            out-of-sample data. (See 'Model Selection' below for more on this.)
+                                            statistical properties of that energy stream — whether consumption is
+                                            near-universal or zero-inflated, and how skewed the distribution is.
+                                            Most end-uses use Gradient Boosting regression; water heating and
+                                            cooking use linear regression; electric appliances use log-linear
+                                            regression; heat pump heating uses Random Forest.
+                                        </p>
+                                        <h4 style="font-size:0.95rem; margin-top:1rem;">Predictor variables</h4>
+                                        <p>All end-use models share a common base feature set:</p>
+                                        <ul>
+                                            <li><strong>Building type</strong> — single-family detached/attached, apartment (2–4 units, 5+ units), mobile home</li>
+                                            <li><strong>Climate</strong> — heating degree days (HDD65) and cooling degree days (CDD65) from NOAA at the household's location</li>
+                                            <li><strong>Floor area</strong> — estimated total conditioned square footage (from Step 2)</li>
+                                            <li><strong>Household size</strong> — number of occupants</li>
+                                            <li><strong>Heating fuel type</strong> — natural gas, electricity, propane, fuel oil, wood, or other</li>
+                                            <li><strong>AC type</strong> — central air, room unit, evaporative cooler, or none (from Step 2)</li>
+                                            <li><strong>Heat pump indicator</strong> — whether the primary heating system is a heat pump</li>
+                                            <li><strong>All-electric indicator</strong> — whether electricity is the sole energy source</li>
+                                            <li><strong>Urban/rural classification</strong></li>
+                                            <li><strong>Building America climate zone</strong> — eight zones encoding regional building stock and climate norms</li>
+                                            <li><strong>State fixed effects</strong> — FIPS-level indicators capturing state-specific program, code, and rate differences</li>
+                                            <li><strong>Poverty ratio (FPL ratio)</strong> — household income divided by the federal poverty level for that household size; captures income-dependent consumption behaviors (appliance ownership, thermostat settings) in a form that is independent of household size already in the model (see below)</li>
+                                        </ul>
+                                        <p>
+                                            End-use models for water heating, cooking, drying, and appliances
+                                            additionally include the relevant fuel type for that end-use
+                                            (e.g., gas vs. electric water heater) as a predictor.
                                         </p>
                                         <p>
                                             Climate inputs (heating and cooling degree days from <strong>NOAA</strong>) 
                                             are included to capture geographic variation in demand. End-use predictions 
                                             are summed to total household energy consumption by fuel type.
+                                        </p>
+                                        <h4 style="font-size:0.95rem; margin-top:1rem;">Electric appliance end-use coverage</h4>
+                                        <p>
+                                            The electric appliances end-use aggregates 14 RECS measured components:
+                                            refrigerators, freezers, televisions and electronics, lighting,
+                                            microwaves, clothes washers, dishwashers, dehumidifiers, humidifiers,
+                                            pool pumps, hot tub pumps and heaters, ceiling fans, and miscellaneous
+                                            plug loads. This is the end-use most sensitive to income, because
+                                            appliance ownership rates increase substantially with household income.
+                                        </p>
+                                        <h4 style="font-size:0.95rem; margin-top:1rem;">Electric appliance end-use coverage</h4>
+                                        <p>
+                                            The electric appliances end-use aggregates 14 RECS measured components:
+                                            refrigerators, freezers, televisions and electronics, lighting,
+                                            microwaves, clothes washers, dishwashers, dehumidifiers, humidifiers,
+                                            pool pumps, hot tub pumps and heaters, ceiling fans, and miscellaneous
+                                            plug loads. This is the end-use most sensitive to income, because
+                                            appliance ownership rates increase substantially with household income.
                                         </p>
                                     </div>
                                 </div>
@@ -794,10 +833,45 @@
 
                             <p>
                                 Across all end-uses, Gradient Boosting reduces the cost-weighted prediction
-                                error by roughly $14 per household per year compared to using Random
-                                Forest.
+                                error by approximately $14 per household per year compared to the Random
+                                Forest baseline used in earlier versions of the pipeline.
                             </p>
 
+                            <h3>How income enters the model</h3>
+                            <p>
+                                Income affects energy consumption through two channels: an indirect channel
+                                (lower-income households tend to live in smaller, older homes — already
+                                captured by building characteristics) and a direct behavioral channel
+                                (appliance ownership, hot water use intensity, and thermostat settings
+                                all vary by income even within the same building type). Including income
+                                explicitly captures this second channel.
+                            </p>
+                            <p>
+                                We use the <strong>poverty ratio (FPL ratio)</strong> — household income
+                                divided by the federal poverty level for that household size — rather than
+                                raw income. This size-adjusted measure is independent of household size,
+                                which is already in the model, avoiding the collinearity that raw income
+                                introduces. Cross-validation on RECS 2020 confirms the poverty ratio has
+                                measurable Gini importance in every end-use model.
+                            </p>
+                            <p>
+                                The effect is largest for <strong>electric appliances</strong>: without
+                                the poverty ratio, predicted electricity consumption is nearly flat across
+                                income quintiles (Q5/Q1 ratio of 1.48×). With it, the model reproduces
+                                the observed RECS gradient (1.87× predicted vs. 1.89× actual). This
+                                reflects the strong income gradient in appliance ownership — refrigerators,
+                                dishwashers, pool pumps, and electronics are far more common in higher-income
+                                homes.
+                            </p>
+                            <div class="callout">
+                                <p>
+                                    <strong>What we do not include:</strong> Raw income (collinear with
+                                    household size), number-of-rooms dummies (collinear with floor area —
+                                    their presence inflated income's variance inflation factor from ~1.3
+                                    to ~14, masking income's true predictive signal), and tenure
+                                    (owner vs. renter — captured by building type and income).
+                                </p>
+                            </div>
                         </section>
 
                         <!-- ===== SECTION 2: DECISION SUPPORT TOOL ===== -->
