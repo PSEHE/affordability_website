@@ -402,7 +402,7 @@
                 <h1>Methodology & Data</h1>
                 <p class="lead">
                     How we estimate energy costs, consumption, and burden for every household
-                    in the United States — step by step.
+                    in the United States.
                 </p>
             </div>
         </header>
@@ -417,6 +417,7 @@
                         <h4>Contents</h4>
                         <ul class="toc-list">
                             <li><a href="#overview" class="toc-link">Overview</a></li>
+                            <li><a href="#data-sources" class="toc-link">Data Sources</a></li>
                             <li><a href="#pipeline" class="toc-link">Modeling Pipeline</a></li>
                             <ul class="toc-sub">
                                 <li><a href="#step-allocation" class="toc-link">1 · Household Allocation</a></li>
@@ -425,8 +426,6 @@
                                 <li><a href="#step-costs" class="toc-link">4 · Costs & Burden</a></li>
                                 <li><a href="#step-emissions" class="toc-link">5 · Emissions</a></li>
                             </ul>
-                            <div class="toc-divider"></div>
-                            <li><a href="#data-sources" class="toc-link">Data Sources</a></li>
                             <li><a href="#model-selection" class="toc-link">Model Selection</a></li>
                             <div class="toc-divider"></div>
                             <li><a href="#tool-methodology" class="toc-link">Decision Support Tool</a></li>
@@ -444,215 +443,28 @@
                         <section id="overview">
                             <h2>Overview</h2>
                             <p>
-                                The National Energy Affordability Tool estimates household-level energy costs,
-                                consumption, and emissions for all occupied housing units across the United States —
-                                down to the census tract level. Rather than relying on direct measurements (which
-                                don't exist at this scale), we build a <strong>synthetic population</strong>: a
-                                statistically representative set of simulated households in every tract, each with
-                                realistic characteristics, energy use, and costs.
+                                The National Energy Affordability Tool (NEAT) estimates household-level energy costs,
+                                consumption, and emissions for all occupied housing units in the United States. 
+                                Direct measurements don't exist at this scale, so we built a <em>synthetic household 
+                                    dataset</em>—a statistically representative set of simulated households for 
+                                    every census tract, each with realistic demographic and housing characteristics, 
+                                    energy usage, and costs.
                             </p>
                             <p>
-                                The pipeline draws on several large national datasets — household surveys, utility
-                                records, and census data — and chains them together through five modeling steps.
-                                The result is a tract-level dataset covering all ~84,000 census tracts in the
-                                contiguous U.S., suitable for identifying energy burden hotspots, demographic
-                                disparities, and policy intervention opportunities.
-                            </p>
-                            <div class="callout">
-                                <p>
-                                    <strong>Full technical documentation</strong> is being prepared for peer-reviewed
-                                    publication. This page provides an accessible summary of the methods for
-                                    practitioners and policymakers working with the tool.
-                                </p>
-                            </div>
-                        </section>
-
-                        <!-- PIPELINE -->
-                        <section id="pipeline">
-                            <h2>Modeling Pipeline</h2>
-                            <p>
-                                The pipeline moves from census geography down to individual household estimates
-                                in five steps. Each step feeds into the next: the allocated households receive
-                                estimated housing characteristics, then energy consumption, then costs, then
-                                emissions.
+                                This synthetic household dataset weaves together several large national datasets including 
+                                household surveys, utility records, and census data. The result is a census tract-level 
+                                dataset covering all ~84,000 tracts in the U.S. that is suitable for identifying 
+                                energy burden hotspots, demographic disparities, and policy intervention opportunities.
                             </p>
 
-                            <div class="pipeline-steps">
-
-                                <!-- Step 1 -->
-                                <div class="pipeline-step" id="step-allocation">
-                                    <div class="pipeline-step-connector">
-                                        <div class="step-circle">1</div>
-                                        <div class="step-line"></div>
-                                    </div>
-                                    <div class="step-body">
-                                        <h4>Household Allocation</h4>
-                                        <span class="step-tag">ACS</span>
-                                        <span class="step-tag">PUMS</span>
-                                        <p>
-                                            Each census tract in the U.S. has known demographic and housing
-                                            characteristics from the <strong>American Community Survey (ACS)</strong> —
-                                            things like how many renter households there are, the income distribution,
-                                            the share of multi-family homes, and the predominant heating fuel. But the
-                                            ACS reports these as aggregate counts, not individual households.
-                                        </p>
-                                        <p>
-                                            To get individual households, we draw from the <strong>Public Use
-                                            Microdata Sample (PUMS)</strong>, which contains detailed records for
-                                            real (anonymized) households. Using integer programming optimization,
-                                            we select a combination of PUMS households for each tract whose
-                                            collective profile matches the ACS counts across 70 demographic and
-                                            structural variables simultaneously — income brackets, housing type,
-                                            heating fuel, year built, household size, and more.
-                                        </p>
-                                        <p>
-                                            The optimization minimizes geographic distance between the source PUMS
-                                            geography and the target tract, so allocated households are drawn from
-                                            nearby areas with similar regional characteristics.
-                                        </p>
-                                        <div class="callout">
-                                            <p>
-                                                <strong>Why not simpler methods?</strong> Standard reweighting
-                                                approaches like iterative proportional fitting can only enforce
-                                                two-way constraints and produce fractional households. Integer
-                                                programming enforces multi-way constraints and produces whole
-                                                households — which matters for accurate energy modeling.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Step 2 -->
-                                <div class="pipeline-step" id="step-housing">
-                                    <div class="pipeline-step-connector">
-                                        <div class="step-circle">2</div>
-                                        <div class="step-line"></div>
-                                    </div>
-                                    <div class="step-body">
-                                        <h4>Housing Characteristics Estimation</h4>
-                                        <span class="step-tag">AHS</span>
-                                        <p>
-                                            The allocated PUMS households carry many characteristics directly,
-                                            but a few attributes critical for energy modeling — primarily
-                                            <strong>floor area</strong> and <strong>air conditioning type</strong>
-                                            — are not reliably observed in PUMS. These are estimated using
-                                            machine learning models trained on the <strong>American Housing
-                                            Survey (AHS)</strong>.
-                                        </p>
-                                        <p>
-                                            For floor area, a Gradient Boosting model uses housing structure
-                                            (rooms, building type, year built, tenure), household demographics,
-                                            and geographic division as predictors. For AC type — whether a
-                                            household has central air, a window unit, or none — a similar
-                                            approach is used, with metro-specific models trained where local
-                                            AHS data is available (35 metros), since AC patterns vary dramatically
-                                            by region.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <!-- Step 3 -->
-                                <div class="pipeline-step" id="step-energy">
-                                    <div class="pipeline-step-connector">
-                                        <div class="step-circle">3</div>
-                                        <div class="step-line"></div>
-                                    </div>
-                                    <div class="step-body">
-                                        <h4>Energy Consumption Estimation</h4>
-                                        <span class="step-tag">RECS 2020</span>
-                                        <span class="step-tag">NOAA</span>
-                                        <p>
-                                            Energy use is predicted separately for up to 14 end-use categories —
-                                            space heating by fuel (electricity, natural gas, propane, fuel oil,
-                                            wood), space cooling, water heating, appliances, cooking, and
-                                            lighting/other. Models are trained on the
-                                            <strong>Residential Energy Consumption Survey (RECS) 2020</strong>,
-                                            which provides detailed energy use data for ~18,500 U.S. households.
-                                        </p>
-                                        <p>
-                                            The appropriate model type is chosen for each end-use based on the
-                                            statistical properties of that energy stream — whether consumption is
-                                            near-universal or zero-inflated, and how skewed the distribution is.
-                                            Most end-uses use Gradient Boosting regression; a few use linear
-                                            models or Random Forest where those perform better on out-of-sample
-                                            data. Climate inputs (heating and cooling degree days from NOAA) are
-                                            included to capture geographic variation in demand.
-                                        </p>
-                                        <p>
-                                            End-use predictions are summed to total household energy consumption
-                                            by fuel type.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <!-- Step 4 -->
-                                <div class="pipeline-step" id="step-costs">
-                                    <div class="pipeline-step-connector">
-                                        <div class="step-circle">4</div>
-                                        <div class="step-line"></div>
-                                    </div>
-                                    <div class="step-body">
-                                        <h4>Cost &amp; Burden Calculation</h4>
-                                        <span class="step-tag">EIA Form 861</span>
-                                        <span class="step-tag">SEDS</span>
-                                        <p>
-                                            Predicted energy consumption (in BTU or kWh) is converted to annual
-                                            energy costs using local utility rates and regional fuel prices.
-                                            Electricity rates come from <strong>EIA Form 861</strong>, which
-                                            maps utilities to their service territories, allowing us to apply
-                                            the correct rate for each household's location. Natural gas,
-                                            propane, fuel oil, and wood prices are drawn from the
-                                            <strong>State Energy Data System (SEDS)</strong>.
-                                        </p>
-                                        <p>
-                                            <strong>Energy burden</strong> — the share of household income
-                                            spent on energy — is calculated by dividing annual energy cost by
-                                            annual household income from the PUMS record. Households spending
-                                            more than 6% of income on energy are commonly considered
-                                            energy-burdened; those above 10% are considered highly burdened.
-                                        </p>
-                                        <p>
-                                            For households where utilities are included in rent
-                                            (approximately 2–4% of households), payment status flags
-                                            from PUMS are carried through the pipeline so these households
-                                            can be distinguished in analysis.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <!-- Step 5 -->
-                                <div class="pipeline-step" id="step-emissions">
-                                    <div class="pipeline-step-connector">
-                                        <div class="step-circle">5</div>
-                                        <div class="step-line"></div>
-                                    </div>
-                                    <div class="step-body">
-                                        <h4>Emissions Estimation</h4>
-                                        <span class="step-tag">eGRID</span>
-                                        <p>
-                                            Greenhouse gas emissions are estimated for each household's energy
-                                            consumption. Electricity emissions use subregional emission factors
-                                            from EPA's <strong>eGRID</strong> database, which captures variation
-                                            in grid carbon intensity across the country. On-site fuel combustion
-                                            (gas, propane, oil, wood) uses standard combustion emission factors.
-                                        </p>
-                                        <p>
-                                            Emission estimates are provided in CO₂-equivalent, allowing
-                                            comparison across fuels and informing analysis of how fuel-switching
-                                            or efficiency improvements would affect both costs and emissions.
-                                        </p>
-                                    </div>
-                                </div>
-
-                            </div> <!-- end pipeline-steps -->
                         </section>
 
                         <!-- DATA SOURCES -->
                         <section id="data-sources">
-                            <h2>Primary Data Sources</h2>
+                            <h2>Data Sources</h2>
                             <p>
-                                The pipeline integrates six major national datasets. Each plays a distinct role
-                                in the modeling chain.
+                                The data underlying the tool integrates six major national datasets. Each plays a 
+                                distinct role in the modeling pipeline to develop the synthetic household dataset.
                             </p>
 
                             <div class="source-grid">
@@ -667,7 +479,7 @@
                                     </div>
                                     <p>
                                         Tract-level counts of households by income bracket, housing type,
-                                        tenure, heating fuel, year built, household size, and race/ethnicity.
+                                        housing tenure, heating fuel, year built, household size, and race/ethnicity.
                                         These serve as the hard constraints for household allocation.
                                     </p>
                                 </div>
@@ -728,7 +540,7 @@
                                     <p>
                                         Utility service territory boundaries and electricity retail rates
                                         (Form 861), plus state-level residential fuel prices by type
-                                        (State Energy Data System). Used to translate consumption to costs.
+                                        (State Energy Data System). Used to translate energy consumption to costs.
                                     </p>
                                 </div>
 
@@ -749,6 +561,179 @@
 
                             </div>
                         </section>
+                    
+
+                        <!-- PIPELINE -->
+                        <section id="pipeline">
+                            <h2>Modeling Pipeline</h2>
+                            <p>
+                                The modeling pipeline moves data from census tract or larger geographies down to individual 
+                                household estimates in five steps. Each step feeds into the next: the appropriate number 
+                                of households for each census tract are allocated demographic and housing characteristics, 
+                                then estimated energy consumption, then costs, then emissions.
+                            </p>
+
+                            <div class="pipeline-steps">
+
+                                <!-- Step 1 -->
+                                <div class="pipeline-step" id="step-allocation">
+                                    <div class="pipeline-step-connector">
+                                        <div class="step-circle">1</div>
+                                        <div class="step-line"></div>
+                                    </div>
+                                    <div class="step-body">
+                                        <h4>Household Allocation</h4>
+                                        <span class="step-tag">ACS</span>
+                                        <span class="step-tag">PUMS</span>
+                                        <p>
+                                            Each census tract in the U.S. has known demographic and housing
+                                            characteristics from the <strong>American Community Survey (ACS)</strong>.
+                                            This includes information like how many households are renters versus owners, 
+                                            income distributions, the share of multi-family homes, and predominant heating 
+                                            fuels. But the ACS reports each of these characteristics only as aggregate counts.
+                                        </p>
+                                        <p>
+                                            To get individual households, we draw from the <strong>Public Use
+                                            Microdata Sample (PUMS)</strong>, which contains detailed records for
+                                            real (anonymized) households. Using integer programming optimization,
+                                            we select a combination of PUMS households for each tract whose
+                                            collective profile matches the ACS counts across 70 demographic and
+                                            structural variables simultaneously, including income brackets, housing 
+                                            type, heating fuel, year built, household size, and more.
+                                        </p>
+                                        <p>
+                                            The optimization minimizes geographic distance between the source PUMS
+                                            geography and the target tract, so allocated households are drawn from
+                                            nearby areas with similar regional characteristics. This integer 
+                                            programming approach enforces multi-way constraints (for example, <strong>[YUNUS ADD]</strong>) 
+                                            and produces whole households, allowing for accurate energy modeling.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Step 2 -->
+                                <div class="pipeline-step" id="step-housing">
+                                    <div class="pipeline-step-connector">
+                                        <div class="step-circle">2</div>
+                                        <div class="step-line"></div>
+                                    </div>
+                                    <div class="step-body">
+                                        <h4>Housing Characteristics Estimation</h4>
+                                        <span class="step-tag">AHS</span>
+                                        <p>
+                                            The allocated PUMS households carry many characteristics directly,
+                                            but a few attributes critical for energy modeling—primarily
+                                            floor area and air conditioning type—are not included in the PUMS data. 
+                                            So we estimated these using machine learning models trained on the 
+                                            <strong>American Housing Survey (AHS)</strong> data.
+                                        </p>
+                                        <p>
+                                            To determine floor area, we used a Gradient Boosting algorithm with housing 
+                                            structure (number of rooms, building type, year built, and tenure), household 
+                                            demographics, and geographic division as predictors. A similar approach is used 
+                                            to determine AC type—whether a household has central air, a window unit, or no 
+                                            AC. Since AC patterns vary dramatically by region, metro-specific models were 
+                                            used in 35 metro areas where local AHS data was available.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Step 3 -->
+                                <div class="pipeline-step" id="step-energy">
+                                    <div class="pipeline-step-connector">
+                                        <div class="step-circle">3</div>
+                                        <div class="step-line"></div>
+                                    </div>
+                                    <div class="step-body">
+                                        <h4>Energy Consumption Estimation</h4>
+                                        <span class="step-tag">RECS 2020</span>
+                                        <span class="step-tag">NOAA</span>
+                                        <p>
+                                            Energy use is predicted separately for up to 14 end-use categories, 
+                                            including space heating by fuel (electricity, natural gas, propane, 
+                                            fuel oil, and wood), space cooling, water heating, appliances, cooking, 
+                                            and lighting/other. Models were trained on the
+                                            <strong>Residential Energy Consumption Survey (RECS) 2020</strong> data,
+                                            which provides detailed energy use information for roughly 18,500 U.S. households.
+                                        </p>
+                                        <p>
+                                            The appropriate model type is chosen for each end-use based on the
+                                            statistical properties of that energy stream—whether consumption is
+                                            near-universal or zero-inflated and how skewed the distribution is.
+                                            We used a Gradient Boosting regression for most end-uses, though used 
+                                            Random Forest or linear regressions where those performed better on 
+                                            out-of-sample data. (See 'Model Selection' below for more on this.)
+                                        </p>
+                                        <p>
+                                            Climate inputs (heating and cooling degree days from <strong>NOAA</strong>) 
+                                            are included to capture geographic variation in demand. End-use predictions 
+                                            are summed to total household energy consumption by fuel type.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Step 4 -->
+                                <div class="pipeline-step" id="step-costs">
+                                    <div class="pipeline-step-connector">
+                                        <div class="step-circle">4</div>
+                                        <div class="step-line"></div>
+                                    </div>
+                                    <div class="step-body">
+                                        <h4>Cost &amp; Burden Calculation</h4>
+                                        <span class="step-tag">EIA Form 861</span>
+                                        <span class="step-tag">SEDS</span>
+                                        <p>
+                                            Predicted energy consumption (in BTU or kWh) is converted to annual
+                                            energy costs using local utility rates and regional fuel prices.
+                                            Electricity rates come from <strong>EIA Form 861</strong>, which
+                                            maps utilities to their service territories, allowing us to apply
+                                            the correct rate for each household's location. Natural gas,
+                                            propane, fuel oil, and wood prices are drawn from the
+                                            <strong>U.S. State Energy Data System (SEDS)</strong>.
+                                        </p>
+                                        <p>
+                                            Energy burden—the share of a household's income spent on energy—is 
+                                            calculated by dividing a household's annual energy cost by its annual 
+                                            income from the PUMS data. Households spending more than 6 percent of 
+                                            their income on energy are commonly considered energy-burdened; those 
+                                            above 10% are considered highly burdened.
+                                        </p>
+                                        <p>
+                                            For the roughly 2–4 percent of households where utilities are included 
+                                            in rent, payment status flags from the PUMS record are included in the 
+                                            synthetic population dataset so these households can be distinguished 
+                                            during analysis.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Step 5 -->
+                                <div class="pipeline-step" id="step-emissions">
+                                    <div class="pipeline-step-connector">
+                                        <div class="step-circle">5</div>
+                                        <div class="step-line"></div>
+                                    </div>
+                                    <div class="step-body">
+                                        <h4>Emissions Estimation</h4>
+                                        <span class="step-tag">eGRID</span>
+                                        <p>
+                                            Greenhouse gas emissions are estimated for each household's energy
+                                            consumption. Electricity emissions use subregional emission factors
+                                            from EPA's <strong>eGRID</strong> database, which captures variation
+                                            in grid carbon intensity across the country. On-site fuel combustion
+                                            of gas, propane, oil, and/or wood uses standard combustion emission 
+                                            factors.
+                                        </p>
+                                        <p>
+                                            Emission estimates are provided in CO₂-equivalent, allowing
+                                            comparison across fuels and informing analysis of how fuel-switching
+                                            or efficiency improvements would affect both costs and emissions.
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div> <!-- end pipeline-steps -->
+                        </section>
 
                         <!-- MODEL SELECTION -->
                         <section id="model-selection">
@@ -756,18 +741,17 @@
                             <p>
                                 Rather than using a single model type for all energy end-uses, we assign
                                 each end-use to a model family based on the statistical properties of that
-                                energy stream — observable before any model is trained. This approach
-                                avoids the appearance of empirical cherry-picking while still allowing
+                                energy stream. This approach avoids empirical cherry-picking while still allowing
                                 the most appropriate method for each case.
                             </p>
 
                             <h3>Energy consumption models</h3>
                             <p>
-                                Four model types were evaluated through 10-fold cross-validation on
-                                RECS 2020 data: Gradient Boosting regression, Random Forest, linear
+                                Four model types were evaluated through 10-fold cross-validation on the
+                                RECS 2020 data: Gradient Boosting regression, Random Forest regression, linear
                                 regression, and log-linear regression. Performance was compared using
-                                a <em>cost-weighted</em> error metric that translates BTU prediction
-                                errors into dollar errors — which weights electricity errors more heavily
+                                a cost-weighted error metric that translates BTU prediction
+                                errors into dollar errors—which weights electricity errors more heavily
                                 than gas errors, reflecting electricity's higher price per BTU.
                             </p>
 
@@ -810,58 +794,76 @@
 
                             <p>
                                 Across all end-uses, Gradient Boosting reduces the cost-weighted prediction
-                                error by approximately $14 per household per year compared to the Random
-                                Forest baseline used in earlier versions of the pipeline.
+                                error by roughly $14 per household per year compared to using Random
+                                Forest.
                             </p>
 
-                            <h3>Why income is not a predictor</h3>
-                            <p>
-                                A natural question is whether household income should be used to predict
-                                energy consumption. Our analysis found that income adds negligible predictive
-                                power (less than $2/year improvement in cost-weighted error) once building
-                                characteristics are already included. This is because income's effect on
-                                energy use operates largely <em>through</em> housing — lower-income
-                                households tend to live in smaller, older homes, and these characteristics
-                                are already in the model. Using income directly would introduce potential
-                                bias and conflate energy consumption with ability to pay.
-                            </p>
                         </section>
 
                         <!-- ===== SECTION 2: DECISION SUPPORT TOOL ===== -->
                         <section id="tool-methodology">
                             <h2>How the Decision Support Tool Works</h2>
                             <p>
-                                The underlying dataset represents individual simulated households at the
-                                census tract level — far too granular for direct use in an interactive web
-                                tool. The decision support tool works with a processed, aggregated version
-                                of this data and adds a scenario modeling layer that lets users explore
-                                how energy policy changes would affect costs and burdens.
+                                The NEAT synthetic household dataset represents individual households at the census 
+                                tract level. This is critical for identifying policy intervention opportunities 
+                                based on energy cost burden and demographic disparities, but is too granular for 
+                                direct use in an interactive web tool. To account for this, the tool works with a 
+                                pre-processed, aggregated version of this data. The decision support tool adds a 
+                                scenario modeling layer that lets users explore how policy changes might affect 
+                                energy costs and burdens for different types of households.
+
+                                The underlying dataset represents individual households at the census tract 
+                                level. This is critical for identifying policy intervention opportunities based 
+                                on energy cost burden and demographic disparities, but is too granular for direct 
+                                use in an interactive web tool. To account for this, the decision support tool 
+                                works with a pre-processed, aggregated version of this data, adding a scenario 
+                                modeling layer that lets users explore how policy changes might affect energy costs 
+                                and burdens.
                             </p>
 
                             <!-- Data Aggregation -->
                             <h3 id="tool-aggregation">Data aggregation for the tool</h3>
-                            <div class="coming-soon-section">
-                                <h3>Documentation in Progress</h3>
-                                <p>
-                                    This section will describe how household-level estimates are aggregated
-                                    to tract-level summary statistics for the tool — including which
-                                    statistics are computed, how demographic subgroups are handled, and
-                                    how the aggregated data is structured for the frontend.
+                             <p>
+                                For the tool, households within specified geographic scopes from the synthetic 
+                                dataset are grouped by shared characteristics and their energy and fuel usage 
+                                and costs, energy burdens and affordability gaps, and emissions are aggregated. 
+                                This allows us to pre-calculate statistics—such as the total energy affordability 
+                                gap, mean energy burden, total energy cost, and total energy consumption—for 
+                                census tracts, counties, metro areas, and utility service territories while 
+                                preserving a user’s ability to see these statistics disaggregated by specific 
+                                household characteristics.
                                 </p>
-                            </div>
+                                <p>
+                                    For example… <strong>[YUNUS ADD]</strong>
+                                </p>
+                                <p>
+                                Grouping households by shared characteristics also allows us to model different 
+                                scenarios such as changes in energy efficiency or fuel switching from gas to 
+                                electric and see how this might change household energy usage and costs across 
+                                household categories.
+                                </p>
+                            
 
                             <!-- Scenario Modeling -->
                             <h3 id="tool-scenarios" style="margin-top: 2rem;">Scenario modeling</h3>
-                            <div class="coming-soon-section">
-                                <h3>Documentation in Progress</h3>
-                                <p>
-                                    This section will explain how the decision support tool applies
-                                    user-defined assumptions — such as changes in energy efficiency,
-                                    fuel switching, rate changes, or income shifts — to adjust household
-                                    energy use and costs, and how summary statistics are recalculated
-                                    for the modified scenario in real time.
-                                </p>
-                            </div>
+                            <p>
+                                The decision support tool allows users to apply certain energy policy interventions 
+                                to households within a specified geographic area and see how they may impact energy 
+                                usage, costs, burdens, affordability gaps, and emissions for different types of 
+                                households. Interventions include rate changes (e.g., changes in energy prices), fuel 
+                                switching, efficiency improvements, solar programs, energy storage, and more.
+                            </p>
+                            <p> 
+                                Just as home energy programs follow a specific order of operations—for example, 
+                                energy efficiency improvements may be required before a home electrifies and installs 
+                                solar panels—the scenario modeling in the tool applies interventions in a specific
+                                sequence to understand their cumulative impact on household energy usage, 
+                                costs, and emissions. For example, if a user applies both an energy efficiency improvement
+                                and a fuel switching intervention, the tool first applies the efficiency improvement before
+                                modeling the fuel switch, since the efficiency improvement would reduce householdenergy 
+                                demand and thus affect the impact of the fuel switch.
+                            </p>
+
                         </section>
 
                     </div> <!-- end method-content -->
