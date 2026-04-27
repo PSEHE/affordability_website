@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -943,3 +944,1069 @@
     </script>
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Methodology | National Energy Affordability Tool</title>
+    <meta name="description" content="Technical methodology, data sources, and modeling approaches for the National Energy Affordability Tool.">
+    <script src="../assets/password-gate.js"></script>
+    <link rel="stylesheet" href="../assets/styles-new.css">
+    <link rel="icon" type="image/png" href="../assets/favicon.png">
+    <style>
+        /* ---- Transparent background image ---- */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url('../assets/stock-images/iStock-1128888172.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+            z-index: -1;
+            pointer-events: none;
+        }
+        /* ---- Page layout: sidebar + content ---- */
+        
+        .methodology-layout {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 2.5rem;
+            align-items: start;
+            padding: 2.5rem 0 4rem;
+        }
+
+        /* ---- Sticky TOC Sidebar ---- */
+        .toc-sidebar {
+            position: sticky;
+            top: calc(var(--navbar-height) + 1.5rem);
+            max-height: calc(100vh - var(--navbar-height) - 3rem);
+            overflow-y: auto;
+            padding: 1.25rem 1rem 1.25rem 0;
+            border-right: 2px solid var(--color-gray-200);
+        }
+
+        .toc-sidebar h4 {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-gray-500);
+            margin-bottom: 0.75rem;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-list li {
+            margin-bottom: 0;
+        }
+
+        .toc-list a {
+            display: block;
+            padding: 0.3rem 0.5rem;
+            font-size: 0.875rem;
+            color: var(--color-gray-600);
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-fast);
+            text-decoration: none;
+            border-left: 2px solid transparent;
+        }
+
+        .toc-list a:hover {
+            color: var(--color-primary);
+            background: var(--color-primary-lighter);
+            border-left-color: var(--color-primary);
+        }
+
+        .toc-list a.active {
+            color: var(--color-primary);
+            background: var(--color-primary-lighter);
+            border-left-color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        .toc-list .toc-sub a {
+            padding-left: 1.25rem;
+            font-size: 0.825rem;
+            color: var(--color-gray-500);
+        }
+
+        .toc-divider {
+            height: 1px;
+            background: var(--color-gray-200);
+            margin: 0.75rem 0;
+        }
+
+        /* ---- Main content ---- */
+        .method-content section {
+            margin-bottom: 3rem;
+            scroll-margin-top: calc(var(--navbar-height) + 1.5rem);
+        }
+
+        .method-content h2 {
+            font-size: 1.6rem;
+            color: var(--color-primary-dark);
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--color-primary-lighter);
+        }
+
+        .method-content h3 {
+            font-size: 1.15rem;
+            color: var(--color-gray-900);
+            margin-top: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .method-content p {
+            color: var(--color-gray-700);
+            line-height: 1.75;
+        }
+
+        .method-content ul, .method-content ol {
+            margin: 0.5rem 0 1rem 1.25rem;
+            line-height: 1.75;
+            color: var(--color-gray-700);
+        }
+
+        .method-content li {
+            margin-bottom: 0.25rem;
+        }
+
+        /* ---- Pipeline flow steps ---- */
+        .pipeline-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin: 1.5rem 0;
+        }
+
+        .pipeline-step {
+            display: grid;
+            grid-template-columns: 44px 1fr;
+            gap: 1rem;
+            align-items: start;
+        }
+
+        .pipeline-step-connector {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .step-circle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            z-index: 1;
+        }
+
+        .step-line {
+            width: 2px;
+            flex: 1;
+            min-height: 1.5rem;
+            background: var(--color-gray-300);
+        }
+
+        .pipeline-step:last-child .step-line {
+            display: none;
+        }
+
+        .step-body {
+            padding-bottom: 1.5rem;
+        }
+
+        .step-body h4 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--color-gray-900);
+            margin-bottom: 0.35rem;
+            margin-top: 0.5rem;
+        }
+
+        .step-body p {
+            font-size: 0.925rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.15rem 0.6rem;
+            border-radius: var(--radius-full);
+            background: var(--color-primary-lighter);
+            color: var(--color-primary);
+            margin-right: 0.35rem;
+            margin-bottom: 0.35rem;
+        }
+
+        /* ---- Data source cards ---- */
+        .source-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-top: 1.25rem;
+        }
+
+        .source-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-md);
+            padding: 1rem 1.1rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .source-card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .source-icon {
+            font-size: 1.2rem;
+            line-height: 1;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        .source-card h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--color-gray-900);
+            margin-bottom: 0.1rem;
+        }
+
+        .source-card .source-abbrev {
+            font-size: 0.775rem;
+            color: var(--color-gray-500);
+            font-weight: 500;
+        }
+
+        .source-card p {
+            font-size: 0.85rem;
+            color: var(--color-gray-600);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* ---- Callout / info boxes ---- */
+        .callout {
+            border-left: 4px solid var(--color-primary);
+            background: var(--color-primary-lighter);
+            padding: 0.9rem 1.1rem;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            margin: 1.25rem 0;
+        }
+
+        .callout.accent {
+            border-left-color: var(--color-accent);
+            background: var(--color-accent-lighter);
+        }
+
+        .callout p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--color-gray-700);
+        }
+
+        .callout strong {
+            color: var(--color-gray-900);
+        }
+
+        /* ---- Decision table ---- */
+        .method-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+            margin: 1rem 0;
+        }
+
+        .method-table th {
+            background: var(--color-primary);
+            color: white;
+            text-align: left;
+            padding: 0.6rem 0.9rem;
+            font-weight: 600;
+        }
+
+        .method-table td {
+            padding: 0.55rem 0.9rem;
+            border-bottom: 1px solid var(--color-gray-200);
+            color: var(--color-gray-700);
+            vertical-align: top;
+        }
+
+        .method-table tr:nth-child(even) td {
+            background: var(--color-gray-50);
+        }
+
+        .method-table .winner {
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        /* ---- Coming soon placeholder ---- */
+        .coming-soon-section {
+            background: linear-gradient(135deg, var(--color-primary-lighter) 0%, #f0faf9 100%);
+            border: 2px dashed var(--color-primary-light);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .coming-soon-section h3 {
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .coming-soon-section p {
+            color: var(--color-gray-600);
+            max-width: 540px;
+            margin: 0 auto;
+        }
+
+        /* ---- Responsive ---- */
+        @media (max-width: 900px) {
+            .methodology-layout {
+                grid-template-columns: 1fr;
+            }
+            .toc-sidebar {
+                position: static;
+                max-height: none;
+                border-right: none;
+                border-bottom: 2px solid var(--color-gray-200);
+                padding-bottom: 1rem;
+                margin-bottom: 1rem;
+            }
+            .toc-list {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.25rem;
+            }
+            .toc-list li, .toc-list .toc-sub {
+                display: contents;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .source-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav" id="navbar">
+        <div class="nav-container">
+            <a href="../home-page.html" class="nav-logo">
+                <img src="../assets/2021 - PSE_Logo_Stacked_Color.png" alt="PSE Healthy Energy Logo" class="logo-img">
+                <span class="logo-text"><span class="logo-text-line">Energy</span><span class="logo-text-line">Affordability</span></span>
+            </a>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="overview.html" class="nav-link">Overview</a></li>
+                <li><a href="tool-guide.html" class="nav-link">Tool Guide</a></li>
+                <li><a href="case-studies.html" class="nav-link">Case Studies</a></li>
+                <li><a href="methodology.html" class="nav-link active">Methodology</a></li>
+                <li><a href="resources.html" class="nav-link">Resources</a></li>
+                <li><a href="use-cases.html" class="nav-link">Use Cases</a></li>
+                <li><a href="contact.html" class="nav-link">Contact Us</a></li>
+                <li><a href="https://energy-affordability-frontend.vercel.app" class="nav-link nav-cta" target="_blank">Launch Tool</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Wrapper -->
+    <div class="page-wrapper">
+        <!-- Page Header -->
+        <header class="page-header">
+            <div class="container">
+                <div class="breadcrumbs">
+                    <a href="../home-page.html">Home</a>
+                    <span class="separator">/</span>
+                    <span class="current">Methodology</span>
+                </div>
+                <h1>Methodology & Data</h1>
+                <p class="lead">
+                    How we estimate energy costs, consumption, and burden for every household
+                    in the United States.
+                </p>
+            </div>
+        </header>
+
+        <!-- Page Content -->
+        <main class="page-content">
+            <div class="container">
+                <div class="methodology-layout">
+
+                    <!-- ======= TOC SIDEBAR ======= -->
+                    <aside class="toc-sidebar" id="toc">
+                        <h4>Contents</h4>
+                        <ul class="toc-list">
+                            <li><a href="#overview" class="toc-link">Overview</a></li>
+                            <li><a href="#data-sources" class="toc-link">Data Sources</a></li>
+                            <li><a href="#pipeline" class="toc-link">Modeling Pipeline</a></li>
+                            <ul class="toc-sub">
+                                <li><a href="#step-allocation" class="toc-link">1 · Household Allocation</a></li>
+                                <li><a href="#step-housing" class="toc-link">2 · Housing Characteristics</a></li>
+                                <li><a href="#step-energy" class="toc-link">3 · Energy Estimation</a></li>
+                                <li><a href="#step-costs" class="toc-link">4 · Costs & Burden</a></li>
+                                <li><a href="#step-emissions" class="toc-link">5 · Emissions</a></li>
+                            </ul>
+                            <li><a href="#model-selection" class="toc-link">Model Selection & Variables</a></li>
+                            <div class="toc-divider"></div>
+                            <li><a href="#tool-methodology" class="toc-link">Decision Support Tool</a></li>
+                            <ul class="toc-sub">
+                                <li><a href="#tool-aggregation" class="toc-link">Data Aggregation</a></li>
+                                <li><a href="#tool-scenarios" class="toc-link">Scenario Modeling</a></li>
+                            </ul>
+                        </ul>
+                    </aside>
+
+                    <!-- ======= MAIN CONTENT ======= -->
+                    <div class="method-content">
+
+                        <!-- OVERVIEW -->
+                        <section id="overview">
+                            <h2>Overview</h2>
+                            <p>
+                                The National Energy Affordability Tool (NEAT) estimates household-level energy costs,
+                                consumption, and emissions for all occupied housing units in the United States. 
+                                Direct measurements don't exist at this scale, so we built a <em>synthetic household 
+                                    dataset</em>—a statistically representative set of simulated households for 
+                                    every census tract, each with realistic demographic and housing characteristics, 
+                                    energy usage, and costs.
+                            </p>
+                            <p>
+                                This synthetic household dataset weaves together several large national datasets including 
+                                household surveys, utility records, and census data. The result is a census tract-level 
+                                dataset covering all ~84,000 tracts in the U.S. that is suitable for identifying 
+                                energy burden hotspots, demographic disparities, and policy intervention opportunities.
+                            </p>
+
+                        </section>
+
+                        <!-- DATA SOURCES -->
+                        <section id="data-sources">
+                            <h2>Data Sources</h2>
+                            <p>
+                                The data underlying the tool integrates six major national datasets. Each plays a 
+                                distinct role in the modeling pipeline to develop the synthetic household dataset.
+                            </p>
+
+                            <div class="source-grid">
+
+                                <div class="source-card">
+                                    <div class="source-card-header">
+                                        <div class="source-icon">🏘️</div>
+                                        <div>
+                                            <h4>American Community Survey</h4>
+                                            <div class="source-abbrev">ACS 5-Year · U.S. Census Bureau</div>
+                                        </div>
+                                    </div>
+                                    <p>
+                                        Tract-level counts of households by income bracket, housing type,
+                                        housing tenure, heating fuel, year built, household size, and race/ethnicity.
+                                        These serve as the hard constraints for household allocation.
+                                    </p>
+                                </div>
+
+                                <div class="source-card">
+                                    <div class="source-card-header">
+                                        <div class="source-icon">👥</div>
+                                        <div>
+                                            <h4>Public Use Microdata Sample</h4>
+                                            <div class="source-abbrev">PUMS · U.S. Census Bureau</div>
+                                        </div>
+                                    </div>
+                                    <p>
+                                        Anonymized individual household records with detailed demographics,
+                                        housing characteristics, income, and housing costs. The source
+                                        pool from which households are allocated to tracts.
+                                    </p>
+                                </div>
+
+                                <div class="source-card">
+                                    <div class="source-card-header">
+                                        <div class="source-icon">⚡</div>
+                                        <div>
+                                            <h4>Residential Energy Consumption Survey</h4>
+                                            <div class="source-abbrev">RECS 2020 · U.S. EIA</div>
+                                        </div>
+                                    </div>
+                                    <p>
+                                        Nationally representative survey of ~18,500 U.S. households with
+                                        detailed end-use energy consumption. Used to train all energy
+                                        prediction models.
+                                    </p>
+                                </div>
+
+                                <div class="source-card">
+                                    <div class="source-card-header">
+                                        <div class="source-icon">🏠</div>
+                                        <div>
+                                            <h4>American Housing Survey</h4>
+                                            <div class="source-abbrev">AHS · U.S. Census Bureau</div>
+                                        </div>
+                                    </div>
+                                    <p>
+                                        Detailed housing unit characteristics including floor area, AC type,
+                                        and utility payment status. Used to train housing characteristics
+                                        models, with metro-level samples for 35 major metros.
+                                    </p>
+                                </div>
+
+                                <div class="source-card">
+                                    <div class="source-card-header">
+                                        <div class="source-icon">🔌</div>
+                                        <div>
+                                            <h4>EIA Form 861 &amp; SEDS</h4>
+                                            <div class="source-abbrev">U.S. Energy Information Administration</div>
+                                        </div>
+                                    </div>
+                                    <p>
+                                        Utility service territory boundaries and electricity retail rates
+                                        (Form 861), plus state-level residential fuel prices by type
+                                        (State Energy Data System). Used to translate energy consumption to costs.
+                                    </p>
+                                </div>
+
+                                <div class="source-card">
+                                    <div class="source-card-header">
+                                        <div class="source-icon">🌿</div>
+                                        <div>
+                                            <h4>eGRID &amp; NOAA</h4>
+                                            <div class="source-abbrev">EPA · NOAA</div>
+                                        </div>
+                                    </div>
+                                    <p>
+                                        EPA's eGRID subregional electricity emission factors for CO₂
+                                        intensity calculations. NOAA heating and cooling degree days
+                                        as climate inputs to energy models.
+                                    </p>
+                                </div>
+
+                            </div>
+                        </section>
+                    
+
+                        <!-- PIPELINE -->
+                        <section id="pipeline">
+                            <h2>Modeling Pipeline</h2>
+                            <p>
+                                The modeling pipeline moves data from census tract or larger geographies down to individual 
+                                household estimates in five steps. Each step feeds into the next: the appropriate number 
+                                of households for each census tract are allocated demographic and housing characteristics, 
+                                then estimated energy consumption, then costs, then emissions.
+                            </p>
+
+                            <div class="pipeline-steps">
+
+                                <!-- Step 1 -->
+                                <div class="pipeline-step" id="step-allocation">
+                                    <div class="pipeline-step-connector">
+                                        <div class="step-circle">1</div>
+                                        <div class="step-line"></div>
+                                    </div>
+                                    <div class="step-body">
+                                        <h4>Household Allocation</h4>
+                                        <span class="step-tag">ACS</span>
+                                        <span class="step-tag">PUMS</span>
+                                        <p>
+                                            Each census tract in the U.S. has known demographic and housing
+                                            characteristics from the <strong>American Community Survey (ACS)</strong>.
+                                            This includes information like how many households are renters versus owners, 
+                                            income distributions, the share of multi-family homes, and predominant heating 
+                                            fuels. But the ACS reports each of these characteristics only as aggregate counts.
+                                        </p>
+                                        <p>
+                                            To get individual households, we draw from the <strong>Public Use
+                                            Microdata Sample (PUMS)</strong>, which contains detailed records for
+                                            real (anonymized) households. Using integer programming optimization,
+                                            we select a combination of PUMS households for each tract whose
+                                            collective profile matches the ACS counts across 70 demographic and
+                                            structural variables simultaneously, including income brackets, housing 
+                                            type, heating fuel, year built, household size, and more.
+                                        </p>
+                                        <p>
+                                            The optimization minimizes geographic distance between the source PUMS
+                                            geography and the target tract, so allocated households are drawn from
+                                            nearby areas with similar regional characteristics. This integer 
+                                            programming approach enforces multi-way constraints (for example, <strong>[YUNUS ADD]</strong>) 
+                                            and produces whole households, allowing for accurate energy modeling.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Step 2 -->
+                                <div class="pipeline-step" id="step-housing">
+                                    <div class="pipeline-step-connector">
+                                        <div class="step-circle">2</div>
+                                        <div class="step-line"></div>
+                                    </div>
+                                    <div class="step-body">
+                                        <h4>Housing Characteristics Estimation</h4>
+                                        <span class="step-tag">AHS</span>
+                                        <p>
+                                            The allocated PUMS households carry many characteristics directly,
+                                            but a few attributes critical for energy modeling—primarily
+                                            floor area and air conditioning type—are not included in the PUMS data. 
+                                            So we estimated these using machine learning models trained on the 
+                                            <strong>American Housing Survey (AHS)</strong> data.
+                                        </p>
+                                        <p>
+                                            To determine floor area, we used a Gradient Boosting algorithm with housing 
+                                            structure (number of rooms, building type, year built, and tenure), household 
+                                            demographics, and geographic division as predictors. A similar approach is used 
+                                            to determine AC type—whether a household has central air, a window unit, or no 
+                                            AC. Since AC patterns vary dramatically by region, metro-specific models were 
+                                            used in 35 metro areas where local AHS data was available.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Step 3 -->
+                                <div class="pipeline-step" id="step-energy">
+                                    <div class="pipeline-step-connector">
+                                        <div class="step-circle">3</div>
+                                        <div class="step-line"></div>
+                                    </div>
+                                    <div class="step-body">
+                                        <h4>Energy Consumption Estimation</h4>
+                                        <span class="step-tag">RECS 2020</span>
+                                        <span class="step-tag">NOAA</span>
+                                        <p>
+                                            Energy use is predicted separately for 14 end-use categories—space heating 
+                                            by fuel (electricity, natural gas, propane, fuel oil, wood), space cooling, 
+                                            water heating, electric appliances, cooking, clothes drying, and fan/pump 
+                                            loads. Models were trained on the <strong>Residential Energy Consumption 
+                                            Survey (RECS) 2020</strong> data, which provides measured end-use energy 
+                                            information for roughly 18,500 U.S. households.
+                                        </p>
+                                        <p>
+                                            The appropriate model type is chosen for each end-use based on the
+                                            statistical properties of that energy stream—whether consumption is
+                                            near-universal or zero-inflated and how skewed the distribution is.
+                                            We used a Gradient Boosting regression for most end-uses, though used 
+                                            a linear regression for water heating and cooking, a log-linear regression 
+                                            for electric appliances, and Random Forest regression for heat pump heating. 
+                                            (See 'Model Selection' below for more on this.)
+                                        </p>
+                                        <p>    
+                                            Climate inputs (heating and cooling degree days from <strong>NOAA</strong>) 
+                                            are included to capture geographic variation in demand. End-use predictions 
+                                            are summed to total household energy consumption by fuel type.
+                                        </p>
+                                        
+                                    
+                                    </div>
+                                </div>
+
+                                <!-- Step 4 -->
+                                <div class="pipeline-step" id="step-costs">
+                                    <div class="pipeline-step-connector">
+                                        <div class="step-circle">4</div>
+                                        <div class="step-line"></div>
+                                    </div>
+                                    <div class="step-body">
+                                        <h4>Cost &amp; Burden Calculation</h4>
+                                        <span class="step-tag">EIA Form 861</span>
+                                        <span class="step-tag">SEDS</span>
+                                        <p>
+                                            Predicted energy consumption (in BTU or kWh) is converted to annual
+                                            energy costs using local utility rates and regional fuel prices.
+                                            Electricity rates come from <strong>EIA Form 861</strong>, which
+                                            maps utilities to their service territories, allowing us to apply
+                                            the correct rate for each household's location. Natural gas,
+                                            propane, fuel oil, and wood prices are drawn from the
+                                            <strong>U.S. State Energy Data System (SEDS)</strong>.
+                                        </p>
+                                        <p>
+                                            Energy burden—the share of a household's income spent on energy—is 
+                                            calculated by dividing a household's annual energy cost by its annual 
+                                            income from the PUMS data. Households spending more than 6 percent of 
+                                            their income on energy are commonly considered energy-burdened; those 
+                                            above 10% are considered highly burdened.
+                                        </p>
+                                        <p>
+                                            For the roughly 2–4 percent of households where utilities are included 
+                                            in rent, payment status flags from the PUMS record are included in the 
+                                            synthetic population dataset so these households can be distinguished 
+                                            during analysis.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Step 5 -->
+                                <div class="pipeline-step" id="step-emissions">
+                                    <div class="pipeline-step-connector">
+                                        <div class="step-circle">5</div>
+                                        <div class="step-line"></div>
+                                    </div>
+                                    <div class="step-body">
+                                        <h4>Emissions Estimation</h4>
+                                        <span class="step-tag">eGRID</span>
+                                        <p>
+                                            Greenhouse gas emissions are estimated for each household's energy
+                                            consumption. Electricity emissions use subregional emission factors
+                                            from EPA's <strong>eGRID</strong> database, which captures variation
+                                            in grid carbon intensity across the country. On-site fuel combustion
+                                            of gas, propane, oil, and/or wood uses standard combustion emission 
+                                            factors.
+                                        </p>
+                                        <p>
+                                            Emission estimates are provided in CO₂-equivalent, allowing
+                                            comparison across fuels and informing analysis of how fuel-switching
+                                            or efficiency improvements would affect both costs and emissions.
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div> <!-- end pipeline-steps -->
+                        </section>
+
+                        <!-- MODEL SELECTION -->
+                        <section id="model-selection">
+                            <h2>Model Selection & Variables</h2>
+                            <p>
+                                Rather than using a single model type for all energy end-uses, we assign
+                                each end-use to a model family based on the statistical properties of that
+                                energy stream. This approach avoids empirical cherry-picking while still allowing
+                                the most appropriate method for each case.
+                            </p>
+
+                            <h3>Energy consumption models</h3>
+                            <p>
+                                Four model types were evaluated through 10-fold cross-validation on the
+                                RECS 2020 data: Gradient Boosting regression, Random Forest regression, linear
+                                regression, and log-linear regression. Performance was compared using
+                                a cost-weighted error metric that translates BTU prediction
+                                errors into dollar errors—which weights electricity errors more heavily
+                                than gas errors, reflecting electricity's higher price per BTU.
+                            </p>
+
+                            <table class="method-table">
+                                <thead>
+                                    <tr>
+                                        <th>End-use type</th>
+                                        <th>Example end-uses</th>
+                                        <th>Model used</th>
+                                        <th>Reason</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>High-prevalence continuous</td>
+                                        <td>Space cooling, space heating (electric)</td>
+                                        <td class="winner">Gradient Boosting</td>
+                                        <td>Best performance on high-priority end-uses; handles non-linearity well</td>
+                                    </tr>
+                                    <tr>
+                                        <td>High-prevalence, small sample</td>
+                                        <td>Heat pump heating</td>
+                                        <td class="winner">Random Forest</td>
+                                        <td>Bagging reduces variance when fewer training examples are available</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Moderate right-skewed</td>
+                                        <td>Appliances (electric), cooking</td>
+                                        <td class="winner">Linear or Log-linear</td>
+                                        <td>Simpler models outperform on moderately skewed distributions</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Zero-inflated (few users)</td>
+                                        <td>Gas appliances, propane, fuel oil</td>
+                                        <td class="winner">Linear</td>
+                                        <td>Tree models overfit the zero mass; linear model most calibrated</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <p>
+                               Across all end-uses, Gradient Boosting reduces the cost-weighted prediction 
+                                error by roughly $14 per household per year compared to using Random Forest.
+
+                            </p>
+
+                            <h3>Predictor variables</h3>
+                            <p>
+                                All end-use models share a common base feature set. End-use models for water 
+                                heating, cooking, drying, and appliances additionally include the relevant 
+                                fuel type for that end-use (e.g., gas vs. electric water heater) as a predictor.
+                            </p>
+
+                            <table class="method-table">
+                                <thead>
+                                    <tr>
+                                        <th>Predictor variable</th>
+                                        <th>Variable options</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="winner">Building type</td>
+                                        <td>Single-family detached/attached, apartment (2–4 units, 5+ units), mobile home</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="winner">Climate</td>
+                                        <td>Heating degree days (HDD65) and cooling degree days (CDD65) from NOAA at the household's location</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="winner">Floor area</td>
+                                        <td>Estimated total conditioned square footage (from Step 2)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="winner">Household size</td>
+                                        <td>Number of occupants</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="winner">Heating fuel type</td>
+                                        <td>Natural gas, electricity, propane, fuel oil, wood, or other</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="winner">AC type</td>
+                                        <td>Central air, room unit, evaporative cooler, or none (from Step 2)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="winner">Heat pump indicator</td>
+                                        <td>Whether the primary heating system is a heat pump</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="winner">All-electric indicator</td>
+                                        <td>Whether electricity is the sole energy source</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="winner">Urban/rural classification</td>
+                                        <td>Urban or rural based on <strong>[YUNUS ADD]</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="winner">Building America climate zone</td>
+                                        <td>Eight zones encoding regional building stock and climate norms</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="winner">State fixed effects</td>
+                                        <td>FIPS-level indicators capturing state-specific program, code, and rate differences</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="winner">Poverty ratio (FPL ratio)</td>
+                                        <td>Household income divided by the federal poverty level for that household 
+                                            size; captures income-dependent consumption behaviors (appliance ownership, 
+                                            thermostat settings) in a form that is independent of household size already 
+                                            in the model (see below)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <p>
+                                <strong>Electric appliance end-use coverage:</strong>The electric appliances 
+                                end-use aggregates 14 RECS measured components:
+                                refrigerators, freezers, televisions and electronics, lighting, 
+                                microwaves, clothes washers, dishwashers, dehumidifiers, humidifiers,
+                                pool pumps, hot tub pumps and heaters, ceiling fans, and miscellaneous
+                                plug loads. This is the end-use most sensitive to income, because
+                                appliance ownership rates increase substantially with household income.
+                            </p>
+
+
+                            <h3>How income enters the model</h3>
+                            <p>
+                                Income affects energy consumption through two channels: an indirect channel
+                                (lower-income households tend to live in smaller, older homes, which is already
+                                captured by building characteristics) and a direct behavioral channel
+                                (appliance ownership, hot water use intensity, and thermostat settings
+                                all vary by income even within the same building type). Including income
+                                explicitly captures this second channel.
+                            </p>
+                            <p>
+                                We use the poverty ratio (FPL ratio)—household income
+                                divided by the federal poverty level for that household size—rather than
+                                raw income. This size-adjusted measure is independent of household size,
+                                which is already in the model, avoiding the collinearity that raw income
+                                introduces. Cross-validation on RECS 2020 confirms the poverty ratio has
+                                measurable Gini importance in every end-use model.
+                            </p>
+                            <p>
+                                The effect is largest for electric appliances: without
+                                the poverty ratio, predicted electricity consumption is nearly flat across
+                                income quintiles (Q5/Q1 ratio of 1.48×). With it, the model reproduces
+                                the observed RECS gradient (1.87× predicted vs. 1.89× actual). This
+                                reflects the strong income gradient in appliance ownership, wherein dishwashers, 
+                                pool pumps, and numerous electronics are far more common in higher-income homes.
+                            </p>
+                            <div class="callout">
+                                <p>
+                                    <strong>What we do not include:</strong> Raw income (collinear with
+                                    household size), number-of-rooms dummies (collinear with floor area; 
+                                    their presence inflated income's variance inflation factor from ~1.3
+                                    to ~14, masking income's true predictive signal), and tenure
+                                    (owner vs. renter; captured by building type and income).
+                                </p>
+                            </div>
+                        </section>
+
+                        <!-- ===== SECTION 2: DECISION SUPPORT TOOL ===== -->
+                        <section id="tool-methodology">
+                            <h2>How the Decision Support Tool Works</h2>
+                            <p>
+                                The NEAT synthetic household dataset represents individual households at the census 
+                                tract level. This is critical for identifying policy intervention opportunities 
+                                based on energy cost burden and demographic disparities, but is too granular for 
+                                direct use in an interactive web tool. To account for this, the tool works with a 
+                                pre-processed, aggregated version of this data. The decision support tool adds a 
+                                scenario modeling layer that lets users explore how policy changes might affect 
+                                energy costs and burdens for different types of households.
+
+                                The underlying dataset represents individual households at the census tract 
+                                level. This is critical for identifying policy intervention opportunities based 
+                                on energy cost burden and demographic disparities, but is too granular for direct 
+                                use in an interactive web tool. To account for this, the decision support tool 
+                                works with a pre-processed, aggregated version of this data, adding a scenario 
+                                modeling layer that lets users explore how policy changes might affect energy costs 
+                                and burdens.
+                            </p>
+
+                            <!-- Data Aggregation -->
+                            <h3 id="tool-aggregation">Data aggregation for the tool</h3>
+                             <p>
+                                For the tool, households within specified geographic scopes from the synthetic 
+                                dataset are grouped by shared characteristics and their energy and fuel usage 
+                                and costs, energy burdens and affordability gaps, and emissions are aggregated. 
+                                This allows us to pre-calculate statistics—such as the total energy affordability 
+                                gap, mean energy burden, total energy cost, and total energy consumption—for 
+                                census tracts, counties, metro areas, and utility service territories while 
+                                preserving a user’s ability to see these statistics disaggregated by specific 
+                                household characteristics.
+                                </p>
+                                <p>
+                                    For example… <strong>[YUNUS ADD]</strong>
+                                </p>
+                                <p>
+                                Grouping households by shared characteristics also allows us to model different 
+                                scenarios such as changes in energy efficiency or fuel switching from gas to 
+                                electric and see how this might change household energy usage and costs across 
+                                household categories.
+                                </p>
+                            
+
+                            <!-- Scenario Modeling -->
+                            <h3 id="tool-scenarios" style="margin-top: 2rem;">Scenario modeling</h3>
+                            <p>
+                                The decision support tool allows users to apply certain energy policy interventions 
+                                to households within a specified geographic area and see how they may impact energy 
+                                usage, costs, burdens, affordability gaps, and emissions for different types of 
+                                households. Interventions include rate changes (e.g., changes in energy prices), fuel 
+                                switching, efficiency improvements, solar programs, energy storage, and more.
+                            </p>
+                            <p> 
+                                Just as home energy programs follow a specific order of operations—for example, 
+                                energy efficiency improvements may be required before a home electrifies and installs 
+                                solar panels—the scenario modeling in the tool applies interventions in a specific
+                                sequence to understand their cumulative impact on household energy usage, 
+                                costs, and emissions. For example, if a user applies both an energy efficiency improvement
+                                and a fuel switching intervention, the tool first applies the efficiency improvement before
+                                modeling the fuel switch, since the efficiency improvement would reduce householdenergy 
+                                demand and thus affect the impact of the fuel switch.
+                            </p>
+
+                        </section>
+
+                    </div> <!-- end method-content -->
+                </div> <!-- end methodology-layout -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section footer-logo">
+                    <img src="../assets/2021 - PSE_Logo_Stacked_Color.png" alt="PSE Healthy Energy">
+                    <p>Bringing science to energy policy for a healthy, clean future.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="overview.html">Overview</a></li>
+                        <li><a href="tool-guide.html">Tool Guide</a></li>
+                        <li><a href="case-studies.html">Case Studies</a></li>
+                        <li><a href="methodology.html">Methodology</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="use-cases.html">Use Cases</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="https://energy-affordability-frontend.vercel.app" target="_blank">Launch Tool</a></li>
+                        <li><a href="https://www.psehealthyenergy.org/" target="_blank">PSE Healthy Energy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2025 PSE Healthy Energy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('open');
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Active TOC highlighting
+        const tocLinks = document.querySelectorAll('.toc-link');
+        const sections = document.querySelectorAll('.method-content section[id], .pipeline-step[id]');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    tocLinks.forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+                    });
+                }
+            });
+        }, {
+            rootMargin: '-10% 0px -80% 0px'
+        });
+
+        sections.forEach(s => observer.observe(s));
+    </script>
+</body>
+</html>
+>>>>>>> fd43fdde8ff13b3ce3bd880a131d1e54e17363f9
