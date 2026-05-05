@@ -245,8 +245,8 @@
                 </div>
                 <h1>National Energy Affordability Tool Guide</h1>
                 <p class="lead">
-                    A comprehensive guide to using the NEAT for energy equity analysis,
-                    including the Existing Affordability Landscape and Decision Support tools.
+                    A comprehensive guide to using NEAT's interactive dashboard and
+                    decision support tool for energy equity analysis.
                 </p>
             </div>
         </header>
@@ -260,7 +260,7 @@
                     <aside class="toc-sidebar" id="toc">
                         <h4>Contents</h4>
                         <ul class="toc-list">
-                            <li><a href="#existing-affordability-landscape" class="toc-link">Existing Affordability Landscape</a></li>
+                            <li><a href="#existing-affordability-landscape" class="toc-link">NEAT Landing Page</a></li>
                             <li><a href="#decision-support-tool" class="toc-link">Decision Support Tool</a></li>
                             <li><a href="#tips" class="toc-link">Tips &amp; Best Practices</a></li>
                         </ul>
@@ -270,55 +270,87 @@
                     <div>
                         <div class="story-lede" style="max-width: 100%;">
                             <p>
-                                The National Energy Affordability Tool provides two main capabilities for energy equity analysis: an Existing Affordability Landscape Tool for exploring current data, and a Decision Support Tool for modeling the impacts of policy interventions. Below is a guide to using each component of the dashboard.
+                                The National Energy Affordability Tool (NEAT) allows users to explore the current landscape of 
+                                energy equity data as well as model the potential impacts of policy interventions. The opening 
+                                dashboard offers a map, summary statistics, and various charts/graphs and is set to the existing 
+                                landscape of data. The Decision Support Tool enables users to adjust policy parameters to explore 
+                                their impact on energy affordability. Dashboard filters allow users to define the population they 
+                                wish to focus on.
+                            </p>
+                            <p> 
+                                Below is a guide for each component of the dashboard. 
                             </p>
                         </div>
 
                         <div class="story-sections">
 
-                    <!-- Section 1: Existing Affordability Landscape Tool -->
+                    <!-- Section 1: NEAT Landing Page -->
                     <section class="story-section" id="existing-affordability-landscape">
                         <div class="story-body">
                             <span class="story-tag">01 • Generate Statistics</span>
-                            <h3>Existing Affordability Landscape Tool</h3>
+                            <h3>NEAT Landing Page</h3>
                             <img src="../assets/neat-landing1.png" alt="Tool Dashboard Overview" style="width: 100%; margin-bottom: 1rem;">
                             <p>
-                                The Existing Affordability Landscape Tool allows you to explore comprehensive data on energy costs,
-                                consumption, emissions, and affordability gaps across the United States. This section describes
-                                each component of the interface.
+                                The landing page dashboard allows you to explore comprehensive data on energy costs, consumption, 
+                                emissions, and affordability gaps across the United States. This section describes each component 
+                                of the interface.
                             </p>
 
-                            <!-- Accordion: Geographies -->
+                            <!-- Accordion: Geographic Scope -->
                             <div class="accordion-item">
                                 <button class="accordion-header" aria-expanded="false">
-                                    Geographies
+                                    Geographic Scope
                                     <span class="accordion-chevron">&#9660;</span>
                                 </button>
                                 <div class="accordion-body">
-                                    <p>The Geography selector determines the spatial unit of analysis for all visualizations and statistics.</p>
+                                    <p>The Geographic Scope filter determines the spatial unit of analysis for all visualizations and statistics.</p>
                                     <ul>
-                                        <li><strong>Nationwide:</strong> Aggregate statistics for the entire United States</li>
-                                        <li><strong>States:</strong> All 50 states plus Washington D.C.</li>
-                                        <li><strong>Counties:</strong> Over 3,000 U.S. counties</li>
-                                        <li><strong>Utility Service Territories:</strong> Electric utility boundaries</li>
-                                        <li><strong>Metropolitan Areas:</strong> Census-defined metro/micro statistical areas</li>
+                                        <li><strong>State:</strong> All 50 states plus Washington D.C.</li>
+                                        <li><strong>County:</strong> Over 3,000 U.S. counties</li>
+                                        <li><strong>Utility:</strong> Electric utility service territory boundaries</li>
+                                        <li><strong>Metro:</strong> Census-defined metropolitan statistical areas</li>
+                                        <li><strong>National:</strong> Statistics aggregated for the entire United States</li>
                                     </ul>
                                 </div>
                             </div>
 
-                            <!-- Accordion: Filtering Households -->
+                            <!-- Accordion: Generate Customer Dataset -->
                             <div class="accordion-item">
                                 <button class="accordion-header" aria-expanded="false">
-                                    Filtering Households
+                                    Generate Customer Dataset
                                     <span class="accordion-chevron">&#9660;</span>
                                 </button>
                                 <div class="accordion-body">
-                                    <p>The filtering panel allows you to narrow your analysis to specific household types based on demographic and housing characteristics.</p>
+                                    <p>This set of filters allows you to narrow your analysis to specific household types based on demographic and 
+                                        housing characteristics. These custom filters use 'AND' logic to combine selections (e.g., a household must 
+                                        satisfy ALL of the chosen criteria to be included in the dataset).</p>
                                     <ul>
-                                        <li><strong>Income Level:</strong> By AMI brackets (0-30%, 30-60%, 60-80%, 80-100%, &gt;100%), FPL, or absolute income</li>
-                                        <li><strong>Housing Characteristics:</strong> Building type, tenure (owner/renter), year built</li>
-                                        <li><strong>Heating Fuel:</strong> Electricity, natural gas, propane/LPG, fuel oil, other</li>
-                                        <li><strong>Demographics:</strong> Race/ethnicity, age, household size</li>
+                                        <li><strong>Poverty Brackets:</strong> Filter households by income level, choosing between No Income Filter 
+                                            (all households), FPL Brackets (&lt;100%, 100-150%, 150-200%, 200-300%, 300%+), or AMI Brackets (&lt;50%, 
+                                            50-80%, 80-100%, 100-150%, 150%+).</li>
+                                        <li><strong>Geographic Filter:</strong> Draw a freehand lasso on the map to select a spatial subset of tracts. 
+                                            The selected geographies are AND-ed with any demographic filters.</li>
+                                        <li><strong>Race/Ethnicity:</strong> Filter households by the race/ethnicity of the head of household. 
+                                            Categories include White, Black, Hispanic, Asian, and Other Race (which includes Native American, 
+                                            Pacific Islander, and multi-racial households).</li>
+                                        <li><strong>Education:</strong> Filter by the educational attainment of the head of household. Options include 
+                                            No Tertiary (high school or less), Some Tertiary (some college/associate degree), and 4+ Tertiary (bachelor's 
+                                            degree or higher).</li>
+                                        <li><strong>Number of Household Members:</strong> Filter by the total number of people living in the household. 
+                                            Larger households may have higher absolute energy usage but lower per-person costs.</li>
+                                        <li><strong>Renter Status:</strong> Filter by whether the household rents or owns their home. Renters typically 
+                                            have less control over energy efficiency upgrades and may face different energy cost dynamics than owners.</li>
+                                        <li><strong>Home Type:</strong> Filter by the type of residential building. Options include Single Family (detached 
+                                            houses), Multi-Family (apartments/condos), Mobile (manufactured/mobile homes).</li>
+                                        <li><strong>Space Heating Fuel:</strong> Filter by the primary fuel used for space heating. Options include Electric, 
+                                            Fossil Gas, Fuel Oil, Propane, and Other (which includes wood, solar, and no heating). The fuel type significantly 
+                                            impacts both energy costs and carbon emissions.</li>
+                                        <li><strong>Year Home Built:</strong> Filter by the age of the home. Homes built before 1970 typically have less 
+                                            insulation and lower energy efficiency than newer construction.</li>
+                                        <li><strong>Space Heat Pump:</strong> Filter by whether the household uses a heat pump for space heating. Heat pumps 
+                                            are typically 2-3x more efficient than resistance heating and can provide both heating and cooling.</li>
+                                        <li><strong>All Electric:</strong> Filter by whether the household uses electricity for all energy needs. All-electric 
+                                            homes use electricity for heating, cooling, water heating, and cooking—no natural gas, propane, or fuel oil.</li>
                                     </ul>
                                 </div>
                             </div>
@@ -332,10 +364,11 @@
                                 <div class="accordion-body">
                                     <p>The interactive map displays spatial patterns in energy affordability metrics across your selected geography.</p>
                                     <ul>
-                                        <li><strong>Choropleth coloring:</strong> Geographic units shaded by selected metric</li>
-                                        <li><strong>Hover information:</strong> Mouse over any region for detailed statistics</li>
-                                        <li><strong>Click to select:</strong> Click a region to focus the analysis</li>
-                                        <li><strong>Metrics:</strong> Energy burden, costs, affordability gap, consumption, emissions</li>
+                                        <li><strong>Coloring:</strong> Dots representing either census tracts or counties shaded by selected demographic 
+                                            metric (e.g., Race/Ethnicity, Renter Status, income, etc)</li>
+                                        <li><strong>Sizing:</strong> Dots sized by Total Energy Affordability Gap, Mean Energy Burden, Number of Households, 
+                                            or Total Energy Cost.</li>
+                                        <li><strong>Hover information:</strong> Click on dots for more detailed information and statistics.</li>
                                     </ul>
                                 </div>
                             </div>
@@ -343,16 +376,22 @@
                             <!-- Accordion: Summary Statistics -->
                             <div class="accordion-item">
                                 <button class="accordion-header" aria-expanded="false">
-                                    Summary Statistics
+                                    Summary Statistics Sidebar
                                     <span class="accordion-chevron">&#9660;</span>
                                 </button>
                                 <div class="accordion-body">
-                                    <p>The Summary Statistics panel provides aggregate numerical summaries for your current selection.</p>
+                                    <p>The Summary Statistics panel (to the right of the Affordability Map) provides aggregate numerical summaries 
+                                        for your current selection.</p>
                                     <ul>
-                                        <li><strong>Household counts:</strong> Total households and filtered subset</li>
-                                        <li><strong>Energy costs:</strong> Mean, median, total annual costs</li>
-                                        <li><strong>Energy burden:</strong> Mean and median burden rates, distribution</li>
-                                        <li><strong>Affordability gap:</strong> Total gap, households exceeding threshold</li>
+                                        <li><strong>Cost:</strong> Total Energy Cost (the sum of annual energy costs across all households in the 
+                                            selected geography, broken down by demographic group) and Total Affordability Gap (the cumulative dollar 
+                                            amount that households spend on energy above the affordability threshold of 6% of gross income).</li>
+                                        <li><strong>Energy:</strong> Total Energy Consumption (the sum of annual energy usage across all households in 
+                                            millions of BTUs, broken down by demographic group) and Total Emissions (the cumulative greenhouse gas emissions 
+                                            in kilograms CO<sub>2</sub>-equivalent from all household energy use, broken down by demographic group.)</li>
+                                        <li><strong>Households:</strong> Number of Households (the total count of households in the selected geography, 
+                                            broken down by demographic group) and Mean Energy Burden (the average energy cost burden—energy costs as a 
+                                            percentage of income—for each demographic group).</li>
                                     </ul>
                                 </div>
                             </div>
@@ -364,30 +403,66 @@
                                     <span class="accordion-chevron">&#9660;</span>
                                 </button>
                                 <div class="accordion-body">
-                                    <p>The Bar Chart visualization allows comparison of metrics across categories or geographies.</p>
+                                    
+                                    <p>
+                                        The Bar Chart visualization allows comparison of statistics across different household groups using sets 
+                                        of stacked bar charts. This visualization is best for comparing mean or cumulative values across categories. 
+                                        You'll adjust the given sentence in the Bar Chart tab to change what and how the data for your selected 
+                                        geography is shown.
+                                    </p>
+                                    <p>
+                                        Show <i>[Aggregation Option]</i> <i>[Y-axis Metric]</i> broken down by <i>[X-axis Categorical Variable → Stacked Category]</i> 
+                                        for households grouped by <i>[X-axis Categorical Variable → Stacked Category Grouping]</i> and <i>[Facet/Split]</i>.
+                                    </p>
                                     <ul>
-                                        <li>Choose X-axis categorical variable (geography, income group, housing type)</li>
-                                        <li>Select Y-axis metric (costs, burden, consumption, emissions)</li>
-                                        <li>Aggregation options: sum, mean, median, or count</li>
-                                        <li>Sorting and grouping controls</li>
+                                        <li><strong>Aggregation Option:</strong> Cumulative or Mean</li>
+                                        <li><strong>Y-axis Metric:</strong> Cost, Energy, Emissions, Gap, or Cost Burden</li>
+                                        <li><strong>X-axis Categorical Variable:</strong>
+                                            <ul>
+                                                <li><strong>Stacked Category:</strong> End Use or Energy Source</li>
+                                                <li><strong>Stacked Category Grouping:</strong> Demographic variables including Federal Poverty Bracket, Area Median 
+                                                Income Bracket, Energy Cost Burden Bracket, Energy Cost Bracket, Race/Ethnicity, Education, 
+                                                Renter Status, Number Household Members, Home Type, Year Home Built, or Space Heating Fuel</li>
+                                            </ul>
+                                        </li>
+                                            <li><strong>Facet/Split:</strong> Other demographic variables or None</li>
                                     </ul>
+                                    <img src="../assets/tool-guide/NEAT_barchart.png" alt="NEAT Bar Chart" class="inline-image-pair">
                                 </div>
                             </div>
 
                             <!-- Accordion: Scatter Chart -->
                             <div class="accordion-item">
                                 <button class="accordion-header" aria-expanded="false">
-                                    Scatter Chart
+                                    Scatter Plot
                                     <span class="accordion-chevron">&#9660;</span>
                                 </button>
                                 <div class="accordion-body">
-                                    <p>The Scatter Chart shows relationships between two continuous variables across geographic units.</p>
+                                    <p>
+                                        The Scatter Plot shows relationships between two energy metrics across household groups within your 
+                                        selected geography. It is best for identifying correlations, outliers, and clusters. For example, 
+                                        it can be used to find groups with both high burdens and high costs. Each point represents a household 
+                                        subgroup. You'll adjust the given sentence in the Scatter Plot to change the data shown.
+                                    </p>
+                                    <p>
+                                        Plot <i>[Y-axis Variable Aggregation]</i> <i>[Y-axis Categorical Variable]</i> [Y-axis Metric] versus <i>[X-axis Variable 
+                                        Aggregation]</i> <i>[X-axis Categorical Variable]</i> <i>[X-axis Metric]</i> for households grouped by <i>[Grouping/Color]</i> 
+                                        and <i>[Shape]</i>.
+                                    </p>
                                     <ul>
-                                        <li>Configure X and Y axis variables</li>
-                                        <li>Optionally scale point size by household count</li>
-                                        <li>Color points by categorical variable</li>
-                                        <li>Hover to identify geographic units</li>
+                                        <li><strong>Y-axis Variable Aggregation:</strong> Mean or Cumulative</li>
+                                        <li><strong>Y-axis Categorical Variable:</strong> All Energy, Electricity, Gas, Delivered Fuel</li>
+                                        <li><strong>Y-axis Metric:</strong> Cost, Cost Burden, Emissions, Gap</li>
+                                        <li><strong>X-axis Variable Aggregation:</strong> Mean or Cumulative (will not always apply)</li>
+                                        <li><strong>X-axis Categorical Variable:</strong> All Energy, Electricity, Gas, Delivered Fuel</li>
+                                        <li><strong>X-axis Metric:</strong> Cost, Cost Burden, Emissions, Gap</li>
+                                        <li><strong>Grouping/Color:</strong> Demographic variable such as Federal Poverty Bracket, Area Median Income Bracket, 
+                                            Energy Cost Burden Bracket, Energy Cost Bracket, Race/Ethnicity, Education, Renter Status, Number 
+                                            Household Members, Home Type, Year Home Built, or Space Heating Fuel</li>
+                                        <li><strong>Shape:</strong> Other demographic variables or None</li>
+                                        <li><strong>Hover text:</strong> Statistics about the specific grouping</li>
                                     </ul>
+                                <img src="../assets/tool-guide/NEAT_scatterplot.png" alt="NEAT Scatter Plot" class="inline-image-pair">
                                 </div>
                             </div>
 
@@ -398,12 +473,20 @@
                                     <span class="accordion-chevron">&#9660;</span>
                                 </button>
                                 <div class="accordion-body">
-                                    <p>The Network Graph visualizes relationships and flows between entities in the energy system.</p>
+                                    <p>
+                                        The Network Graph visualizes how household characteristics intersect and relate to each other. 
+                                        It is best for understanding the co-occurrence of characteristics and useful for identifying 
+                                        where disadvantages are compounded. Lines represent the connection between nodes and run between 
+                                        each subcategory of different categorical variables. Select 2-4 categorical variables to visualize 
+                                        their correlations.
+                                    </p>
                                     <ul>
-                                        <li>Utility service territory relationships</li>
-                                        <li>Energy flow patterns</li>
-                                        <li>Interactive node positioning</li>
+                                        <li><strong>Node size:</strong> Represents the total Energy Affordability Gap for a given categorical variable</li>
+                                        <li><strong>Node color:</strong> Represents the Mean Energy Cost Burden of a given categorical variable</li>
+                                        <li><strong>Line thickness:</strong> Shows PMI correlation strength, with thicker lines indicating a stronger 
+                                            correlation between given categorical variables</li>
                                     </ul>
+                                <img src="../assets/tool-guide/NEAT_networkgraph.png" alt="NEAT Network Graph" class="inline-image-pair">
                                 </div>
                             </div>
 
@@ -414,12 +497,21 @@
                                     <span class="accordion-chevron">&#9660;</span>
                                 </button>
                                 <div class="accordion-body">
-                                    <p>The Treemap displays hierarchical data as nested rectangles, useful for understanding composition.</p>
+                                    <p>
+                                        The Treemap displays hierarchical breakdowns of households by nested categories. It is best for 
+                                        understanding composition and proportions within categories and allows users to drill down through 
+                                        multiple categorical levels. Select 1-4 categorical variables to create the hierarchical treemap. 
+                                        Keep in mind that order matters: the first category is the outermost level (largest boxes) while the 
+                                        last is the innermost (most detailed). Click on a rectangle to drill down and see details by category.
+                                    </p>
                                     <ul>
-                                        <li>Share of energy costs by fuel type</li>
-                                        <li>Household distribution by income bracket</li>
-                                        <li>Geographic contribution to total emissions</li>
+                                        <li><strong>Categories:</strong> Demographic variables including Home Type, Space Heating Fuel, Renter Status, 
+                                            Race/Ethnicity, Education, Year Home Built, Federal Poverty Bracket, Area Median Income Bracket, 
+                                            Heat Pump, All Electric</li>
+                                        <li><strong>Rectangle size:</strong> Total energy affordability gap for households within the given set of categories</li>
+                                        <li><strong>Rectangle color:</strong> Mean energy cost burden for households within the given set of categories</li>
                                     </ul>
+                                <img src="../assets/tool-guide/NEAT_treemap_crop.png" alt="NEAT Treemap" class="inline-image-pair">
                                 </div>
                             </div>
                         </div>
@@ -432,50 +524,82 @@
                             <h3>Decision Support Tool</h3>
                             <img src="../assets/neat-decision-support.png" alt="Decision Support Tool" style="width: 100%; margin-bottom: 1rem;">
                             <p>
-                                The Decision Support Tool allows you to model the impacts of energy efficiency programs,
-                                weatherization initiatives, electrification policies, and rate changes on household energy
-                                costs and emissions.
+                                The Decision Support Tool allows you to model the impacts of different policy interventions such as energy efficiency 
+                                programs, weatherization initiatives, and rate changes as well as different technologies like heat pumps and energy 
+                                storage on household energy costs and emissions.
                             </p>
 
-                            <h4>Inputs</h4>
-                            <p>The Input panel is where you configure the policy scenario to model, based on target geography and populations defined in the Landscape portion of the tool. Parameters are organized into accordion sections:</p>
+                            <h4>Configure Policy Scenarios</h4>
+                            <p>This panel is where you configure the policy scenarios to model, based on target geography and populations defined 
+                                on the landing page. Parameters are organized into accordion sections:</p>
 
-                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1rem 0;">
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1rem 0;">
                                 <div class="input-tile">
-                                    <strong>Rate Changes</strong>
-                                    <p style="margin: 0.5rem 0 0;">Simulate rate modifications: increases/decreases, time-of-use, tiered rates, fixed charges.</p>
+                                    <strong>Rate Changes (Energy Prices)</strong>
+                                    <p style="margin: 0.5rem 0 0;">Model changes to energy prices, including electricity, gas, propane, and fuel oil. 
+                                        You can view current average rates and enter new rates to model price changes. This simulates the impact of 
+                                        different tariff scenarios.</p>
                                 </div>
                                 <div class="input-tile">
-                                    <strong>Grid Decarbonization</strong>
-                                    <p style="margin: 0.5rem 0 0;">Model emission intensity changes: future emission factors, renewable portfolio impacts.</p>
-                                </div>
-                                <div class="input-tile">
-                                    <strong>Weatherization &amp; Efficiency</strong>
-                                    <p style="margin: 0.5rem 0 0;">Configure envelope improvements: insulation, air sealing, windows, appliance upgrades.</p>
-                                </div>
-                                <div class="input-tile">
-                                    <strong>Heating &amp; Cooling Interventions and Fuel Switching</strong>
-                                    <p style="margin: 0.5rem 0 0;">Model equipment upgrades: heat pump adoption, efficiency improvements, smart thermostats.</p>
-                                </div>
-                                <div class="input-tile">
-                                    <strong>Demand Response Programs</strong>
-                                    <p style="margin: 0.5rem 0 0;">Simulate programs that incentivize demand-side energy-saving actions, like load shifting.</p>
+                                    <strong>Grid Decarbonization (CO<sub>2</sub>e)</strong>
+                                    <p style="margin: 0.5rem 0 0;">Model changes in the carbon intensity of electricity to understand the change in 
+                                        household emissions given a cleaner electricity grid. This simulates the impact of grid decarbonization policies 
+                                        like renewable portfolio standards.</p>
                                 </div>
                                 <div class="input-tile">
                                     <strong>Bill Assistance Programs</strong>
-                                    <p style="margin: 0.5rem 0 0;">Model financial assistance: discounts, credits, income-qualified rates, arrearage forgiveness.</p>
+                                    <p style="margin: 0.5rem 0 0;">Model low-income energy assistance programs such as fixed discounts, percentage discounts, 
+                                        or PIPP (Percentage of Income Payment) programs with income targeting by Federal Poverty Level, Area Median Income, 
+                                        or Universal (no targeting). You can also define program enrollment levels.</p>
                                 </div>
                                 <div class="input-tile">
-                                    <strong>Behind-the-Meter Solar</strong>
-                                    <p style="margin: 0.5rem 0 0;">Calculate affordability impacts from rooftop solar.</p>
+                                    <strong>Demand Response Programs</strong>
+                                    <p style="margin: 0.5rem 0 0;">Model incentives for households participating in demand response programs for load shifting 
+                                        and peak reduction. Customize annual discount amounts for all-electric and hybrid fuel households, program participation 
+                                        levels, and income-based eligibility.</p>
                                 </div>
                                 <div class="input-tile">
-                                    <strong>Community Solar</strong>
-                                    <p style="margin: 0.5rem 0 0;">Affordability impacts of community solar in specific geographies and communities.</p>
+                                    <strong>Energy Efficiency Improvements &amp; Weatherization</strong>
+                                    <p style="margin: 0.5rem 0 0;">Model energy consumption reductions from efficiency upgrades by end use and/or fuel type. For example, 
+                                        the change in efficiency from housing envelope improvements like upgraded insulation and air sealing. As energy efficiency programs 
+                                        are often targeted based on income, you can select eligibility criteria for this policy intervention including by Federal Poverty 
+                                        Level bracket, Area Median Income bracket, or Universal (where all households are eligible regardless of income level).</p>
+                                </div>
+                                <div class="input-tile">
+                                    <strong>Fuel Switching (Electrification)</strong>
+                                    <p style="margin: 0.5rem 0 0;">Model switching from fossil fuels (natural gas, propane, or fuel oil) to electricity through 
+                                        heat pump installations for space and water heating. Choose the starting fuel and end use, program enrollment, and 
+                                        income-based eligibility. You can also select the system configuration—whether households are adopting a standard, cold 
+                                        climate, or other efficiency heat pump—and if systems are operating in full electric or a dual 
+                                        fuel mode with existing furnaces used for colder temperatures.</p>
+                                </div>
+                                <div class="input-tile">
+                                    <strong>Heat Pump Replacement (Electric Systems)</strong>
+                                    <p style="margin: 0.5rem 0 0;">Model replacing existing electric resistance heating and water systems with more efficient 
+                                        heat pump systems using climate-aware COP (coefficients of performance) based on heating degree days by census tract. 
+                                        Customize the number or percentage of households participating and income-based program eligibility requirements.</p>
                                 </div>
                                 <div class="input-tile">
                                     <strong>Energy Storage (Battery)</strong>
-                                    <p style="margin: 0.5rem 0 0;">Model savings from a home battery providing power during peak demand times.</p>
+                                    <p style="margin: 0.5rem 0 0;">Model savings from using a home battery to provide time-of-use load shifting (e.g., batteries 
+                                        charge during low-cost, off-peak hours and discharge during high-cost, on-peak hours.) Determine the daily load shift per 
+                                        household, the time-of-use price differential, how many households are participating, and possible eligibility criteria by income.</p>
+                                </div>
+                                <div class="input-tile">
+                                    <strong>Behind-the-Meter Solar</strong>
+                                    <p style="margin: 0.5rem 0 0;">Model the affordability impacts from individual rooftop solar installations with net metering incentives 
+                                        in place. (Behind-the-meter solar reduces electricity costs through on-site generation and net metering credits.) Customize system 
+                                        sizes using averages or sizing caps, a basic rate and fee structure, net metering configurations, deployment parameters (adoption 
+                                        rates or total MW capacity), and whether systems are limited to owner-occupied homes. An optional configuration allows additional 
+                                        customization for low-income solar programs.</p>
+                                </div>
+                                <div class="input-tile">
+                                    <strong>Community Solar</strong>
+                                    <p style="margin: 0.5rem 0 0;">Model the affordability impacts of shared solar arrays with subscription-based bill credits. (Community 
+                                        solar distributes generation from a shared array to subscribers, with different discount rates for low-income and market-rate 
+                                        participants.) Define the average system size, the discount on subscription fees for market-rate participants,  
+                                        low-income discounts, community solar size caps either by total program capacity or low-income enrollment, and whether community 
+                                        solar will be limited to only multi-family or renter households.</p>
                                 </div>
                             </div>
 
