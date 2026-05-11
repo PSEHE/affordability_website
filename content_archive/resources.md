@@ -75,6 +75,3 @@ Visit our website to learn more about our research, publications, and mission.
 
 [Visit PSE Healthy Energy](https://www.psehealthyenergy.org/) :::
 
-## Funding Acknowledgment
-
-Development of the National Energy Affordability Tool was supported by [Funder Name]. The findings and conclusions in this tool are those of the authors and do not necessarily represent the views of the funders.
