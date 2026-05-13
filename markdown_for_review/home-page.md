@@ -4,8 +4,6 @@ Explore comprehensive data on household energy costs, burdens, and emissions acr
 
 ## Explore the National Energy Affordability Tool (NEAT)
 
-Navigate through comprehensive resources on NEAT, from tool guides and examples using the tool to assess affordability impacts of local policy decisions, to deeper dives into other work on energy affordability, both by PSE and by our contemporaries.
-
 ### Overview
 
 Summary of why home energy costs matter and how NEAT can inform strategic policies.
