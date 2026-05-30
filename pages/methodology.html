@@ -402,7 +402,7 @@
                 <h1>Methodology & Data</h1>
                 <p class="lead">
                     How we estimate energy costs, consumption, and burden for every household
-                    in the United States.
+                    in the United States. All data is aligned to match 2024, except for climate variables which rely on long-term averages.
                 </p>
             </div>
         </header>
@@ -455,6 +455,8 @@
                                 household surveys, utility records, and census data. The result is a census tract-level 
                                 dataset covering all ~84,000 tracts in the U.S. that is suitable for identifying 
                                 energy burden hotspots, demographic disparities, and policy intervention opportunities.
+                                This data will be made public in 2026 and may be available upon request. The online NEAT tool relies on a simplified form of this dataset that groups similar households data to minimize computational costs. 
+                                Methodology below is currently being written into a paper to be submitted for peer review.
                             </p>
 
                         </section>
@@ -523,7 +525,7 @@
                                         </div>
                                     </div>
                                     <p>
-                                        Detailed housing unit characteristics including floor area, AC type,
+                                        Detailed housing unit characteristics, including floor area, AC type,
                                         and utility payment status. Used to train housing characteristics
                                         models, with metro-level samples for 35 major metros.
                                     </p>
@@ -567,10 +569,9 @@
                         <section id="pipeline">
                             <h2>Modeling Pipeline</h2>
                             <p>
-                                The modeling pipeline moves data from census tract or larger geographies down to individual 
-                                household estimates in five steps. Each step feeds into the next: the appropriate number 
-                                of households for each census tract are allocated demographic and housing characteristics, 
-                                then estimated energy consumption, then costs, then emissions.
+                                The modeling pipeline moves data from census tracts or larger geographies down to individual household estimates in five steps. 
+                                Each step feeds into the next: the appropriate number of households for each census tract is allocated based on demographic and housing characteristics, 
+                                followed by estimated energy consumption, then costs, and then emissions.
                             </p>
 
                             <div class="pipeline-steps">
@@ -588,25 +589,22 @@
                                         <p>
                                             Each census tract in the U.S. has known demographic and housing
                                             characteristics from the <strong>American Community Survey (ACS)</strong>.
-                                            This includes information like how many households are renters versus owners, 
-                                            income distributions, the share of multi-family homes, and predominant heating 
-                                            fuels. But the ACS reports each of these characteristics only as aggregate counts.
+                                            This includes information such as the number of households that are renters versus owners, 
+                                            income distributions, the share of multi-family homes, and predominant heating fuels. 
+                                            However, the ACS reports each of these characteristics only as aggregate counts.
                                         </p>
                                         <p>
                                             To get individual households, we draw from the <strong>Public Use
                                             Microdata Sample (PUMS)</strong>, which contains detailed records for
-                                            real (anonymized) households. Using integer programming optimization,
-                                            we select a combination of PUMS households for each tract whose
-                                            collective profile matches the ACS counts across 70 demographic and
-                                            structural variables simultaneously, including income brackets, housing 
-                                            type, heating fuel, year built, household size, and more.
+                                            real (anonymized) households. Using integer programming optimization, we select a combination 
+                                            of PUMS households for each tract whose collective profile simultaneously matches the ACS counts 
+                                            across 70 demographic and structural variables, including income brackets, housing type, heating fuel, 
+                                            year built, household size, and more.
                                         </p>
                                         <p>
-                                            The optimization minimizes geographic distance between the source PUMS
-                                            geography and the target tract, so allocated households are drawn from
-                                            nearby areas with similar regional characteristics. This integer 
-                                            programming approach enforces multi-way constraints (for example, <strong>[YUNUS ADD]</strong>) 
-                                            and produces whole households, allowing for accurate energy modeling.
+                                            The optimization minimizes geographic distance between the source PUMS geography and the target tract, 
+                                            so allocated households are drawn from nearby areas with similar regional characteristics. This integer programming approach 
+                                            enforces multi-way constraints to match the ACS-reported tract total household counts for each tracked variable.
                                         </p>
                                     </div>
                                 </div>
@@ -632,8 +630,8 @@
                                             structure (number of rooms, building type, year built, and tenure), household 
                                             demographics, and geographic division as predictors. A similar approach is used 
                                             to determine AC type—whether a household has central air, a window unit, or no 
-                                            AC. Since AC patterns vary dramatically by region, metro-specific models were 
-                                            used in 35 metro areas where local AHS data was available.
+                                            AC. Since AC patterns vary dramatically by region, metro-specific models were used in 
+                                            35 metro areas with available local AHS data.
                                         </p>
                                     </div>
                                 </div>
@@ -699,7 +697,7 @@
                                             calculated by dividing a household's annual energy cost by its annual 
                                             income from the PUMS data. Households spending more than 6 percent of 
                                             their income on energy are commonly considered energy-burdened; those 
-                                            above 10% are considered highly burdened.
+                                            above 10 percent are considered highly burdened.
                                         </p>
                                         <p>
                                             For the roughly 2–4 percent of households where utilities are included 
@@ -728,7 +726,7 @@
                                             factors.
                                         </p>
                                         <p>
-                                            Emission estimates are provided in CO₂-equivalent, allowing
+                                            Emission estimates are provided in CO₂-equivalents, allowing
                                             comparison across fuels and informing analysis of how fuel-switching
                                             or efficiency improvements would affect both costs and emissions.
                                         </p>
@@ -795,11 +793,7 @@
                                 </tbody>
                             </table>
 
-                            <p>
-                               Across all end-uses, Gradient Boosting reduces the cost-weighted prediction 
-                                error by roughly $14 per household per year compared to using Random Forest.
-
-                            </p>
+                            
 
                             <h3>Predictor variables</h3>
                             <p>
@@ -871,8 +865,8 @@
                             </table>
 
                             <p>
-                                <strong>Electric appliance end-use coverage:</strong>The electric appliances 
-                                end-use aggregates 14 RECS measured components:
+                                <strong>Electric appliance end use coverage:</strong>The electric appliances 
+                                end use aggregates 14 RECS measured components:
                                 refrigerators, freezers, televisions and electronics, lighting, 
                                 microwaves, clothes washers, dishwashers, dehumidifiers, humidifiers,
                                 pool pumps, hot tub pumps and heaters, ceiling fans, and miscellaneous
@@ -895,8 +889,7 @@
                                 divided by the federal poverty level for that household size—rather than
                                 raw income. This size-adjusted measure is independent of household size,
                                 which is already in the model, avoiding the collinearity that raw income
-                                introduces. Cross-validation on RECS 2020 confirms the poverty ratio has
-                                measurable Gini importance in every end-use model.
+                                introduces. 
                             </p>
                             <p>
                                 The effect is largest for electric appliances: without
@@ -906,15 +899,7 @@
                                 reflects the strong income gradient in appliance ownership, wherein dishwashers, 
                                 pool pumps, and numerous electronics are far more common in higher-income homes.
                             </p>
-                            <div class="callout">
-                                <p>
-                                    <strong>What we do not include:</strong> Raw income (collinear with
-                                    household size), number-of-rooms dummies (collinear with floor area; 
-                                    their presence inflated income's variance inflation factor from ~1.3
-                                    to ~14, masking income's true predictive signal), and tenure
-                                    (owner vs. renter; captured by building type and income).
-                                </p>
-                            </div>
+                            
                         </section>
 
                         <!-- ===== SECTION 2: DECISION SUPPORT TOOL ===== -->
@@ -950,15 +935,7 @@
                                 preserving a user’s ability to see these statistics disaggregated by specific 
                                 household characteristics.
                                 </p>
-                                <p>
-                                    For example… <strong>[YUNUS ADD]</strong>
-                                </p>
-                                <p>
-                                Grouping households by shared characteristics also allows us to model different 
-                                scenarios such as changes in energy efficiency or fuel switching from gas to 
-                                electric and see how this might change household energy usage and costs across 
-                                household categories.
-                                </p>
+                              
                             
 
                             <!-- Scenario Modeling -->
@@ -977,7 +954,7 @@
                                 sequence to understand their cumulative impact on household energy usage, 
                                 costs, and emissions. For example, if a user applies both an energy efficiency improvement
                                 and a fuel switching intervention, the tool first applies the efficiency improvement before
-                                modeling the fuel switch, since the efficiency improvement would reduce householdenergy 
+                                modeling the fuel switch, since the efficiency improvement would reduce household energy 
                                 demand and thus affect the impact of the fuel switch.
                             </p>
 
